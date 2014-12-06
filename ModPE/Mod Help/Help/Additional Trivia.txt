@@ -1,0 +1,78 @@
+	1. InsualZ contributed a Level.extinguishFire() function to ModPE, but 500 Internal Server Error a.k.a Zhuowei Zhang commented it out because it can be done with Level.setTile(). But here is a way to use it:
+
+Level.extinguishFire = function(x, y, z, side) {
+	net.zhuoweizhang.mcpelauncher.ScriptManager.nativeExtinguishFire(x, y, z, side);
+};
+
+Paste it to the top of script, and call it whenever you need it.
+
+
+	2. Player.getEntity() and getPlayerEnt() returns the last player to trigger a hook. If are in multiplayer, and, for example, you cannot add anything to your inventory or set your health, the easiest thing to do is to trigger the useItem hook, so just tap a block to fix the problem.
+
+3. If the entity parameter isn't entered for Entity.getYaw(), getYaw(), Entity.getPitch(), or getPitch(), it uses the player (refer to 2.) as the entity.
+
+4. CoffeeScript and Literate CoffeeScript can be used as well as JavaScript, which you can learn at coffeescript.org.
+
+5. There is a way to tell if a new block has been placed. Here it is:
+
+var pX = pY = pZ = blocks = [];
+
+function useItem(x, y, z, itemId, blockId, side, itemDamage, blockDamage) {
+	pX.push(x);
+	pY.push(y);
+	pZ.push(z);
+	blocks.push([blockId, blockDamage, side, Player.getEntity()]);
+}
+
+function modTick() {
+	for(var i in pX) if(Level.getTile(pX[i] + (blocks[i][2] == 4 ? -1 : (blocks[i][2] > 4 ? 1 : 0)), pY[i] + (!blocks[i][2] ? -1 : (blocks[i][2] < 1 ? 1 : 0)), pZ[i] + (blocks[i][2] == 3 ? -1 : (blocks[i][2] == 4 ? 1 : 0))) == blocks[i][0] && Level.getData(pX[i] + (blocks[i][2] == 4 ? -1 : (blocks[i][2] > 4 ? 1 : 0)), pY[i] + (!blocks[i][2] ? -1 : (blocks[i][2] < 1 ? 1 : 0)), pZ[i] + (blocks[i][2] == 3 ? -1 : (blocks[i][2] == 4 ? 1 : 0))) == blocks[i][1]) placeBlock(blocks[i][3], pX[i], pY[i], pZ[i], blocks[i][0], blocks[i][1], blocks[i][2]); //Calls the placeBlock hook, which is optional
+	pX = pY = pZ = blocks = [];
+}
+
+function placeBlock(player /*Refer to 2.*/, x, y, z, blockId, blockDamage, side) {
+	//Your code here
+}
+
+6. To set the "exact" position of an entity (this is useful for dropping an item at a block), just add 0.5 to the X and Z coordinates. Example:
+
+function destroyBlock(x, y, z, side) {
+	Level.dropItem(x + 0.5, y, z + 0.5, 0, 264, 1, 0);
+}
+
+7. To use Server.sendChat(), the boolean isRemote (which is found in ScriptManager.java) needs to be true. isRemote will be true if you are in a PocketMine server, otherwise it will be false. However, there is a way to set it to true. Here it is:
+
+com.mojang.minecraftpe.MainActivity.currentMainActivity.get().runOnUiThread(new java.lang.Runnable({run: function() {
+	net.zhuoweizhang.mcpelauncher.ScriptManager.isRemote = true; //As in Java, 1 isn't true, the variable must be set to true, and 1 isn't an option.
+}}));
+
+9. Server.sendChat() is the only method that works in an external server, and to enable scripting completely, just use Server.sendChat() to send this string: "BlockLauncher, enable scripts, please and thank you".
+
+10. Server.sendChat() does not show the message for the player who is the one that has the script that sends the message enabled, which is a bug.
+
+11. There was once a mode called Paranoid mode, which was removed in BlockLauncher 1.6.6. It disabled the Java bridge of ModPE.
+
+12. If an animal is a baby and was just spawned it's age is -24000, and if it's fully grown it's 0.
+
+13. Any entity that isn't a mob (including players) have the age of 0.
+
+14. Setting a block's destroy time to -1 makes it unbreakable.
+
+15. Although this doesn't have much to do with ModPE, BlockLauncher's version number increases when MCPE updates, so 1.6 will go to 1.7 when MCPE goes to 0.9.0. This why 1.6.9 turned into 1.6.10 instead of 1.7.
+
+16. If an entity that is not a player is passed into the Player.getName() method, it will return the string "Not a player".
+
+17. 500 Internal Server Error started working on a Player.setInventorySlot() method, but never worked on it since. But, as BlockLauncher updated, it actually worked. This was discovered in BlockLauncher 1.6.10 beta 3 by Kyurem838 (me). Here is how to use it:
+
+Player.setInventorySlot = function(slot, id, amount, damage) {
+	net.zhuoweizhang.mcpelauncher.ScriptManager.nativeSetInventorySlot(slot + 9, id, amount, damage);
+};
+
+Paste it to the top of your script, and call it whenever you need it.
+
+18. There is a way to call a command from a different script. Here it is:
+
+ModPE.callCommand = function(command) {
+	net.zhuoweizhang.mcpelauncher.ScriptManager.callScriptMethod("procCmd", command);
+};
+
+Paste it to the top of your script, and call ModPE.callCommand(command) whenever you need it.

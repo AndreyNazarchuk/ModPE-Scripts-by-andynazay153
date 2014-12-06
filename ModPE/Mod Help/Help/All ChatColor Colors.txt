@@ -1,0 +1,81 @@
+﻿ALL ChatColor COLORS
+
+ChatColor.BLACK
+
+ChatColor.DARK_BLUE
+
+ChatColor.DARK_GREEN
+
+ChatColor.DARK_AQUA
+
+ChatColor.DARK_RED
+
+ChatColor.DARK_PURPLE
+
+ChatColor.GOLD
+
+ChatColor.GRAY
+
+ChatColor.DARK_GRAY
+
+ChatColor.BLUE
+
+ChatColor.GREEN
+
+ChatColor.AQUA
+
+ChatColor.RED
+
+ChatColor.LIGHT_PURPLE
+
+ChatColor.YELLOW
+
+ChatColor.WHITE
+
+SELECTOR 
+
+
+KEY CODES - The selector key codes are the same as the ChatColor Colors.
+
+§0 - Black
+
+§1 - Dark Blue
+
+§2 - Dark Green
+
+§3 - Dark Aqua
+
+§4 - Dark Red
+
+§5 - Dark Purple
+
+§6 - Gold
+
+§7 - Gray
+
+§8 - Dark Gray
+
+§9 - Blue
+
+§a - Green
+
+§b - Aqua
+
+§c - Red
+
+§d - Light Purple
+
+§e - Yellow
+
+§f - White
+
+
+EXAMPLE
+
+function modTick() {
+
+clientMessage(ChatColor.BLUE + "Blue! " + ChatColor.GRAY + "Gray!");
+	
+Level.setSignText(10, 15, 10, 1, ChatColor.DARK_RED + "Dark Red!");
+}
+

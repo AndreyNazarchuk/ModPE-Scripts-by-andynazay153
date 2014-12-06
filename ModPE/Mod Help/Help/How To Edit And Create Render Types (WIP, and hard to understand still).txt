@@ -1,0 +1,63 @@
+First, there is a method namespace called Renderer. The Renderer namespace has two methods:
+
+Renderer.get(renderType);
+Renderer.createHumanoidRenderer();
+
+Something notable about Renderer.get() is that the parameter is not actually an integer, but a string. RenderManager.java (the file that contains all the render type methods) uses Integer.parseInt() (the parseInt() of Java) on the render type and then gets the renderer with that render type.
+
+To create a new renderer, you will have to call Renderer.createHumanoidRenderer(). This creates a new renderer with a unique render type so render types don't collide with different render types from different scripts. The new renderer looks like the original humanoid model:
+
+var myRenderer = Renderer.createHumanoidRenderer();
+
+There are two methods you can call on myRenderer:
+
+myRenderer.getRenderType();
+myRenderer.getModel();
+
+myRenderer.getRenderType() gets the render type of your model, and myRenderer.getModel() gets the actual model. If you would like to edit another renderer, then use this:
+
+var myRenderer = Renderer.get(renderType);
+
+Instead of the above.
+
+To edit or add new body parts, you will have to get the name of the body part you will have to edit. See Renderer Body Part Names.txt for more informatiom. For this example, we will use "leftLeg":
+
+var myRenderer = Renderer.createHumanoidRenderer();
+var myModel = myRenderer.getModel();
+var leftLeg = myModel.getPart("leftLeg");
+
+There are three methods you can call on leftLeg:
+
+leftLeg.setTextureOffset(x, y, isTransparent);
+leftLeg.addBox(x, y, z, width, height, depth, scale);
+leftLeg.clear();
+
+The parameters isTransparent in leftLeg.setTextureOffset() and scale in leftLeg.addBox() are not required. Unlike other methods, you can't have 0 or 1 as the parameter isTransparent.
+
+First, you will have to clear the left leg so we can recreate it:
+
+var myRenderer = Renderer.createHumanoidRenderer();
+var myModel = myRenderer.getModel();
+var leftLeg = myModel.getPart("leftLeg");
+leftLeg.clear();
+
+Next, we will have to set the texture offset. The texture offset is basically the X and Y position of the textures that leftLeg is going to use. With offsets, if an offset goes up by 1, it is moving up one pixel. One block is twenty-three pixels:
+
+var myRenderer = Renderer.createHumanoidRenderer();
+var myModel = myRenderer.getModel();
+var leftLeg = myModel.getPart("leftLeg");
+leftLeg.clear();
+leftLeg.setTextureOffset(18, 4, false);
+
+Finally, we will add a new box:
+
+var myRenderer = Renderer.createHumanoidRenderer();
+var myModel = myRenderer.getModel();
+var leftLeg = myModel.getPart("leftLeg");
+leftLeg.clear();
+leftLeg.setTextureOffset(18, 4, false);
+leftLeg.addBox(-6, -10, -7, 12, 18, 10, 0);
+
+What this is doing is it is adding a box at the X and Y texture offset of 18 and 4 and at the X, Y, and Z offset of -6, -10, and -7 with the width of 12, the height of 18, the depth of 10, and the scale of 0.
+
+If you haven't figured it out yet, scale is basically the size of the box.

@@ -1,0 +1,10 @@
+RENDERER BODY PART NAMES
+
+head
+body
+rightArm
+leftArm
+rightLeg
+leftLeg
+
+For more information, see How To Edit And Create Render Types.txt.

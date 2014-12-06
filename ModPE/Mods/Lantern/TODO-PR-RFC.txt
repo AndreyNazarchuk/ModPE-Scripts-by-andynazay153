@@ -1,0 +1,11 @@
+Listed in order of priority:
+
+ 1. stop crahes (its crashing because its not finished).
+
+ 2. add the lantern (duh :).
+
+ 3. add a crafting recipe. (probably torch sorounded with 4 paper)
+
+ 4. add to creative item inventory.
+
+ 5. make it autoupdate.

@@ -1,0 +1,34 @@
+ModPE.setItem(500, "fireworks", 0, "Rocket Jumper");
+ModPE.setItem(501, "fireworks", 0, "tweaked rocket jumper");
+ModPE.setItem(502, "fireworks", 0, "modified rocket jumper");
+ModPE.setItem(503, "fireworks", 0, "insane rocket jumper");
+ 
+Item.addShapedRecipe(500,1,0,["sgs","sms","wmw"],["g",87,0,"m",289,0,"s",20,0,"w",49,0]);
+Item.addShapedRecipe(501,1,0,["bbb","bib","bbb"],["i",500,0,"b",264,0]);
+Item.addShapedRecipe(502,1,0,["ooo","oeo","ooo"],["e",501,0,"o",388,0]);
+Item.addShapedRecipe(503,1,0,["rrr","rur","rrr"],["u",502,0,"r",247,0]);
+ 
+function useItem(x,y,z,itemId,blockId,side) 
+{
+if(itemId==500)
+{
+setVelY(getPlayerEnt(),2)
+}
+if(itemId==501)
+{
+setVelY(getPlayerEnt(),5)
+}
+if(itemId==502)
+{
+setVelY(getPlayerEnt(),7)
+}
+if(itemId==503)
+{
+setVelY(getPlayerEnt(),11)
+}}
+ 
+var initCreativeItems = true;
+Player.addItemCreativeInv(500,1,0);
+Player.addItemCreativeInv(501,1,0);
+Player.addItemCreativeInv(502,1,0);
+Player.addItemCreativeInv(503,1,0);

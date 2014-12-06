@@ -1,0 +1,80 @@
+THE CORRECT METHOD OF INDENTATION
+
+This has almost nothing to do with ModPE, and is not actually required, but for those who do, I recommend you read this, as I've noticed most people on the Minecraft Forums don't indent properly.
+
+First, to indent you're code, use Tab. Here is an example:
+	Put you're cursor on the direct left of this sentence.
+It can look like 2 spaces or 4 spaces, depending on the text editor you're using. You don't necessarily have to use the Tab key though:
+    Put you're cursor on the direct left of this sentence.
+  Put you're cursor on the direct left of this sentence.
+2 and 4 spaces are the most common way, but in CoffeeScript, this doesn't matter at all (and it really doesn't matter in JavaScript either):
+        Put you're cursor on the direct left of this sentence.
+
+Now, let's get to it:
+
+Basically, indent you're code in every new block:
+
+function test(par1float) {
+	if(par1float > 2) { //An indentation!
+		clientMessage("Above 2."); //Another one!
+		print("Above 2.");
+	} else { //When a block is closed, unindent once.
+		clientMessage("Under or equal to 2."); //Another one!
+		print("Under or equal to 2.");
+	}
+}
+
+function testSwitch(par1boolean) {
+	switch(par1boolean) {
+		case true:
+			clientMessage("True!"); //Indent after you use the case keyword as well!
+			break; //Don't unindent you're break!
+		case false: //Now you can unindent.
+			clientMessage("False.");
+			break;
+		default:
+			clientMessage("Not a boolean.");
+			break;
+	}
+}
+
+Okay, those were the basics. Now let's try some more:
+
+var myObj = {
+	theBoolean: true,
+	theInteger: 3,
+	theString: "Hi",
+	theNull: null,
+	theUndefined = void 0,
+	theAnotherMyObj: {
+		theBoolean: false,
+		theInteger: 4,
+		theString: "Bye",
+		theNull: null,
+		theUndefined: void 1
+	}
+};
+
+Now you know how to indent JavaScript. But what about CoffeeScript? It's very similiar:
+
+test = (par1float) ->
+	if par1float > 2 #A new block!
+		clientMessage "Above 2." #Another one!
+		print "Above 2."
+	else #Unindent
+		clientMessage "Under or equal to 2."
+		print "Under or equal to 2."
+
+testSwitch = (par1boolean) ->
+	switch par1boolean
+		when true
+			clientMessage "True"
+			print "True"
+		when false #No need for a break.
+			clientMessage "False"
+			print "False"
+		else then clientMessage "Not a boolean"
+
+That's all. As with the JavaScript example, myObj should be the same in CoffeeScript except for the semi-colon at the end, which isn't required.
+
+Literate CoffeeScript is the same as normal CoffeeScript except that it ignores all unindented code, meaning all code must be indented.

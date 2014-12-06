@@ -1,0 +1,22 @@
+HOW TO USE Item.setMaxDamage()
+
+I thought it was too obvious, but everyone's getting clueless about how to use it. The most useful part about this method is that it allows creating tools.
+
+Here is how to use it:
+
+ModPE.setItem(500, "stick", 0, "myStickTool", 1);
+ModPE.langEdit("item.myStickTool.name", "My Stick Tool");
+Item.setMaxDamage(500, 10); //Sets the max damage of My Stick Tool to 10 (like how Flint and Steel has 65 durability)
+
+function attackHook(attacker, victim) {
+	if(Player.getCarriedItem() == 500) { //If the player is holding My Stick Tool
+		if(Player.getCarriedItemData() < 9) Entity.setCarriedItem(attacker, 500, Player.getCarriedItemCount(), Player.getCarriedItemData() + 1); //Increments the damage of My Stick Tool if the current damage is below 9 (one below the max damage)
+		else { //Otherwise
+			Level.playSoundEnt(attacker, "random.break", 100, 100); //Play the break sound
+			Player.clearInventorySlot(Player.getSelectedSlotId()); //Remove the tool from the player's inventory
+		}
+		Entity.setHealth(victim, 1); //Sets the victim's health to 1 half heart, and My Stick Tool will do the rest of the damage, allowing the victim to drop any items
+	}
+}
+
+For a template, see Tool Or Sword Item Template.js.

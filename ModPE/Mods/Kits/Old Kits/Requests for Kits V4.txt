@@ -1,0 +1,53 @@
+ A Demolisher kit with TNT, flint and steel, lava bucket, and stone sword.
+ 
+ A Light scout kit with a bow, 64 arrows a stone sword, and iron boots.
+ 
+ A Heavy scout with a diamond sword, and a bow with 64 arrows.
+ 
+ A Knight with an iron sword with full chain armor.
+ 
+ A King with a gold helmet, the rest leather armor, 5 mushroom stew, and and full iron tools.
+ 
+ A Thief with a leather helmet and pants, 32 raw carrots, an iron axe and pickaxe, and a water bucket.
+ 
+ A Sheriff with an iron sword, full chain armor, a stack of steak, and a flint and steel.
+ 
+ A Reinforced trooper with full chain armor, a diamond sword, and a bow with 64 arrows, a flint and steel, and 10 TNT.
+ 
+ A Gamer kit that gives you an iron sword, full iron armor, 64 cooked potatoes, all diamond tools, and a flint and steel.
+ 
+ A Pirate with, a bow and 10 arrows, 10 TNT, and a stone sword.
+ 
+ A Butcher with, 64 raw beef, 64 cooked beef, 64 raw pork, 64 cooked pork, 64 raw chicken, and 64 cooked chicken.(added iron axe and leather tunic)
+ 
+ A Tamer: 5 dogs spawn, 64 bones, 64 cooked beef, and an iron sword.
+ 
+ A Hunter with a diamond sword, full leather armor, bow and 64 arrows, and 16 apples.
+ 
+ A Scientist with an iron sword, 32 cooked potatoes, and a diamond shovel.
+ 
+ A Executioner with full leather except for iron chest plate, an iron axe, and 10 carrots.
+ 
+ An Adventurer with full chain armor, all stone tools, a compass and a clock, and 64 cooked steak.
+ 
+ A baker with 16 bread, 5 cakes, 16 cookies, and a furnace .
+ 
+ A mine manager with a diamond pickaxe, a cake, 64 powered rails, 64 rails, a mine cart, and an iron helmet.
+ 
+ A constriction worker with an iron helmet, an iron pickaxe, 64 wood and 64 cobblestone, and 32 cooked chicken.
+ 
+ A constriction manager with diamond pickaxe, a cake, 64 powered rails, 64 rails, a mine cart, and an iron helmet, 64 wood and 64 cobblestone, and 32 cooked chicken, full leather armor except the helmet.
+ 
+ An Admin with full diamond armor and tools, and 64 cobblestone.
+ 
+ VIP with full iron armor and tools, with 64 wood planks.
+ 
+ Executive(Super) VIP with full iron armor and diamond tools.
+ 
+ Trapper with a bow and 64 arrows, leather boots and chest plate, 64 logs, and 64 raw beef.
+ 
+ Guardian with full gold armor, a diamond sword, a chest, a cake, and a lava bucket.
+ 
+ Frogman kit that gives you full leather armor, 64 TNT, a flint and steel, and 64 ladders. that would be useful for pvp on a server.
+
+ Food: 16 cooked porkchops, 16 steak,  16 baked potatoes, 16 cooked chicken, 16 Beetroot soup, 16 Mushrooom stew, 16 bread, 16 carrots, 16 Pumpkin Pie, 16 apples, 16 melon slices, 16 cakes, 16 cookies
