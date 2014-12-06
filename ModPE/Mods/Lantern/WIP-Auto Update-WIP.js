@@ -1,7 +1,7 @@
 
 //Auto update 
  
-var version="5.1";
+var version="1.0";
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
@@ -135,6 +135,4 @@ function updateVersion() {
             }
         }));
         updateWindow=false;
-    } 
-}
- 
+    }
