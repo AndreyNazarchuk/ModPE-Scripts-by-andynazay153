@@ -174,7 +174,7 @@ Level.destroyBlock(x, y, z, true);
 }
 }
 /*
-function leaveGame() {
+function leaveGame(){
 ModPE.resetImages();
 }
 */
