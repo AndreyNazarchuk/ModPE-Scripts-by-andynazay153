@@ -17,12 +17,12 @@ No additional restrictions - You may not apply legal terms or technological meas
 
 //Auto update 
  
-var version="1";
+var version= "1.0";
 var checkForUpdate=false;
-var updateWindow=false; 
+var updateWindow=false;
 var newUpdate;
-var updateMod; 
-var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get(); 
+var updateMod;
+var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
  
  function checkVersion() {
     var r  = new java.lang.Runnable() {
@@ -57,7 +57,7 @@ var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
                             }
                             else {
                                 clientMessage("§8[TR]   Error: \n" + err);
-                            } 
+                            }
             }
         }
     }
