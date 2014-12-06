@@ -162,18 +162,17 @@ function newLevel(){
 	}
 }
 //                                       Bottom                   Top                     North                    South                    East                     West 
-Block.defineBlock(180,"Lantern",[["redstone_lamp_on", 0],["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0]]);
+Block.defineBlock(180, "Lantern", [["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0]]);
 Block.setDestroyTime(180,2);
 Block.setShape(180,0.5,0,0.5,0.5,0.5,0.5);
 Block.setLightLevel(180, 16);
-function destryBlock(x, y, z){
+function destroyBlock(x, y, z){
 var blockId = Level.getTile(x, y, z);
 if(blockId == 180){
 preventDefault();
 Level.destroyBlock(x, y, z, true);
 }
 }
-
 /*
 function leaveGame() {
 ModPE.resetImages();
