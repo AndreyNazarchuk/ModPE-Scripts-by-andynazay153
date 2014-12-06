@@ -24,11 +24,11 @@ function newLevel(){
 	ModPE.saveData("test", "Test");
 	}
 }
-
-Block.defineBlock(699,"Lantern",[[texturename, offset]],type,false,0);
+//                                       Bottom                   Top                     North                    South                    East                     West 
+Block.defineBlock(699,"Lantern",[["redstone_lamp_on", 0],["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0]],type,false,0);
 Block.setDestroyTime(699,2);
 Block.setShape(699,.5,0,.5,.5,.5,.5);
-Block.setLightLevel(699, 15);
+Block.setLightLevel(699, 16);
 
 function leaveGame() {
 ModPE.resetImages();
