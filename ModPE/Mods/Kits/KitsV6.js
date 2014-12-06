@@ -15,7 +15,7 @@ No additional restrictions - You may not apply legal terms or technological meas
 
 //Auto update 
  
-var version="1.0";
+var version="6.0";
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;

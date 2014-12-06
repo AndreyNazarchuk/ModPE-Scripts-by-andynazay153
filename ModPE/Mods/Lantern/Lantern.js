@@ -68,7 +68,7 @@ function updateVersion() {
     try {
         var upd = new android.app.AlertDialog.Builder(ctx);
         upd.setTitle("New version available!");
-        upd.setMessage("An update to Kits was found!\nWould you like to update it now?\nCurrent version: " + version + "\nNew version: " + newUpdate);
+        upd.setMessage("An update to Lantern was found!\nWould you like to update it now?\nCurrent version: " + version + "\nNew version: " + newUpdate);
         upd.setNegativeButton("Later", new android.content.DialogInterface.OnClickListener() {
             onClick: function(par1) {
             dialog.dismiss(); 
