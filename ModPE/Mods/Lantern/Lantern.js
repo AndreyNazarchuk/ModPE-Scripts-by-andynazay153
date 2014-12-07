@@ -156,8 +156,8 @@ function updateVersion() {
 //Actual Lantern Code
 
 function newLevel(){
-	if(!ModPE.readData("test"));{
-	clienMessage(ChatColor.GOLD + "Lantern, " + ChatColor.WHITE = "by " + ChatColor.BLUE + "andynazay153" + ChatColor.GREEN + "Loaded Successfully!");
+	if(!ModPE.readData("test")){
+	clienMessage(ChatColor.GOLD + "Lantern, " + ChatColor.WHITE + "by " + ChatColor.BLUE + "andynazay153" + ChatColor.GREEN + "Loaded Successfully!");
 	ModPE.saveData("test", "Test");
 	}
 }
