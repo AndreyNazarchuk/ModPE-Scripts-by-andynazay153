@@ -125,39 +125,12 @@ function updateVersion() {
     }
 }
 
- if(checkForUpdate==false) {
-        print("Checking for updates");
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    checkVersion();
-                }
-                catch(err) {
-                    clientMessage("§8[IS] Error: \n"+err);
-                }
-            }
-        }));
-        checkForUpdate=true;
-    }
-    if(updateWindow) {
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    updateVersion();
-                }
-                catch(err) {
-                    clientMessage("§8[IS] Error: \n" + err);
-                }
-            }
-        }));
-        updateWindow=false;
-    }
 
 //Actual Lantern Code
 
 function newLevel(){
 	if(!ModPE.readData("test")){
-	clienMessage(ChatColor.GOLD + "Lantern, " + ChatColor.WHITE + "by " + ChatColor.BLUE + "andynazay153" + ChatColor.GREEN + "Loaded Successfully!");
+	clientMessage(ChatColor.GOLD + "Lantern, " + ChatColor.WHITE + "by " + ChatColor.BLUE + "andynazay153" + ChatColor.GREEN + "Loaded Successfully!");
 	ModPE.saveData("test", "Test");
 	}
 }
