@@ -1,23 +1,21 @@
 /*
 Made by andynazay153.
-This is my second mod. Please do not copy or add it to anything or make a video without giving me credit ;)
+This is my mod. Please do not copy or add it to anything or make a video without giving me credit ;)
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 You are free to:
 Share - copy and redistribute the material in any medium or format
-Adapt - remix, transform, and build upon the material for any purpose, even commercially.
+Adapt - remix, transform, and build upon the material for any purpose, even commercially, But with credit to the original author.
 The licensor cannot revoke these freedoms as long as you follow the license terms.
 Under the following terms:
-Attribution - You must give appropriate credit, provide a link to the license, 
-and indicate if changes were made. You may do so in any reasonable manner, 
-but not in any way that suggests the licensor endorses you or your use.
-ShareAlike - If you remix, transform, or build upon the material, you must .
-No additional restrictions - You may not apply legal terms or technological measures
- that legally restrict others from doing anything the license permits.
+Attribution - You must give appropriate credit, provide a link to the license, and indicate if changes were made. 
+You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+ShareAlike - If you remix, transform, or build upon the material, you must ask the Owner of this mod if you can release it to the public.
+No additional restrictions - You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
 */
 
 //Update  Code
  
-var version= "1.1";
+var version= "1.7";
 var checkForUpdate=false;
 var updateWindow=false;
 var newUpdate;
@@ -162,9 +160,9 @@ function newLevel(){
 	Item.setCategory(499,8,0);
 	Item.addShapedRecipe(499, 4, 0, ["p","ptp","p"], ["t",50,0,"p",339,0]);
 	Player.addItemCreativeInv(499, 1, 0);
-	if(!ModPE.readData("intro")){
+	if(!ModPE.readData("lanternintro")){
 		clientMessage(ChatColor.GOLD + "Lantern " + ChatColor.WHITE + "by " + ChatColor.BLUE + "andynazay153" + ChatColor.GREEN + "Loaded Successfully!");
-		ModPE.saveData("intro", "Intro");
+		ModPE.saveData("lanternintro", "LanternIntro");
 	}
 }
 

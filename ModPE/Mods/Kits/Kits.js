@@ -15,14 +15,15 @@ No additional restrictions - You may not apply legal terms or technological meas
 
 //Update Code 
  
-var version="6.0";
+var version="6.2";
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
 var updateMod;
 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get(); 
- 
- function checkVersion() {
+
+if(!ModPE.readData("KitsGUI")){
+function checkVersion() {
     var r  = new java.lang.Runnable() {
         run: function() {
             try {
@@ -151,7 +152,7 @@ function updateVersion() {
         updateWindow=false;
     }
 
-//kKits Code
+//Kits Code
 var GUI;
 var menu;
 var exitUI;
@@ -162,6 +163,33 @@ function dip2px(dips){
 }
 
 function newLevel(){
+	Player.clearInventory = function() {
+		for(var i = 0; i < 255; i++) Player.clearInventorySlot(i);
+	};
+	if(!ModPE.readData("kitsintro")){
+	clientMessage(ChatColor.BLUE + "Kits " + ChatColor.WHITE + "by " + ChatColor.GOLD + "andynazay153" + ChatColor.GREEN + "Loaded Successfully!");
+	ModPE.saveData("kitsintro", "KitsIntro");
+	}
+function procCmd(cmd) {
+ if(cmd == "kits off"){
+ ModPE.saveData(KitsGUI, off);
+     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
+    ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
+        if(GUI != null){
+            GUI.dismiss();
+            GUI = null;
+        }
+        if(menu != null){
+            menu.dismiss();
+            menu = null;
+        }
+        if(exitUI != null){
+            exitUI.dismiss();
+            exitUI = null;
+        }
+    }}));
+ }
+ else if(cmd == "kits on"){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
         try{
@@ -209,6 +237,14 @@ function mainMenu(){
 			}
 			}}));
 			menuLayout.addView(closebutton);
+			var buttonClearInv = new android.widget.Button(ctx);
+            button1.setText("Clear Inventory");
+            button1.setOnClickListener(new android.view.View.OnClickListener({
+             onClick: function(viewarg){
+			  Player.clearInventory();
+			   }
+            }));
+            menuLayout.addView(buttonClearInv);
 			
 			var button1 = new android.widget.Button(ctx);
             button1.setText("Starter");
@@ -758,6 +794,9 @@ function exit(){
             print(exception);
         }
     }}));
+}
+}
+}
 }
 
 function leaveGame(){
