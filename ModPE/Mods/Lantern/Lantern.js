@@ -124,7 +124,33 @@ function updateVersion() {
         clientMessage("§8[TR] Error: \n" + err);
     }
 }
-
+if(checkForUpdate==false) {
+        print("Checking for updates");
+        ctx.runOnUiThread(new java.lang.Runnable({
+            run: function() {
+                try {
+                    checkVersion();
+                }
+                catch(err) {
+                    clientMessage("§8[IS] Error: \n"+err);
+                }
+            }
+        }));
+        checkForUpdate=true;
+    }
+    if(updateWindow) {
+        ctx.runOnUiThread(new java.lang.Runnable({
+            run: function() {
+                try {
+                    updateVersion();
+                }
+                catch(err) {
+                    clientMessage("§8[IS] Error: \n" + err);
+                }
+            }
+        }));
+        updateWindow=false;
+    }
 
 //Lantern Code
 
