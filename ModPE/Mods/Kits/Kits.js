@@ -13,13 +13,13 @@ ShareAlike - If you remix, transform, or build upon the material, you must ask t
 No additional restrictions - You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
 */
 
-//Auto update 
+//Update Code 
  
 var version="6.0";
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
-var updateMod; 
+var updateMod;
 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get(); 
  
  function checkVersion() {
@@ -151,8 +151,7 @@ function updateVersion() {
         updateWindow=false;
     }
 
-//kits code
-	
+//kKits Code
 var GUI;
 var menu;
 var exitUI;

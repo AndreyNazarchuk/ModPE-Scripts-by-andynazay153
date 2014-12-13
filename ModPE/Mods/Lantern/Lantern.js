@@ -165,8 +165,8 @@ Block.defineBlock(499, "Lantern", [["redstone_lamp_on", 0], ["redstone_lamp_on",
 Block.setDestroyTime(499,2);
 Block.setShape(499,0.5,0,0.5,0.5,0.5,0.5);
 Block.setLightLevel(499, 16);
-//                      ID  A  D 
-//Item.addShapedRecipe(499, 4, 0, [topSquare, middleSquare, bottomSquare], [key, itemId, itemDamage]);
+
+Item.addShapedRecipe(499,1,0,["p","ptp","p"],["t",50,0,"p",339,0]);
 function destroyBlock(x, y, z){
 var blockId = Level.getTile(x, y, z);
 if(blockId == 499){
