@@ -155,18 +155,19 @@ if(checkForUpdate==false) {
 //Lantern Code
 
 function newLevel(){
+	Block.defineBlock(499,"Lantern",[["redstone_lamp_on", 0],["redstone_lamp_on", 0],["redstone_lamp_on", 0],["redstone_lamp_on", 0],["redstone_lamp_on", 0],["redstone_lamp_on", 0]]);
+	Block.setDestroyTime(499,2);
+	Block.setShape(499,0.5,0,0.5,0.5,0.5,0.5);
+	Block.setLightLevel(499,16);
+	Item.setCategory(499,8,0);
+	Item.addShapedRecipe(499, 4, 0, ["p","ptp","p"], ["t",50,0,"p",339,0]);
+	Player.addItemCreativeInv(499, 1, 0);
 	if(!ModPE.readData("intro")){
-	clientMessage(ChatColor.GOLD + "Lantern" + ChatColor.WHITE + "by " + ChatColor.BLUE + "andynazay153" + ChatColor.GREEN + "Loaded Successfully!");
-	ModPE.saveData("intro", "Intro");
+		clientMessage(ChatColor.GOLD + "Lantern " + ChatColor.WHITE + "by " + ChatColor.BLUE + "andynazay153" + ChatColor.GREEN + "Loaded Successfully!");
+		ModPE.saveData("intro", "Intro");
 	}
 }
-//                                         Bottom                    Top                     North                     South                     East                    West 
-Block.defineBlock(499, "Lantern", [["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0]]);
-Block.setDestroyTime(499,2);
-Block.setShape(499,0.5,0,0.5,0.5,0.5,0.5);
-Block.setLightLevel(499, 16);
 
-Item.addShapedRecipe(499,1,0,["p","ptp","p"],["t",50,0,"p",339,0]);
 function destroyBlock(x, y, z){
 var blockId = Level.getTile(x, y, z);
 if(blockId == 499){
