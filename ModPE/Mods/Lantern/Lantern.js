@@ -15,9 +15,9 @@ No additional restrictions - You may not apply legal terms or technological meas
  that legally restrict others from doing anything the license permits.
 */
 
-//Auto update 
+//Update  Code
  
-var version= "1.0";
+var version= "1.1";
 var checkForUpdate=false;
 var updateWindow=false;
 var newUpdate;
@@ -126,22 +126,24 @@ function updateVersion() {
 }
 
 
-//Actual Lantern Code
+//Lantern Code
 
 function newLevel(){
-	if(!ModPE.readData("test")){
-	clientMessage(ChatColor.GOLD + "Lantern, " + ChatColor.WHITE + "by " + ChatColor.BLUE + "andynazay153" + ChatColor.GREEN + "Loaded Successfully!");
-	ModPE.saveData("test", "Test");
+	if(!ModPE.readData("intro")){
+	clientMessage(ChatColor.GOLD + "Lantern" + ChatColor.WHITE + "by " + ChatColor.BLUE + "andynazay153" + ChatColor.GREEN + "Loaded Successfully!");
+	ModPE.saveData("intro", "Intro");
 	}
 }
-//                                       Bottom                   Top                     North                    South                    East                     West 
-Block.defineBlock(180, "Lantern", [["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0]]);
-Block.setDestroyTime(180,2);
-Block.setShape(180,0.5,0,0.5,0.5,0.5,0.5);
-Block.setLightLevel(180, 16);
+//                                         Bottom                    Top                     North                     South                     East                    West 
+Block.defineBlock(499, "Lantern", [["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0], ["redstone_lamp_on", 0]]);
+Block.setDestroyTime(499,2);
+Block.setShape(499,0.5,0,0.5,0.5,0.5,0.5);
+Block.setLightLevel(499, 16);
+//                      ID  A  D 
+//Item.addShapedRecipe(499, 4, 0, [topSquare, middleSquare, bottomSquare], [key, itemId, itemDamage]);
 function destroyBlock(x, y, z){
 var blockId = Level.getTile(x, y, z);
-if(blockId == 180){
+if(blockId == 499){
 preventDefault();
 Level.destroyBlock(x, y, z, true);
 }
