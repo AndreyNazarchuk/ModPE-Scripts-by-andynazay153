@@ -209,10 +209,10 @@ function procCmd(cmd) {
             GUI.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
             GUI.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.BOTTOM, 0, 0);
         }catch(err){
-            print("An error occured: " + err);
+            print("An error occurred: " + err);
         }
     }}));
-}
+
 
 function mainMenu(){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
@@ -765,7 +765,7 @@ function mainMenu(){
             menu.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.BLACK));
             menu.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.TOP, 0, 0);
         }catch(error){
-            print("An error occured: " + error);
+            print("An error occurred: " + error);
         }
     }}));
 }
@@ -794,6 +794,7 @@ function exit(){
             print(exception);
         }
     }}));
+}
 }
 }
 }
