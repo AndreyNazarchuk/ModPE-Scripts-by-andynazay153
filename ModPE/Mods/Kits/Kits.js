@@ -162,17 +162,17 @@ function dip2px(dips){
 }
 
 function newLevel(){
-	if(!ModPE.readData("KitsGUI")){
 	Player.clearInventory = function() {
 		for(var i = 0; i < 255; i++) Player.clearInventorySlot(i);
 	};
+	if(!ModPE.readData("KitsGUI")){
 	if(!ModPE.readData("kitsintro")){
-	clientMessage(ChatColor.BLUE + "Kits " + ChatColor.WHITE + "by " + ChatColor.GOLD + "andynazay153" + ChatColor.GREEN + "Loaded Successfully!");
+	clientMessage(ChatColor.BLUE + "Kits " + ChatColor.WHITE + "by " + ChatColor.GOLD + "andynazay153 " + ChatColor.GREEN + "Loaded Successfully!");
 	ModPE.saveData("kitsintro", "KitsIntro");
 	}
 function procCmd(cmd) {
  if(cmd == "kits off"){
- ModPE.saveData(KitsGUI, off);
+ ModPE.saveData("KitsGUI", "off");
      var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
         if(GUI != null){
@@ -190,7 +190,8 @@ function procCmd(cmd) {
     }}));
  }
  else if(cmd == "kits on"){
-    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
+    ModPE.removeData("KitsGUI");
+	var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
         try{
             var layout = new android.widget.LinearLayout(ctx);
