@@ -15,7 +15,7 @@ No additional restrictions - You may not apply legal terms or technological meas
 
 //Update Code 
  
-var version="6.3";
+var version="6.5";
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
@@ -156,6 +156,8 @@ var GUI;
 var menu;
 var exitUI;
 
+
+//Get DPI
 function dip2px(dips){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     return Math.ceil(dips * ctx.getResources().getDisplayMetrics().density);
@@ -165,15 +167,15 @@ function newLevel(){
 	Player.clearInventory = function() {
 		for(var i = 0; i < 255; i++) Player.clearInventorySlot(i);
 	};
-	if(!ModPE.readData("KitsGUI")){
 	if(!ModPE.readData("kitsintro")){
 	clientMessage(ChatColor.BLUE + "Kits " + ChatColor.WHITE + "by " + ChatColor.GOLD + "andynazay153 " + ChatColor.GREEN + "Loaded Successfully!");
 	ModPE.saveData("kitsintro", "KitsIntro");
 	}
 function procCmd(cmd) {
  if(cmd == "kits off"){
- ModPE.saveData("KitsGUI", "off");
-     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
+ if(!ModPE.readData("KitsGUI")){
+	 ModPE.saveData("KitsGUI", "GUIOFF");
+    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
         if(GUI != null){
             GUI.dismiss();
@@ -188,6 +190,7 @@ function procCmd(cmd) {
             exitUI = null;
         }
     }}));
+ }
  }
  else if(cmd == "kits on"){
     ModPE.removeData("KitsGUI");
@@ -795,7 +798,6 @@ function exit(){
             print(exception);
         }
     }}));
-}
 }
 }
 }

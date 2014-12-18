@@ -14,7 +14,7 @@ No additional restrictions - You may not apply legal terms or technological meas
 */
 
 //Update  Code
- 
+
 var version= "1.7";
 var checkForUpdate=false;
 var updateWindow=false;
