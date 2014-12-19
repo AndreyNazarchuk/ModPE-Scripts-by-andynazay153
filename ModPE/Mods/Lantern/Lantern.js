@@ -161,7 +161,7 @@ function newLevel(){
 	Item.addShapedRecipe(250, 4, 0, ["p","ptp","p"], ["t",50,0,"p",339,0]);
 	Player.addItemCreativeInv(250, 1, 0);
 	if(!ModPE.readData("lanternintro")){
-		clientMessage(ChatColor.GOLD + "Lantern " + ChatColor.WHITE + "by " + ChatColor.BLUE + "andynazay153" + ChatColor.GREEN + "Loaded Successfully!");
+		clientMessage(ChatColor.GOLD + "Lantern " + ChatColor.WHITE + "by " + ChatColor.BLUE + "andynazay153 " + ChatColor.GREEN + "Loaded Successfully!");
 		ModPE.saveData("lanternintro", "LanternIntro");
 	}
 }
