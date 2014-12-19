@@ -90,7 +90,7 @@ function updateVersion() {
                                 updateMod += new java.lang.String(typeb, 0, byteCount);               
                             }
                             var modpeFolder = ctx.getDir("modscripts", 0);
-                            var modpeFile = new java.io.File(modpeFolder, "Kits.js");
+                            var modpeFile = new java.io.File(modpeFolder, "Lantern.js");
                             var update = new java.io.PrintWriter(modpeFile);
                             update.write(updateMod);
                             update.flush();
@@ -99,7 +99,7 @@ function updateVersion() {
                             try {
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, false);
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, true);
-                                clientMessage("§3[TR] Downloaded and enabled!");
+                                clientMessage("§3[TR] Update was downloaded and enabled!");
                                    
                             }
                             catch(err) {
