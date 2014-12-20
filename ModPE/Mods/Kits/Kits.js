@@ -1,6 +1,6 @@
 /*
 Made by andynazay153.
-This is my mod. Please do not copy or add it to anything or make a video without giving me credit ;)
+This is my mod. Please do not copy or add it to anything or make a video without asking me ;)
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 You are free to:
 Share - copy and redistribute the material in any medium or format
