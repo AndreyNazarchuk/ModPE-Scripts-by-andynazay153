@@ -171,29 +171,6 @@ function newLevel(){
 	clientMessage(ChatColor.BLUE + "Kits " + ChatColor.WHITE + "by " + ChatColor.GOLD + "andynazay153 " + ChatColor.GREEN + "Loaded Successfully!");
 	ModPE.saveData("kitsintro", "KitsIntro");
 	}
-function procCmd(cmd) {
- if(cmd == "kits off"){
- if(!ModPE.readData("KitsGUI")){
-	 ModPE.saveData("KitsGUI", "GUIOFF");
-    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-    ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
-        if(GUI != null){
-            GUI.dismiss();
-            GUI = null;
-        }
-        if(menu != null){
-            menu.dismiss();
-            menu = null;
-        }
-        if(exitUI != null){
-            exitUI.dismiss();
-            exitUI = null;
-        }
-    }}));
- }
- }
- else if(cmd == "kits on"){
-    ModPE.removeData("KitsGUI");
 	var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
         try{
@@ -800,8 +777,25 @@ function exit(){
     }}));
 }
 }
-}
-}
+ function procCmd(cmd) {
+ if(cmd == "kits off"){
+    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
+    ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
+        if(GUI != null){
+            GUI.dismiss();
+            GUI = null;
+        }
+        if(menu != null){
+            menu.dismiss();
+            menu = null;
+        }
+        if(exitUI != null){
+            exitUI.dismiss();
+            exitUI = null;
+        }
+    }}));
+ }
+ }
 
 function leaveGame(){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();

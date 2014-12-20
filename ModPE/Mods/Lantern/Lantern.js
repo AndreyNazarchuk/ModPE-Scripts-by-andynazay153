@@ -173,8 +173,3 @@ preventDefault();
 Level.destroyBlock(x, y, z, true);
 }
 }
-/*
-function leaveGame(){
-ModPE.resetImages();
-}
-*/
