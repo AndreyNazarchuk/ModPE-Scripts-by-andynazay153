@@ -20,7 +20,7 @@ var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
 var updateMod;
-var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get(); 
+var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
 
 function checkVersion() {
     var r  = new java.lang.Runnable() {
@@ -41,20 +41,20 @@ function checkVersion() {
                 }
                 newUpdate = checkedVersion;
                 if(version+"\n" != checkedVersion) {
-                    clientMessage("§8[MH] §fNew version! " + newUpdate);
+                    clientMessage("New version! " + newUpdate);
                     updateWindow=true;
                 }
                 else if(version+"\n"==checkedVersion){
-                clientMessage("§8[TR] No updates available");
+                clientMessage("No updates available");
                 }
             }
             catch(err) {
-                clientMessage("§8[TR] Update check failed ");
+                clientMessage("Update check failed ");
                 if(err=="JavaException: java.net.UnknownHostException: raw.githubusercontent.com") {
-                                clientMessage("§8[TR] No internet connection.");
+                                clientMessage("No internet connection.");
                             }
                             else {
-                                clientMessage("§8[TR]   Error: \n" + err);
+                                clientMessage("Error: \n"+ err);
                             } 
             }
         }
@@ -77,7 +77,7 @@ function updateVersion() {
                 var ru  = new java.lang.Runnable() {
                     run: function() {
                         try {
-                            var urls = new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Mods/Kits/Kits.js");
+                            var urls = new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-master/ModPE/Mods/Kits/Kits.js");
                             var check = urls.openConnection();
                             check.setRequestMethod("GET");
                             check.setDoOutput(true);
@@ -99,15 +99,15 @@ function updateVersion() {
                             try {
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, false);
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, true);
-                                clientMessage("§3[TR] Downloaded and enabled!");
+                                clientMessage("Downloaded and enabled!");
                                    
                             }
                             catch(err) {
-                                clientMessage("§8[TR] Error: \n" + err);
+                                clientMessage("Error: \n" + err);
                             }
                         }
                         catch(err) {
-                            clientMessage("§8[TR] Error: \n" + err);
+                            clientMessage("Error: \n" + err);
                         }
                     }
                 }
@@ -119,37 +119,11 @@ function updateVersion() {
         dialog.show() 
     }
     catch(err) {
-        clientMessage("§8[TR] Error: \n" + err);
+        clientMessage("Error: \n" + err);
     }
 }
 
- if(checkForUpdate==false) {
-        print("Checking for updates");
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    checkVersion();
-                }
-                catch(err) {
-                    clientMessage("§8[IS] Error: \n"+err);
-                }
-            }
-        }));
-        checkForUpdate=true;
-    }
-    if(updateWindow) {
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    updateVersion();
-                }
-                catch(err) {
-                    clientMessage("§8[IS] Error: \n" + err);
-                }
-            }
-        }));
-        updateWindow=false;
-    }
+
 
 //Kits Code
 var GUI;
@@ -171,20 +145,49 @@ function newLevel(){
 	clientMessage(ChatColor.BLUE + "Kits " + ChatColor.WHITE + "by " + ChatColor.GOLD + "andynazay153 " + ChatColor.GREEN + "Loaded Successfully!");
 	ModPE.saveData("kitsintro", "KitsIntro");
 	}
+	 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
+	 
+	 if(checkForUpdate==false) {
+        print("Checking for updates");
+        ctx.runOnUiThread(new java.lang.Runnable({
+            run: function() {
+                try {
+                    checkVersion();
+                }
+                catch(err) {
+                    clientMessage("Error: \n"+err);
+                }
+            }
+        }));
+        checkForUpdate=true;
+    }
+    if(updateWindow) {
+        ctx.runOnUiThread(new java.lang.Runnable({
+            run: function() {
+                try {
+                    updateVersion();
+                }
+                catch(err) {
+                    clientMessage("Error: \n" + err);
+                }
+            }
+        }));
+        updateWindow=false;
+    }
 	var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
         try{
             var layout = new android.widget.LinearLayout(ctx);
             layout.setOrientation(1);
 
-            var menuBtn = new android.widget.Button(ctx);
-            menuBtn.setText("Kits");
-            menuBtn.setOnClickListener(new android.view.View.OnClickListener({
-                onClick: function(viewarg){
-                    mainMenu();
+            var button = new android.widget.Button(ctx);
+            button.setText("Kits");
+            button.setOnClickListener(new android.view.View.OnClickListener({
+                onClick:       function(viewarg){
+                 mainMenu();
                 }
             }));
-            layout.addView(menuBtn);
+            layout.addView(button);
 
             GUI = new android.widget.PopupWindow(layout, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
             GUI.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
