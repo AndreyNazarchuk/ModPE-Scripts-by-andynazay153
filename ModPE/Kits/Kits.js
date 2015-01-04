@@ -15,7 +15,7 @@ No additional restrictions - You may not apply legal terms or technological meas
 
 //Update Code 
  
-var version="6.5";
+var version="6.6";
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
@@ -366,6 +366,20 @@ function mainMenu(){
 				clientMessage("Warrior kit has been added to your inventory!");
 			 } }));
 			 menuLayout.addView(button8);
+			 var buttonGhost = new android.widget.Button(ctx); 
+			buttonGhost.setText("Ghost");
+			buttonGhost.setOnClickListener(new android.view.View.OnClickListener({
+			 onClick: function(viewarg){
+				Player.addItemInventory(302,1);
+				Player.addItemInventory(303,1);
+				Player.addItemInventory(304,1);
+				Player.addItemInventory(305,1);
+				Player.addItemInventory(267,1);
+				Player.addItemInventory(332,16);
+				Player.addItemInventory(344,16);
+				clientMessage("Ghost kit has been added to your inventory!");
+			 } }));
+			 menuLayout.addView(buttonGhost);
 			var button9 = new android.widget.Button(ctx); 
 			button9.setText("Demolisher");
 			button9.setOnClickListener(new android.view.View.OnClickListener({
@@ -673,6 +687,7 @@ function mainMenu(){
 				Player.addItemInventory(46,64);
 				Player.addItemInventory(259,1);
 				Player.addItemInventory(65,64);
+				Player.addItemInventory(341,16);
 				clientMessage("Frogman kit has been added to your inventory");
 			 } }));
 			 menuLayout.addView(button33);
