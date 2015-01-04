@@ -26,7 +26,7 @@ function checkVersion() {
     var r  = new java.lang.Runnable() {
         run: function() {
             try {
-                var urls= new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Mods/Kits/KitsVersion.txt");
+                var urls= new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Kits/KitsVersion.txt");
                 var check = urls.openConnection();
                 check.setRequestMethod("GET");
                 check.setDoOutput(true);
@@ -77,7 +77,7 @@ function updateVersion() {
                 var ru  = new java.lang.Runnable() {
                     run: function() {
                         try {
-                            var urls = new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-master/ModPE/Mods/Kits/Kits.js");
+                            var urls = new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-master/ModPE/Kits/Kits.js");
                             var check = urls.openConnection();
                             check.setRequestMethod("GET");
                             check.setDoOutput(true);
@@ -744,6 +744,28 @@ function mainMenu(){
 			}
 			}}));
 			menuLayout.addView(closebutton1);
+			
+			var closeKits = new android.widget.Button(ctx);
+			closeKits.setText("Hide Kits");
+			closeKits.setOnClickListener(new android.view.View.OnClickListener({
+			onClick: function(viewarg){
+			    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
+				ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
+					if(GUI != null){
+						GUI.dismiss();
+						GUI = null;
+					}
+					if(menu != null){
+						menu.dismiss();
+						menu = null;
+					}
+					if(exitUI != null){
+						exitUI.dismiss();
+						exitUI = null;
+					}
+				}}));
+			}}));
+			menuLayout.addView(closeKits);
 
             menu = new android.widget.PopupWindow(menuLayout1, ctx.getWindowManager().getDefaultDisplay().getWidth()/3, ctx.getWindowManager().getDefaultDisplay().getHeight());
             menu.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.BLACK));
@@ -779,27 +801,6 @@ function exit(){
         }
     }}));
 }
-}
- function procCmd(cmd) {
- if(cmd == "kits off"){
-    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-    ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
-        if(GUI != null){
-            GUI.dismiss();
-            GUI = null;
-        }
-        if(menu != null){
-            menu.dismiss();
-            menu = null;
-        }
-        if(exitUI != null){
-            exitUI.dismiss();
-            exitUI = null;
-        }
-    }}));
- }
- }
-
 function leaveGame(){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
@@ -816,4 +817,5 @@ function leaveGame(){
             exitUI = null;
         }
     }}));
+}
 }
