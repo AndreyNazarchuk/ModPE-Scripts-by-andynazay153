@@ -64,7 +64,7 @@ function checkVersion() {
 }
 function updateVersion() {
     try {
-        var upd = new android.app.AlertDialog.Builder(ctx);
+        var upd = new android.app.AlertDialog.Builder(ctx);        
         upd.setTitle("New version available!");
         upd.setMessage("An update to Kits was found!\nWould you like to update it now?\nCurrent version: " + version + "\nNew version: " + newUpdate);
         upd.setNegativeButton("Later", new android.content.DialogInterface.OnClickListener() {
@@ -222,8 +222,8 @@ function mainMenu(){
 			}}));
 			menuLayout.addView(closebutton);
 			var buttonClearInv = new android.widget.Button(ctx);
-            button1.setText("Clear Inventory");
-            button1.setOnClickListener(new android.view.View.OnClickListener({
+            buttonClearInv.setText("Clear Inventory");
+            buttonClearInv.setOnClickListener(new android.view.View.OnClickListener({
              onClick: function(viewarg){
 			  Player.clearInventory();
 			   }
