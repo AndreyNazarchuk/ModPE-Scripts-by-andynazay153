@@ -26,7 +26,7 @@ var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     var r  = new java.lang.Runnable() {
         run: function() {
             try {
-                var urls= new java.net.URL("");
+                var urls= new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Useful/UsefulModVersion.txt");
                 var check = urls.openConnection();
                 check.setRequestMethod("GET");
                 check.setDoOutput(true);
@@ -41,20 +41,20 @@ var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
                 }
                 newUpdate = checkedVersion;
                 if(version+"\n" != checkedVersion) {
-                    clientMessage("§8[MH] §fNew version! " + newUpdate);
+                    clientMessage("New version! " + newUpdate);
                     updateWindow=true;
                 }
                 else if(version+"\n"==checkedVersion){
-                clientMessage("§8[TR] No updates available");
+                clientMessage("No updates available");
                 }
             }
             catch(err) {
-                clientMessage("§8[TR] Update check failed ");
+                clientMessage("Update check failed ");
                 if(err=="JavaException: java.net.UnknownHostException: raw.githubusercontent.com") {
-                                clientMessage("§8[TR] No internet connection.");
+                                clientMessage("No internet connection.");
                             }
                             else {
-                                clientMessage("§8[TR]   Error: \n" + err);
+                                clientMessage("Error: \n" + err);
                             } 
             }
         }
@@ -77,7 +77,7 @@ function updateVersion() {
                 var ru  = new java.lang.Runnable() {
                     run: function() {
                         try {
-                            var urls = new java.net.URL("");
+                            var urls = new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Useful/UsefulMod.js");
                             var check = urls.openConnection();
                             check.setRequestMethod("GET");
                             check.setDoOutput(true);
@@ -99,15 +99,15 @@ function updateVersion() {
                             try {
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, false);
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, true);
-                                clientMessage("§3[TR] Downloaded and enabled!");
+                                clientMessage("Downloaded and enabled!");
                                    
                             }
                             catch(err) {
-                                clientMessage("§8[TR] Error: \n" + err);
+                                clientMessage("Error: \n" + err);
                             }
                         }
                         catch(err) {
-                            clientMessage("§8[TR] Error: \n" + err);
+                            clientMessage("Error: \n" + err);
                         }
                     }
                 }
@@ -119,9 +119,11 @@ function updateVersion() {
         dialog.show() 
     }
     catch(err) {
-        clientMessage("§8[TR] Error: \n" + err);
+        clientMessage("Error: \n" + err);
     }
 }
+
+//GUI Code
 
 var GUI;
 var menu;
@@ -140,7 +142,7 @@ function newLevel(){
             layout.setOrientation(1);
 
             var menuBtn = new android.widget.Button(ctx);
-            menuBtn.setText("Menu");
+            menuBtn.setText("U");
             menuBtn.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
                     mainMenu();
@@ -150,12 +152,11 @@ function newLevel(){
 
             GUI = new android.widget.PopupWindow(layout, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
             GUI.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
-            GUI.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.BOTTOM, 0, 0);
+            GUI.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.CENTER_VERTICAL, 0, 0);
         }catch(err){
-            print("An error occured: " + err);
+            print("An error occurred: " + err);
         }
     }}));
-}
 
 function mainMenu(){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
@@ -170,6 +171,17 @@ function mainMenu(){
             menuScroll.addView(menuLayout);
             menuLayout1.addView(menuScroll);
 
+			var closebutton = new android.widget.Button(ctx);
+			closebutton.setText("Close Menu");
+			closebutton.setOnClickListener(new android.view.View.OnClickListener({
+			onClick: function(viewarg){
+				if(menu != null){
+				menu.dismiss();
+				menu = null;
+			}
+			}}));
+			menuLayout.addView(closebutton);
+			
             var button = new android.widget.Button(ctx);
             button.setText("Button");
             button.setOnClickListener(new android.view.View.OnClickListener({
@@ -259,12 +271,11 @@ function mainMenu(){
                 }
             }));
             menuLayout.addView(button10);
-
-            menu = new android.widget.PopupWindow(menuLayout1, ctx.getWindowManager().getDefaultDisplay().getWidth()/2, ctx.getWindowManager().getDefaultDisplay().getHeight());
-            menu.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.BLACK));
-            menu.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.TOP, 0, 0);
+            menu = new android.widget.PopupWindow(menuLayout1, ctx.getWindowManager().getDefaultDisplay().getWidth()/3, ctx.getWindowManager().getDefaultDisplay().getHeight());
+            menu.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
+            menu.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.BOTTOM, 0, 0);
         }catch(error){
-            print("An error occured: " + error);
+            print("An error occurred: " + error);
         }
     }}));
 }
@@ -295,6 +306,35 @@ function exit(){
     }}));
 }
 
+ if(checkForUpdate==false) {
+        print("Checking for updates");
+        ctx.runOnUiThread(new java.lang.Runnable({
+            run: function() {
+                try {
+                    checkVersion();
+                }
+                catch(err) {
+                    clientMessage("Error: \n"+err);
+                }
+            }
+        }));
+        checkForUpdate=true;
+    }
+    if(updateWindow) {
+        ctx.runOnUiThread(new java.lang.Runnable({
+            run: function() {
+                try {
+                    updateVersion();
+                }
+                catch(err) {
+                    clientMessage("Error: \n" + err);
+                }
+            }
+        }));
+        updateWindow=false;
+    }
+}
+
 function leaveGame(){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
@@ -312,31 +352,3 @@ function leaveGame(){
         }
     }}));
 }
-
- if(checkForUpdate==false) {
-        print("Checking for updates");
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    checkVersion();
-                }
-                catch(err) {
-                    clientMessage("§8[IS] Error: \n"+err);
-                }
-            }
-        }));
-        checkForUpdate=true;
-    }
-    if(updateWindow) {
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    updateVersion();
-                }
-                catch(err) {
-                    clientMessage("§8[IS] Error: \n" + err);
-                }
-            }
-        }));
-        updateWindow=false;
-    }
