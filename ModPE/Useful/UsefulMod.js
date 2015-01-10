@@ -128,6 +128,7 @@ function updateVersion() {
 var GUI;
 var menu;
 var exitUI;
+var nameOfInv = "Inv" + 1;
 
 function dip2px(dips){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
@@ -135,6 +136,12 @@ function dip2px(dips){
 }
 
 function newLevel(){
+    Player.clearInventory = function() {
+		for(var i = 0; i < 255; i++) Player.clearInventorySlot(i);
+	};
+	   ModPE.saveInventory = function() {
+	   	for(var i = 0; i < 255; i++) ModPE.saveData(nameOfInv,i);
+	   };
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
         try{
@@ -183,52 +190,72 @@ function mainMenu(){
 			menuLayout.addView(closebutton);
 			
             var button = new android.widget.Button(ctx);
-            button.setText("Button");
+            button.setText("Save Inventory");
             button.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
-                    //Your Code
+                    ModPE.saveInventory();
                 }
             }));
             menuLayout.addView(button);
 			
 			var button2 = new android.widget.Button(ctx);
-            button2.setText("Button");
+            button2.setText("Clear Inventory");
             button2.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
-                    //Your Code
+                    Player.clearInventory();
                 }
             }));
             menuLayout.addView(button2);
 			
 			var button3 = new android.widget.Button(ctx);
-            button3.setText("Button");
+            button3.setText("Load Inventory");
             button3.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
                     //Your Code
                 }
             }));
             menuLayout.addView(button3);
-			
-			var button4 = new android.widget.Button(ctx);
-            button4.setText("Button");
-            button4.setOnClickListener(new android.view.View.OnClickListener({
+            
+            var button10 = new android.widget.Button(ctx);
+            button10.setText("Time");
+            button10.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
                     //Your Code
+                }
+            }));
+            menuLayout.addView(button10);
+			
+			var button4 = new android.widget.Button(ctx);
+            button4.setText("Gamemode");
+            button4.setOnClickListener(new android.view.View.OnClickListener({
+                onClick: function(viewarg){
+                    
                 }
             }));
             menuLayout.addView(button4);
 			
 			var button5 = new android.widget.Button(ctx);
-            button5.setText("Button");
+            button5.setText("Flying On");
             button5.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
-                    //Your Code
+                    Player.setCanFly(true);
+                    Player.setFlying(true);
                 }
             }));
             menuLayout.addView(button5);
+            
+            var flyOff = new android.widget.Button(ctx);
+            flyOff.setText("Flying Off");
+            flyOff.setOnClickListener(new android.view.View.OnClickListener({
+                onClick: function(viewarg){
+                    Player.setCanFly(false);
+                    Player.setFlying(false);
+                }
+            }));
+            menuLayout.addView(flyOff);
 			
 			var button6 = new android.widget.Button(ctx);
-            button6.setText("Button");
+            button6.setText("Invulnerable Mode");
             button6.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
                     //Your Code
@@ -237,7 +264,7 @@ function mainMenu(){
             menuLayout.addView(button6);
 			
 			var button7 = new android.widget.Button(ctx);
-            button7.setText("Button");
+            button7.setText("Ride an entity");
             button7.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
                     //Your Code
@@ -246,7 +273,7 @@ function mainMenu(){
             menuLayout.addView(button7);
 			
 			var button8 = new android.widget.Button(ctx);
-            button8.setText("Button");
+            button8.setText("Teleport");
             button8.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
                     //Your Code
@@ -255,22 +282,16 @@ function mainMenu(){
             menuLayout.addView(button8);
 			
 			var button9 = new android.widget.Button(ctx);
-            button9.setText("Button");
+            button9.setText("Commit Suicide");
             button9.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
-                    //Your Code
+                    Player.setHealth(0);
                 }
             }));
             menuLayout.addView(button9);
+            
+            /* Entity.setSneaking(entity, setSneaking);*/
 			
-			var button10 = new android.widget.Button(ctx);
-            button10.setText("Button");
-            button10.setOnClickListener(new android.view.View.OnClickListener({
-                onClick: function(viewarg){
-                    //Your Code
-                }
-            }));
-            menuLayout.addView(button10);
             menu = new android.widget.PopupWindow(menuLayout1, ctx.getWindowManager().getDefaultDisplay().getWidth()/3, ctx.getWindowManager().getDefaultDisplay().getHeight());
             menu.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
             menu.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.BOTTOM, 0, 0);
