@@ -22,6 +22,7 @@ var newUpdate;
 var updateMod;
 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
 
+function newLevel(){
 function checkVersion() {
     var r  = new java.lang.Runnable() {
         run: function() {
@@ -137,43 +138,13 @@ function dip2px(dips){
     return Math.ceil(dips * ctx.getResources().getDisplayMetrics().density);
 }
 
-function newLevel(){
 	Player.clearInventory = function() {
 		for(var i = 0; i < 255; i++) Player.clearInventorySlot(i);
 	};
 	if(!ModPE.readData("kitsintro")){
 	clientMessage(ChatColor.BLUE + "Kits " + ChatColor.WHITE + "by " + ChatColor.GOLD + "andynazay153 " + ChatColor.GREEN + "Loaded Successfully!");
 	ModPE.saveData("kitsintro", "KitsIntro");
-	}
-	 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-	 
-	 if(checkForUpdate==false) {
-        print("Checking for updates");
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    checkVersion();
-                }
-                catch(err) {
-                    clientMessage("Error: \n"+err);
-                }
-            }
-        }));
-        checkForUpdate=true;
-    }
-    if(updateWindow) {
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    updateVersion();
-                }
-                catch(err) {
-                    clientMessage("Error: \n" + err);
-                }
-            }
-        }));
-        updateWindow=false;
-    }
+	} 
 	var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
         try{
@@ -789,6 +760,34 @@ function mainMenu(){
             print("An error occurred: " + error);
         }
     }}));
+}
+	 if(checkForUpdate==false) {
+        print("Checking for updates");
+        ctx.runOnUiThread(new java.lang.Runnable({
+            run: function() {
+                try {
+                    checkVersion();
+                }
+                catch(err) {
+                    clientMessage("Error: \n"+err);
+                }
+            }
+        }));
+        checkForUpdate=true;
+    }
+    if(updateWindow) {
+        ctx.runOnUiThread(new java.lang.Runnable({
+            run: function() {
+                try {
+                    updateVersion();
+                }
+                catch(err) {
+                    clientMessage("Error: \n" + err);
+                }
+            }
+        }));
+        updateWindow=false;
+    }
 }
 
 function exit(){
