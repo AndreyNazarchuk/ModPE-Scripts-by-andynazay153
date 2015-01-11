@@ -128,7 +128,6 @@ function updateVersion() {
 var GUI;
 var menu;
 var exitUI;
-var nameOfInv = "Inv" + 1;
 
 function dip2px(dips){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
@@ -139,9 +138,6 @@ function newLevel(){
     Player.clearInventory = function() {
 		for(var i = 0; i < 255; i++) Player.clearInventorySlot(i);
 	};
-	   ModPE.saveInventory = function() {
-	   	for(var i = 0; i < 255; i++) ModPE.saveData(nameOfInv,i);
-	   };
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
         try{
@@ -193,7 +189,51 @@ function mainMenu(){
             button.setText("Save Inventory");
             button.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
-                    ModPE.saveInventory();
+					
+					function saveFile (directory, inventory) {
+				try {
+					directory = android.os.Environment.getExternalStorageDirectory ().getPath () + "/games/com.mojang/minecraftworlds" + getWorldDir () + "/" + directory; // The file should be saved into the world directory.
+					var newFile = new java.io.File (directory,inventory);
+					var directory = new java.io.File (directory);
+					var success = directory.mkdirs (); // creates the directory if not already created
+					if (!success){ // if not succeeded
+						throw new java.io.IOException("Directory "+directory+ "cannot be created"); // throws an IOException. new java.io.IOException(String) has a string parameter as a message.
+					}
+					
+					newFile.delete();
+					/*newFile.createNewFile (); // creates a blank new file*/
+					var outWrite = new java.io.OutputStreamWriter (new java.io.FileOutputStream (newFile)); // creates the output writer
+					outWrite.append (Player.getInventorySlot(i));
+					outWrite.close(); // closes the writer; not necessary to close, but better do it
+					return false; // tells that it succeeds; not necessary to catch, but better do it
+				}
+				catch(thrown){ // catches the error in the try block
+					return thrown.toString(); // returns a human-readable description of the error. The most common one is java.io.IOException that there is no such file
+				}
+			}
+
+			function readFile (directory, inventory, wantBytes) { // wantBytes: true or false
+				try{
+					directory = android.os.Environment.getExternalStorageDirectory ().getPath () + "/games/com.mojang/minecraftworlds" + getWorldDir () + "/" + directory;
+					var inFile = new java.io.File(directory,filename);
+					if (!inFile.isFile()) return "notfile"; // check if it is a file
+					var inStream = new java.io.FileReader (inFile);
+					if (wantBytes) {
+						inStream.read (bytes); // stores the contents into bytes
+						var bytes = new Array();
+						return bytes;
+					}
+					var inBuffer = new java.io.BufferedReader (inStream);
+					var line = "",var returner = "";
+					while ((line = inBuffer.readLine ()) != null) { // read http://docs.oracle.com/javase/7/docs/api/java/io/BufferedReader.html#readLine()
+						returner = returner + line + java.lang.System.getProperty ("line.seperator");
+					}
+					return returner;
+				}
+				catch(error){
+					return error.toString();
+				}
+			}
                 }
             }));
             menuLayout.addView(button);
