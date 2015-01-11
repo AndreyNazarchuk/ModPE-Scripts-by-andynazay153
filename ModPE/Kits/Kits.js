@@ -15,7 +15,7 @@ No additional restrictions - You may not apply legal terms or technological meas
 
 //Update Code 
  
-var version="7";
+var version="6.7";
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
