@@ -15,7 +15,7 @@ No additional restrictions - You may not apply legal terms or technological meas
 
 //Update Code 
  
-var version="6.7";
+var version="6.8";
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
@@ -788,7 +788,25 @@ function mainMenu(){
         }));
         updateWindow=false;
     }
+	function leaveGame(){
+    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
+    ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
+        if(GUI != null){
+            GUI.dismiss();
+            GUI = null;
+        }
+        if(menu != null){
+            menu.dismiss();
+            menu = null;
+        }
+        if(exitUI != null){
+            exitUI.dismiss();
+            exitUI = null;
+        }
+    }}));
 }
+}
+
 
 function exit(){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
@@ -814,22 +832,4 @@ function exit(){
             print(exception);
         }
     }}));
-}
-function leaveGame(){
-    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-    ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
-        if(GUI != null){
-            GUI.dismiss();
-            GUI = null;
-        }
-        if(menu != null){
-            menu.dismiss();
-            menu = null;
-        }
-        if(exitUI != null){
-            exitUI.dismiss();
-            exitUI = null;
-        }
-    }}));
-}
 }
