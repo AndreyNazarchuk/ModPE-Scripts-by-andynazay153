@@ -1,5 +1,6 @@
 /*
 Made by andynazay153.
+Thank you to Bajandeadman for auto update code
 This is my mod. Please do not copy or add it to anything or make a video without asking me ;)
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 You are free to:
@@ -15,7 +16,7 @@ No additional restrictions - You may not apply legal terms or technological meas
 
 //Update Code 
  
-var version="6.8";
+var version="6.9";
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
