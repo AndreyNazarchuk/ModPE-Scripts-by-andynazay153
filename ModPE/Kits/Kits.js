@@ -20,15 +20,14 @@ var version="6.9";
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
-var updateMod;
-var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-
-function newLevel(){
-function checkVersion() {
+var updateMod; 
+var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get(); 
+ 
+ function checkVersion() {
     var r  = new java.lang.Runnable() {
         run: function() {
             try {
-                var urls= new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Kits/KitsVersion.txt");
+                var urls= new java.net.URL(" https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Kits/KitsVersion.txt ");
                 var check = urls.openConnection();
                 check.setRequestMethod("GET");
                 check.setDoOutput(true);
@@ -43,20 +42,20 @@ function checkVersion() {
                 }
                 newUpdate = checkedVersion;
                 if(version+"\n" != checkedVersion) {
-                    clientMessage("New version! " + newUpdate);
+                    clientMessage("[Kits] Kits Mod has an update! " + newUpdate);
                     updateWindow=true;
                 }
                 else if(version+"\n"==checkedVersion){
-                clientMessage("No updates available");
+                clientMessage("There aren't any updates right now");
                 }
             }
             catch(err) {
                 clientMessage("Update check failed ");
                 if(err=="JavaException: java.net.UnknownHostException: raw.githubusercontent.com") {
-                                clientMessage("No internet connection.");
+                                clientMessage("[Kits] Cannot connect to internet.");
                             }
                             else {
-                                clientMessage("Error: \n"+ err);
+                                clientMessage("[Kits]   Error: \n" + err);
                             } 
             }
         }
@@ -66,20 +65,20 @@ function checkVersion() {
 }
 function updateVersion() {
     try {
-        var upd = new android.app.AlertDialog.Builder(ctx);        
-        upd.setTitle("New version available!");
-        upd.setMessage("An update to Kits was found!\nWould you like to update it now?\nCurrent version: " + version + "\nNew version: " + newUpdate);
+        var upd = new android.app.AlertDialog.Builder(ctx);
+        upd.setTitle("Kits has an update!");
+        upd.setMessage("Kits has an update!\nDo you want to update it now?\nCurrent version: " + version + "\nNew version: " + newUpdate "\nThis Update has new features, new Kits, and Bug fixes");
         upd.setNegativeButton("Later", new android.content.DialogInterface.OnClickListener() {
             onClick: function(par1) {
             dialog.dismiss(); 
    }
         });
-        upd.setPositiveButton("Update", new android.content.DialogInterface.OnClickListener() {
+        upd.setPositiveButton("Update it!", new android.content.DialogInterface.OnClickListener() {
             onClick: function(par1) {
                 var ru  = new java.lang.Runnable() {
                     run: function() {
                         try {
-                            var urls = new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Kits/Kits.js");
+                            var urls = new java.net.URL(" https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Kits/Kits.js ");
                             var check = urls.openConnection();
                             check.setRequestMethod("GET");
                             check.setDoOutput(true);
@@ -101,15 +100,15 @@ function updateVersion() {
                             try {
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, false);
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, true);
-                                clientMessage("Downloaded and enabled!");
+                                clientMessage("[Kits] The Kits Mod has been downloaded and is enabled!");
                                    
                             }
                             catch(err) {
-                                clientMessage("Error: \n" + err);
+                                clientMessage("[Kits] Error: \n" + err);
                             }
                         }
                         catch(err) {
-                            clientMessage("Error: \n" + err);
+                            clientMessage("[Kits] Error: \n" + err);
                         }
                     }
                 }
@@ -121,11 +120,39 @@ function updateVersion() {
         dialog.show() 
     }
     catch(err) {
-        clientMessage("Error: \n" + err);
+        clientMessage("[Kits] Error: \n" + err);
     }
 }
-
-
+  
+ function modTick(){
+ if(checkForUpdate==false) {
+        print("Checking for an update");
+        ctx.runOnUiThread(new java.lang.Runnable({
+            run: function() {
+                try {
+                    checkVersion();
+                }
+                catch(err) {
+                    clientMessage("[Kits] Error: \n"+err);
+                }
+            }
+        }));
+        checkForUpdate=true;
+    }
+    if(updateWindow) {
+        ctx.runOnUiThread(new java.lang.Runnable({
+            run: function() {
+                try {
+                    updateVersion();
+                }
+                catch(err) {
+                    clientMessage("[Kits] Error: \n" + err);
+                }
+            }
+        }));
+        updateWindow=false;
+    } 
+ }  
 
 //Kits Code
 var GUI;
@@ -805,7 +832,6 @@ function mainMenu(){
             exitUI = null;
         }
     }}));
-}
 }
 
 
