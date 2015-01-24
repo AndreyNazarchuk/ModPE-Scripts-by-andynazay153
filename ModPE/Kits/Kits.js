@@ -18,7 +18,7 @@ No additional restrictions - You may not apply legal terms or technological meas
  
 var version="6.9";
 var checkForUpdate=false;
-var updateWindow=false; 
+var updateWindow=false;
 var newUpdate;
 var updateMod; 
 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get(); 
@@ -503,7 +503,35 @@ function mainMenu(){
 				Player.addItemInventory(259,1);
 				clientMessage("Game on!!!");
 			 } }));
-			 menuLayout.addView(button17);
+			 var buttonGhost = new android.widget.Button(ctx); 
+			buttonGhost.setText("Ghost");
+			buttonGhost.setOnClickListener(new android.view.View.OnClickListener({
+			 onClick: function(viewarg){
+				Player.addItemInventory(302,1);
+				Player.addItemInventory(303,1);
+				Player.addItemInventory(304,1);
+				Player.addItemInventory(305,1);
+				Player.addItemInventory(267,1);
+				Player.addItemInventory(332,16);
+				Player.addItemInventory(341,16);
+				clientMessage("G-G-Ghost!");
+			 } }));
+			  var buttonDefender = new android.widget.Button(ctx); 
+			buttonDefender.setText("Defender");
+			buttonDefender.setOnClickListener(new android.view.View.OnClickListener({
+			 onClick: function(viewarg){
+				Player.addItemInventory(302,1);
+				Player.addItemInventory(303,1);
+				Player.addItemInventory(304,1);
+				Player.addItemInventory(305,1);
+				Player.addItemInventory(101,64);
+				Player.addItemInventory(30,64);
+				Player.addItemInventory(85,64);
+				Player.addItemInventory(261,1);
+				Player.addItemInventory(262,24);
+				clientMessage("Defend at all costs!");
+			 } }));
+			 menuLayout.addView(buttonDefender);
 			var button18 = new android.widget.Button(ctx); 
 			button18.setText("Pirate");
 			button18.setOnClickListener(new android.view.View.OnClickListener({
