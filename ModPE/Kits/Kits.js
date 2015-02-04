@@ -1,7 +1,7 @@
 /*
 Made by andynazay153.
 Thank you to Bajandeadman for auto update code
-This is my mod. Please do not copy or add it to anything or make a video without asking me ;)
+This is my mod. Please do not copy or add it to anything without asking me ;)
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 You are free to:
 Share - copy and redistribute the material in any medium or format
@@ -20,7 +20,7 @@ var version="7.0";
 var checkForUpdate=false;
 var updateWindow=false;
 var newUpdate;
-var updateMod; 
+var updateMod;
 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get(); 
 
  function checkVersion() {
