@@ -14,15 +14,15 @@ ShareAlike - If you remix, transform, or build upon the material, you must ask t
 No additional restrictions - You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
 */
 
-//Update Code 
+//Update Code
  
-var version="6.9";
+var version="7.0";
 var checkForUpdate=false;
 var updateWindow=false;
 var newUpdate;
 var updateMod; 
 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get(); 
- 
+
  function checkVersion() {
     var r  = new java.lang.Runnable() {
         run: function() {
@@ -55,7 +55,7 @@ var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
                                 clientMessage("[Kits] Cannot connect to internet.");
                             }
                             else {
-                                clientMessage("[Kits]   Error: \n" + err);
+                                print("[Kits]   Error: \n" + err);
                             } 
             }
         }
@@ -104,11 +104,11 @@ function updateVersion() {
                                    
                             }
                             catch(err) {
-                                clientMessage("[Kits] Error: \n" + err);
+                                print("[Kits] Error: \n" + err);
                             }
                         }
                         catch(err) {
-                            clientMessage("[Kits] Error: \n" + err);
+                            print("[Kits] Error: \n" + err);
                         }
                     }
                 }
@@ -123,9 +123,10 @@ function updateVersion() {
         clientMessage("[Kits] Error: \n" + err);
     }
 }
-  
- function modTick(){
- if(checkForUpdate==false) {
+
+function newLevel(){
+  function modTick(){
+	if(checkForUpdate==false) {
         print("Checking for an update");
         ctx.runOnUiThread(new java.lang.Runnable({
             run: function() {
@@ -133,7 +134,7 @@ function updateVersion() {
                     checkVersion();
                 }
                 catch(err) {
-                    clientMessage("[Kits] Error: \n"+err);
+                    print("[Kits] Error: \n"+err);
                 }
             }
         }));
@@ -146,7 +147,7 @@ function updateVersion() {
                     updateVersion();
                 }
                 catch(err) {
-                    clientMessage("[Kits] Error: \n" + err);
+                    print("[Kits] Error: \n" + err);
                 }
             }
         }));
@@ -159,20 +160,22 @@ var GUI;
 var menu;
 var exitUI;
 
-
 //Get DPI
 function dip2px(dips){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     return Math.ceil(dips * ctx.getResources().getDisplayMetrics().density);
 }
-
+//Construct clear inventory function
 	Player.clearInventory = function() {
 		for(var i = 0; i < 255; i++) Player.clearInventorySlot(i);
 	};
+//Make intro message only show the first time
 	if(!ModPE.readData("kitsintro")){
 	clientMessage(ChatColor.BLUE + "Kits " + ChatColor.WHITE + "by " + ChatColor.GOLD + "andynazay153 " + ChatColor.GREEN + "Loaded Successfully!");
+	clientMessage(ChatColor.GREEN + "Choose carefully, you only get one kit");
 	ModPE.saveData("kitsintro", "KitsIntro");
 	} 
+//Kits button
 	var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
         try{
@@ -190,13 +193,13 @@ function dip2px(dips){
 
             GUI = new android.widget.PopupWindow(layout, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
             GUI.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
-            GUI.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.BOTTOM, 0, 0);
+            GUI.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.CENTER_VERTICAL, 0, 0);
         }catch(err){
             print("An error occurred: " + err);
         }
     }}));
 
-
+//Button Menu
 function mainMenu(){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
@@ -256,8 +259,7 @@ function mainMenu(){
 			  Player.addItemInventory(297,20);
 			  Player.addItemInventory(50,64);
 			  clientMessage(ChatColor.GREEN + "Have Fun!");
-                }
-            }));
+			}	}));
             menuLayout.addView(button1);
 			var button34 = new android.widget.Button(ctx); 
 			button34.setText("Food");
@@ -277,7 +279,7 @@ function mainMenu(){
 				Player.addItemInventory(354,16);
 				Player.addItemInventory(357,16);
 				clientMessage("All MCPE foods have been added to your inventory");
-			 } }));
+			} }));
 			 menuLayout.addView(button34);
 			var button2 = new android.widget.Button(ctx); 
 			button2.setText("Sniper");
@@ -289,9 +291,9 @@ function mainMenu(){
 			  Player.addItemInventory(299,1);
 			  Player.addItemInventory(300,1);
 			  Player.addItemInventory(301,1);
-			  Player.addItemInventory(260,25)
+			  Player.addItemInventory(260,25);
 			  clientMessage("Sniper kit has been added to your inventory!");
-			 } }));
+			} }));
 			menuLayout.addView(button2);
 			var button3 = new android.widget.Button(ctx); 
 			button3.setText("Heavy");
@@ -304,7 +306,7 @@ function mainMenu(){
 			  Player.addItemInventory(268,1);
 			  Player.addItemInventory(364,32);
 			  clientMessage("Heavy Kit Has Been Added To Your Inventory!");
-			 } }));
+			} }));
 			 menuLayout.addView(button3);
 			var button4 = new android.widget.Button(ctx); 
 			button4.setText("Miner");
@@ -313,7 +315,7 @@ function mainMenu(){
 				Player.addItemInventory(257,1);
 				Player.addItemInventory(50,64);
 				clientMessage("Miner Kit Has Been Added To Your Inventory!");
-			 } }));
+			} }));
 			 menuLayout.addView(button4);
 			var button5 = new android.widget.Button(ctx); 
 			button5.setText("Farmer");
@@ -328,7 +330,7 @@ function mainMenu(){
 				Player.addItemInventory(361,5);
 				Player.addItemInventory(362,5);
 				clientMessage("Farmer Kit Has Been Added to Your Inventory!");
-			 } }));
+			} }));
 			 menuLayout.addView(button5);
 			var button6 = new android.widget.Button(ctx); 
 			button6.setText("LumberJack");
@@ -340,7 +342,7 @@ function mainMenu(){
 				Player.addItemInventory(300,1);
 				Player.addItemInventory(301,1);
 				clientMessage("Lumberjack Kit Has Been Added To Your Inventory!");
-			 } }));
+			} }));
 			 menuLayout.addView(button6);
 			var button7 = new android.widget.Button(ctx); 
 			button7.setText("Smelter");
@@ -351,7 +353,7 @@ function mainMenu(){
 				Player.addItemInventory(15,10);
 				Player.addItemInventory(14,10);
 				clientMessage("Smelter Kit Has Been Added To Your Inventory!");
-			 } }));
+			} }));
 			 menuLayout.addView(button7);
 			var button8 = new android.widget.Button(ctx); 
 			button8.setText("Warrior");
@@ -363,7 +365,7 @@ function mainMenu(){
 				Player.addItemInventory(309,1);
 				Player.addItemInventory(267,1);
 				clientMessage("Warrior kit has been added to your inventory!");
-			 } }));
+			} }));
 			 menuLayout.addView(button8);
 			 var buttonGhost = new android.widget.Button(ctx); 
 			buttonGhost.setText("Ghost");
@@ -377,7 +379,7 @@ function mainMenu(){
 				Player.addItemInventory(332,16);
 				Player.addItemInventory(344,16);
 				clientMessage("Ghost kit has been added to your inventory!");
-			 } }));
+			} }));
 			 menuLayout.addView(buttonGhost);
 			var button9 = new android.widget.Button(ctx); 
 			button9.setText("Demolisher");
@@ -388,7 +390,7 @@ function mainMenu(){
 				Player.addItemInventory(10,64);
 				Player.addItemInventory(272,1);
 				clientMessage("Thinking of greifing?");
-			 } }));
+			} }));
 			 menuLayout.addView(button9);
 			var button10 = new android.widget.Button(ctx); 
 			button10.setText("Light Scout");
@@ -399,7 +401,7 @@ function mainMenu(){
 				Player.addItemInventory(272,1);
 				Player.addItemInventory(301,1);
 				clientMessage("Going Scouting?");
-			 } }));
+			} }));
 			 menuLayout.addView(button10);
 			var button11 = new android.widget.Button(ctx); 
 			button11.setText("Heavy Scout");
@@ -409,7 +411,7 @@ function mainMenu(){
 				Player.addItemInventory(262,64);
 				Player.addItemInventory(261,1);
 				clientMessage("Heavy Scout kit has been added to your inventory!");
-			 } }));
+			} }));
 			 menuLayout.addView(button11);
 			var button12 = new android.widget.Button(ctx); 
 			button12.setText("Knight");
@@ -421,7 +423,7 @@ function mainMenu(){
 				Player.addItemInventory(304,1);
 				Player.addItemInventory(305,1);
 				clientMessage("Knight kit has been added to your inventory!");
-			 } }));
+			} }));
 			 menuLayout.addView(button12);
 			var button13 = new android.widget.Button(ctx); 
 			button13.setText("King");
@@ -438,7 +440,7 @@ function mainMenu(){
 				Player.addItemInventory(267,1);
 				Player.addItemInventory(292,1);
 				clientMessage("Long live the King!");
-			 } }));
+			} }));
 			 menuLayout.addView(button13);
 			var button14 = new android.widget.Button(ctx); 
 			button14.setText("Thief");
@@ -452,7 +454,7 @@ function mainMenu(){
 				Player.addItemInventory(8,1);
 				Player.addItemInventory(325,1);
 				clientMessage("Don't get caught!");
-			 } }));
+			} }));
 			 menuLayout.addView(button14);
 			var button15 = new android.widget.Button(ctx); 
 			button15.setText("Sheriff");
@@ -466,7 +468,7 @@ function mainMenu(){
 				Player.addItemInventory(259,1);
 				Player.addItemInventory(364,64);
 				clientMessage("Does not include donuts and coffee");
-			 } }));
+			} }));
 			 menuLayout.addView(button15);
 			var button16 = new android.widget.Button(ctx); 
 			button16.setText("Trooper");
@@ -482,7 +484,7 @@ function mainMenu(){
 				Player.addItemInventory(259,1);
 				Player.addItemInventory(46,10);
 				clientMessage("Trooper kit has been added to your inventory");
-			 } }));
+			} }));
 			 menuLayout.addView(button16);
 			var button17 = new android.widget.Button(ctx); 
 			button17.setText("Gamer");
@@ -502,7 +504,7 @@ function mainMenu(){
 				Player.addItemInventory(46,12);
 				Player.addItemInventory(259,1);
 				clientMessage("Game on!!!");
-			 } }));
+			} }));
 			 var buttonGhost = new android.widget.Button(ctx); 
 			buttonGhost.setText("Ghost");
 			buttonGhost.setOnClickListener(new android.view.View.OnClickListener({
@@ -515,7 +517,7 @@ function mainMenu(){
 				Player.addItemInventory(332,16);
 				Player.addItemInventory(341,16);
 				clientMessage("G-G-Ghost!");
-			 } }));
+			} }));
 			  var buttonDefender = new android.widget.Button(ctx); 
 			buttonDefender.setText("Defender");
 			buttonDefender.setOnClickListener(new android.view.View.OnClickListener({
@@ -530,7 +532,7 @@ function mainMenu(){
 				Player.addItemInventory(261,1);
 				Player.addItemInventory(262,24);
 				clientMessage("Defend at all costs!");
-			 } }));
+			} }));
 			 menuLayout.addView(buttonDefender);
 			var button18 = new android.widget.Button(ctx); 
 			button18.setText("Pirate");
@@ -541,7 +543,7 @@ function mainMenu(){
 				Player.addItemInventory(46,10);
 				Player.addItemInventory(272,1);
 				clientMessage("Arrrgh!");
-			 } }));
+			} }));
 			 menuLayout.addView(button18);
 			/*var button19 = new android.widget.Button(ctx); 
 			button19.setText("Tamer");
@@ -556,7 +558,7 @@ function mainMenu(){
 				Player.addItemInventory(364,64);
 				Player.addItemInventory(267,1);
 				clientMessage("Tamer kit has been added to your inventory");
-			 } }));
+			} }));
 			 menuLayout.addView(button19);*/
 			var button20 = new android.widget.Button(ctx); 
 			button20.setText("Hunter");
@@ -571,7 +573,7 @@ function mainMenu(){
 				Player.addItemInventory(262,64);
 				Player.addItemInventory(260,16);
 				clientMessage("Happy Hunting!");
-			 } }));
+			} }));
 			 menuLayout.addView(button20);
 			var button21 = new android.widget.Button(ctx); 
 			button21.setText("Scientist");
@@ -582,7 +584,7 @@ function mainMenu(){
 				Player.addItemInventory(293,1);
 				Player.addItemInventory(277,1);
 				clientMessage("Happy Inventing!");
-			 } }));
+			} }));
 			 menuLayout.addView(button21);
 			var button22 = new android.widget.Button(ctx); 
 			button22.setText("Executioner");
@@ -595,7 +597,7 @@ function mainMenu(){
 				Player.addItemInventory(301,1);
 				Player.addItemInventory(258,1);
 				Player.addItemInventory(391,10);
-			 } }));
+			} }));
 			 menuLayout.addView(button22);
 			var button23 = new android.widget.Button(ctx); 
 			button23.setText("Adventurer");
@@ -613,7 +615,7 @@ function mainMenu(){
 				Player.addItemInventory(347,1);
 				Player.addItemInventory(364,64);
 				clientMessage("Adventure is out there!");
-			 } }));
+			} }));
 			 menuLayout.addView(button23);
 			var button24 = new android.widget.Button(ctx); 
 			button24.setText("Baker");
@@ -625,7 +627,7 @@ function mainMenu(){
 				Player.addItemInventory(61,1);
 				Player.addItemInventory(263,10);
 				clientMessage("Baker kit has been added to your inventory");
-			 } }));
+			} }));
 			 menuLayout.addView(button24);
 			var button28 = new android.widget.Button(ctx); 
 			button28.setText("Admin");
@@ -641,7 +643,7 @@ function mainMenu(){
 				Player.addItemInventory(313,1);
 				Player.addItemInventory(4,64);
 				clientMessage("Admin kit has been added to your inventory");
-			 } }));
+			} }));
 			 menuLayout.addView(button28);
 			var button29 = new android.widget.Button(ctx); 
 			button29.setText("VIP");
@@ -657,7 +659,7 @@ function mainMenu(){
 				Player.addItemInventory(256,1);
 				Player.addItemInventory(5,64);
 				clientMessage("VIP kit has been added to your inventory");
-			 } }));
+			} }));
 			 menuLayout.addView(button29);
 			var button30 = new android.widget.Button(ctx); 
 			button30.setText("Super VIP");
@@ -672,7 +674,7 @@ function mainMenu(){
 				Player.addItemInventory(278,1);
 				Player.addItemInventory(279,1);
 				clientMessage("Super VIP kit has been added to your inventory");
-			 } }));
+			} }));
 			 menuLayout.addView(button30);
 			var button31 = new android.widget.Button(ctx); 
 			button31.setText("Trapper");
@@ -685,7 +687,7 @@ function mainMenu(){
 				Player.addItemInventory(17,1);
 				Player.addItemInventory(363,1);
 				clientMessage("Trapper kit has been added to your inventory");
-			 } }));
+			} }));
 			 menuLayout.addView(button31);
 			var button32 = new android.widget.Button(ctx); 
 			button32.setText("Guardian");
@@ -701,7 +703,7 @@ function mainMenu(){
 				Player.addItemInventory(10,1);
 				Player.addItemInventory(325,1);
 				clientMessage("Guardian kit has been added to your inventory");
-			 } }));
+			} }));
 			 menuLayout.addView(button32);
 			var button33 = new android.widget.Button(ctx); 
 			button33.setText("FrogMan");
@@ -716,7 +718,7 @@ function mainMenu(){
 				Player.addItemInventory(65,64);
 				Player.addItemInventory(341,16);
 				clientMessage("Frogman kit has been added to your inventory");
-			 } }));
+			} }));
 			 menuLayout.addView(button33);
 						var button25 = new android.widget.Button(ctx); 
 			button25.setText("Mine Manager");
@@ -729,7 +731,7 @@ function mainMenu(){
 				Player.addItemInventory(328,1);
 				Player.addItemInventory(306,1);
 				clientMessage("Mine manager kit has been added to your inventory");
-			 } }));
+			} }));
 			 menuLayout.addView(button25);
 			var button26 = new android.widget.Button(ctx); 
 			button26.setText("Construction Worker");
@@ -741,7 +743,7 @@ function mainMenu(){
 				Player.addItemInventory(4,64);
 				Player.addItemInventory(366,32);
 				clientMessage("Happy building!");
-			 } }));
+			} }));
 			 menuLayout.addView(button26);
 			var button27 = new android.widget.Button(ctx); 
 			button27.setText("Construction Manager");
@@ -760,7 +762,7 @@ function mainMenu(){
 				Player.addItemInventory(300,1);
 				Player.addItemInventory(301,1);
 				clientMessage("Construction manager kit has been added to your inventory");
-			 } }));
+			} }));
 			 menuLayout.addView(button27);
 			var button35 = new android.widget.Button(ctx); 
 			button35.setText("EPIC");
@@ -773,7 +775,7 @@ function mainMenu(){
 				Player.addItemInventory(276,1);
 				Player.setHealth(1);
 				clientMessage(ChatColor.AQUA + "CHEATER!!!");
-			 } }));
+			} }));
 			  menuLayout.addView(button35);
 			  
 			  var closebutton1 = new android.widget.Button(ctx);
@@ -844,6 +846,7 @@ function mainMenu(){
         }));
         updateWindow=false;
     }
+}
 	function leaveGame(){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
