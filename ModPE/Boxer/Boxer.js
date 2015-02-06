@@ -14,7 +14,7 @@ ShareAlike - If you remix, transform, or build upon the material, you must ask t
 No additional restrictions - You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
 */
 
-var boxer = true
+var boxer = true;
 
 function procCmd(cmd)
 {
@@ -22,39 +22,46 @@ var cmd = cmd.split (" ");
 {
 if (cmd[0] == "boxer" && cmd[1] == "off"){
 	if(boxer = true){
-		boxer = false
-		clientMessage("Boxer Fists is now on.");
+		boxer = false;
+		clientMessage("Boxer Fists is now off.");
 }
 }
 	else if(boxer = false){
 		clientMessage("Boxer Fists already off");
-}		boxer = true
-		clientMessage("Boxer Fists enabled");
-}
+	}
 }
 if (cmd[0] == "boxer" && cmd[1] == "on"){
   if(boxer = true){
 		clientMessage("Boxer Fists already on");
-}	else if (boxer = false){
 }
-}if (cmd[1] == "s"){
-  Server.sendChat('/spawn');
-  ModPE.showTipMessage('');
-}if (cmd[1] == ""){
-  clientMessage("");
-}if (cmd[1] == "" && cmd[1] == ""){
-  clientMessage("");
-  clientMessage("");
-}else if (cmd[1] == "" && cmd[1] == ""){
-  clientMessage("");
-}if (cmd[1] == "" && cmd[1] == ""){
-  clientMessage("");
-}else if (cmd[1] == "" && cmd[1] == ""){
-
-}if (cmd[1] == "boxer"){
+	else if (boxer = false){
+		boxer = true;
+		clientMessage("Boxer Fists enabled");
+}
+}
+if (cmd[0] == "boxer"){
 	clientMessage("");
-	vLinkcolorv
-	
-	
+	clientMessage("");
+	clientMessage("");
+	clientMessage("");
+	clientMessage("");
+	clientMessage("");
+	clientMessage("");
+}
+if (cmd[0] == "boxer"){
+  clientMessage("");
+}
+if (cmd[0] == "boxer" && cmd[1] == ""){
+  clientMessage("");
+  clientMessage("");
+}
+	else if (cmd[0] == "boxer" && cmd[1] == ""){
+		clientMessage("");
+}
+if (cmd[0] == "boxer" && cmd[1] == ""){
+  clientMessage("");
+}
+if (cmd[0] == "boxer" && cmd[1] == ""){
+	clientMessage("");
 }
 }

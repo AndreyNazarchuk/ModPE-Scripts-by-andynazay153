@@ -307,9 +307,9 @@ function mainMenu(){
             button7.setText("Ride an entity");
             button7.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
-                    clientMessage("Punch an animal to ride it");
 					function attackHook(attacker, victim){
 					rideAnimal(attacker, victim);
+					clientMessage("Punch an animal to ride it");
 					}
                 }
             }));
