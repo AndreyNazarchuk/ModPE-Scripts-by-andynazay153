@@ -166,11 +166,11 @@ function newLevel(){
             }
         }));
         updateWindow=false;
+	}
  function procCmd(command) {
  if(command == "debuglantern"){
 Player.addItemInventory(339,10);
 Player.addItemInventory(50,10);
-}
 }
 }
 function destroyBlock(x, y, z){
