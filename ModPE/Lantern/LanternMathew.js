@@ -1,6 +1,6 @@
 /*
 Made by andynazay153 and Mattgo007.
-This is my mod. Please do not copy or add it to anything and upload without asking me ;)
+This is my mod. Please do not copy or add it to anything or make a video without asking me ;)
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 You are free to:
 Share - copy and redistribute the material in any medium or format
@@ -43,7 +43,7 @@ var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
                 }
 				newUpdate = checkedVersion;
 				if(version+"\n" != checkedVersion) {
-                    print("New version is available! " + newUpdate);
+                    print("New version is avalible! " + newUpdate);
                     updateWindow=true;
                 }
                 else if(version+"\n"==checkedVersion){
@@ -125,20 +125,106 @@ function updateVersion() {
     }
 }
 //Lantern Code
+//                                    bottom?        top?
 
-Block.defineBlock(250, "Lantern",[["cactus", 2],["cactus", 2],["cake_bottom", 0],["cake_bottom", 0],["cake_bottom", 0],["cake_bottom", 0]], 2, false, 0);
-Block.setDestroyTime(250,1);
-Block.setShape(250, 1/4, 0, 1/4, 3/4, 3/4, 3/4);
-Block.setLightLevel(250, 15);
-Item.setCategory(250,4,0);
-Item.addShapedRecipe(250, 4, 0, [
+function useItem(x, y, z, itemId, blockId, side, itemDamage, blockDamage) 
+{
+if(itemId==259&&blockId==250)
+{
+preventDefault()
+Level.setTile(x, y, z, 251)
+}
+if(itemId==50&&blockId==250)
+{
+preventDefault()
+Level.setTile(x, y, z, 252)
+}
+if(itemId==354&&blockId==250)
+{
+preventDefault()
+Level.setTile(x, y, z, 253)
+}
+if(itemId==4&&blockId==250)
+{
+preventDefault()
+Level.setTile(x, y, z, 254)
+}
+if(itemId==12&&blockId==250)
+{
+preventDefault()
+Level.setTile(x, y, z, 249)
+}
+if(itemId==(1,12)&&blockId==250)
+{
+preventDefault()
+Level.setTile(x, y, z, 248)
+}
+if(itemId==(8,325)&&blockId==250)
+{
+preventDefault()
+Level.setTile(x, y, z, 247)
+}
+if(itemId==[10,325]&&blockId==250)
+{
+preventDefault()
+Level.setTile(x, y, z, 246)
+}}
+
+	Block.defineBlock(250, "Lantern",[["cactus", 2],["cactus", 2],["cake_bottom", 0],["cake_bottom", 0],["cake_bottom", 0],["cake_bottom", 0]], 2, false, 0);
+	Block.setDestroyTime(250,1);
+	Block.setShape(250, 1/4, 0, 1/4, 3/4, 3/4, 3/4);
+	Block.setLightLevel(250, 15);
+	Item.setCategory(250,4,0);
+	Item.addShapedRecipe(250, 4, 0, [
 	" p ",
 	"ptp",
 	" p "], 
-	["t",50,0,
-	"p",339,0]);
+	["t",50,0,"p",339,0]);
+	
+	 	Block.defineBlock(251, "Lantern",[["cactus", 2],["cactus", 2],["fire", 0],["fire", 0],["fire", 0],["fire", 0]], 2, false, 0);
+	Block.setDestroyTime(251,1);
+	Block.setShape(251, 1/4, 0, 1/4, 3/4, 3/4, 3/4);
+	Block.setLightLevel(251, 15);	
+	
+	
+	 	 	Block.defineBlock(252, "Lantern",[["cactus", 2],["cactus", 2],["torch_on", 0],["torch_on", 0],["torch_on", 0],["torch_on", 0]], 2, false, 0);
+	 	
+Block.setDestroyTime(252,1);
+Block.setShape(252, 1/4, 0, 1/4, 3/4, 3/4, 3/4);
+	Block.setLightLevel(252, 15); 	
+	
+	 	Block.defineBlock(253, "Lantern",[["cactus", 2],["cactus", 2],["cake_top", 0],["cake_top", 0],["cake_top", 0],["cake_top", 0]], 2, false, 0);
+	Block.setDestroyTime(253,1);
+	Block.setShape(253, 1/4, 0, 1/4, 3/4, 3/4, 3/4);
+	Block.setLightLevel(253, 15);
+	
+	 	Block.defineBlock(254, "Lantern",[["cactus", 2],["cactus", 2],["cobblestone", 0],["cobblestone", 0],["cobblestone", 0],["cobblestone", 0]], 2, false, 0);
+	 	Block.setDestroyTime(254,1);
+	Block.setShape(254, 1/4, 0, 1/4, 3/4, 3/4, 3/4);
+	Block.setLightLevel(254, 15); 
+	
+		Block.defineBlock(249, "Lantern",[["cactus", 2],["cactus", 2],["sand", 0],["sand", 0],["sand", 0],["sand", 0]], 2, false, 0);
+	Block.setDestroyTime(249,1);
+	Block.setShape(249, 1/4, 0, 1/4, 3/4, 3/4, 3/4);
+	Block.setLightLevel(249, 15);
+	
+		Block.defineBlock(248, "Lantern",[["cactus", 2],["cactus", 2],["sand", 1],["sand", 1],["sand", 1],["sand", 1]], 2, false, 0);
+	Block.setDestroyTime(248,1);
+	Block.setShape(248, 1/4, 0, 1/4, 3/4, 3/4, 3/4);
+	Block.setLightLevel(248, 15);
+	
+	 		Block.defineBlock(247, "Lantern",[["cactus", 2],["cactus", 2],["flowing_water", 0],["flowing_water", 0],["flowing_water", 0],["flowing_water", 0]], 2, false, 0);
+	Block.setDestroyTime(247,1);
+	Block.setShape(247, 1/4, 0, 1/4, 3/4, 3/4, 3/4);
+	Block.setLightLevel(247, 15);
+	
+	 		Block.defineBlock(246, "Lantern",[["cactus", 2],["cactus", 2],["flowing_lava", 0],["flowing_lava", 0],["flowing_lava", 0],["flowing_lava", 0]], 2, false, 0);
+	Block.setDestroyTime(246,1);
+	Block.setShape(246, 1/4, 0, 1/4, 3/4, 3/4, 3/4);
+	Block.setLightLevel(246, 15);
 	
 function newLevel(){
+	clientMessage(ChatColor.GOLD + "Lantern " + ChatColor.WHITE + "by " + ChatColor.BLUE + "Mattgo007 " + ChatColor.WHITE + "and " + ChatColor.RED + "andynazay153 " + ChatColor.GREEN + "Loaded Successfully!");
 	Player.addItemCreativeInv(250, 1, 0);
 	if(checkForUpdate==false) {
         print("Checking for updates");

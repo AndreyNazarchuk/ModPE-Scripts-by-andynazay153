@@ -1,13 +1,13 @@
 Listed in order of priority:
 
- DONE1. stop crahes (its crashing because its not finished).
+ DONE 1. Stop crashes (its crashing because its not finished).
 
- DONE2. add the lantern (duh :).
+ DONE 2. Add the lantern (duh :).
 
- DONE3. add a crafting recipe. (probably torch sorounded with 4 paper)
+ DONE 3. Add a crafting recipe. (probably torch surrounded with 4 paper)
 
- DONE4. add to creative item inventory.
+ DONE 4. Add to creative item inventory.
 
- DONE5. make it autoupdate.
+ DONE 5. Make it auto-update.
 
-Awaiting permission from the person that i used the update code from
+ DONE Awaiting permission from the person that I used the update code from
