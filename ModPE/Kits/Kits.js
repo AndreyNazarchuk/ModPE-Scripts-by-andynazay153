@@ -27,7 +27,7 @@ var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     var r  = new java.lang.Runnable() {
         run: function() {
             try {
-                var urls= new java.net.URL(" https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Kits/KitsVersion.txt ");
+                var urls= new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Kits/KitsVersion.txt");
                 var check = urls.openConnection();
                 check.setRequestMethod("GET");
                 check.setDoOutput(true);
@@ -42,17 +42,17 @@ var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
                 }
                 newUpdate = checkedVersion;
                 if(version+"\n" != checkedVersion) {
-                    clientMessage("[Kits] Kits Mod has an update! " + newUpdate);
+                    print("[Kits] Kits Mod has an update! " + newUpdate);
                     updateWindow=true;
                 }
                 else if(version+"\n"==checkedVersion){
-                clientMessage("There aren't any updates right now");
+                print("There aren't any updates right now");
                 }
             }
             catch(err) {
-                clientMessage("Update check failed ");
+                print("Update check failed ");
                 if(err=="JavaException: java.net.UnknownHostException: raw.githubusercontent.com") {
-                                clientMessage("[Kits] Cannot connect to internet.");
+                                print("[Kits] Cannot connect to internet.");
                             }
                             else {
                                 print("[Kits]   Error: \n" + err);
@@ -78,7 +78,7 @@ function updateVersion() {
                 var ru  = new java.lang.Runnable() {
                     run: function() {
                         try {
-                            var urls = new java.net.URL(" https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Kits/Kits.js ");
+                            var urls = new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Kits/Kits.js");
                             var check = urls.openConnection();
                             check.setRequestMethod("GET");
                             check.setDoOutput(true);
@@ -120,7 +120,7 @@ function updateVersion() {
         dialog.show() 
     }
     catch(err) {
-        clientMessage("[Kits] Error: \n" + err);
+        print("[Kits] Error: \n" + err);
     }
 }
 
