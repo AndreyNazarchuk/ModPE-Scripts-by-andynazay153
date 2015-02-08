@@ -18,7 +18,7 @@ var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
 var updateMod;
-var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get(); 
+var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
 
  function dip2px(ctx, dips){
  return Math.ceil(dips * ctx.getResources().getDisplayMetrics().density);
