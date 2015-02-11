@@ -8,115 +8,6 @@ Some edits include:
  - Auto Update
 */
 
-//Auto Update
-var version="1.0";
-var checkForUpdate=false;
-var updateWindow=false;
-var newUpdate;
-var updateMod;
-var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get(); 
-
- function checkVersion() {
-    var r  = new java.lang.Runnable() {
-        run: function() {
-            try {
-                var urls= new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Powerful%20Fists/Powerfull%20Fists%20version.txt");
-                var check = urls.openConnection();
-                check.setRequestMethod("GET");
-                check.setDoOutput(true);
-                check.connect();
-                check.getContentLength();
-                var script = check.getInputStream();
-                var typeb = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
-                var byteCount = 0; 
-                var checkedVersion;
-                while((byteCount = script.read(typeb)) != -1) { 
-                    checkedVersion = new java.lang.String(typeb, 0, byteCount);               
-                }
-                newUpdate = checkedVersion;
-                if(version+"\n" != checkedVersion) {
-                    print("[Powerful Fists] Powerful Fists Mod has an update! " + newUpdate);
-                    updateWindow=true;
-                }
-                else if(version+"\n"==checkedVersion){
-                print("There aren't any updates right now");
-                }
-            }
-            catch(err) {
-                print("Update check failed ");
-                if(err=="JavaException: java.net.UnknownHostException: raw.githubusercontent.com") {
-                                print("[Powerful Fists] Cannot connect to internet.");
-                            }
-                            else {
-                                print("[Powerful Fists]   Error: \n" + err);
-                            } 
-            }
-        }
-    }
-    var threadt = new java.lang.Thread(r);
-    threadt.start();
-}
-function updateVersion() {
-    try {
-        var upd = new android.app.AlertDialog.Builder(ctx);
-        upd.setTitle("Powerful Fists has an update!");
-        upd.setMessage("Powerful Fists has an update!\nDo you want to update it now?\nCurrent version: " + version + "\nNew version: " + newUpdate + "\nThis Update has new features, new Powerful Fists, and Bug fixes");
-        upd.setNegativeButton("Later", new android.content.DialogInterface.OnClickListener() {
-            onClick: function(par1) {
-            dialog.dismiss(); 
-   }
-        });
-        upd.setPositiveButton("Update it!", new android.content.DialogInterface.OnClickListener() {
-            onClick: function(par1) {
-                var ru  = new java.lang.Runnable() {
-                    run: function() {
-                        try {
-                            var urls = new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Powerful%20Fists/Powerful%20Fists.js");
-                            var check = urls.openConnection();
-                            check.setRequestMethod("GET");
-                            check.setDoOutput(true);
-                            check.connect();
-                            check.getContentLength();
-                            var script = check.getInputStream();
-                            var typeb = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
-                            var byteCount = 0;
-                            while((byteCount = script.read(typeb)) != -1) { 
-                                updateMod += new java.lang.String(typeb, 0, byteCount);               
-                            }
-                            var modpeFolder = ctx.getDir("modscripts", 0);
-                            var modpeFile = new java.io.File(modpeFolder, "Powerful Fists.js");
-                            var update = new java.io.PrintWriter(modpeFile);
-                            update.write(updateMod);
-                            update.flush();
-                            update.close();
-                             
-                            try {
-                                net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, false);
-                                net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, true);
-                                clientMessage("[Powerful Fists] The Powerful Fists Mod has been downloaded and is enabled!");
-                                   
-                            }
-                            catch(err) {
-                                print("[Powerful Fists] Error: \n" + err);
-                            }
-                        }
-                        catch(err) {
-                            print("[Powerful Fists] Error: \n" + err);
-                        }
-                    }
-                }
-                var threadt = new java.lang.Thread(ru);
-                threadt.start();
-            }
-        });
-        var dialog = upd.create();
-        dialog.show() 
-    }
-    catch(err) {
-        print("[Powerful Fists] Error: \n" + err);
-    }
-}
-
 //Powerful Fists Code
 var Gui;
 var GUI;
@@ -148,36 +39,8 @@ var path = android.os.Environment.getExternalStorageDirectory().getAbsolutePath(
 var path2 = new java.io.File(path, "games/com.mojang/minecraftWorlds");
 
 function newLevel(){
-	if(checkForUpdate==false) {
-        print("Checking for an update");
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    checkVersion();
-                }
-                catch(err) {
-                    print("[Powerful Fists] Error: \n"+err);
-                }
-            }
-        }));
-        checkForUpdate=true;
-    }
-    if(updateWindow) {
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    updateVersion();
-                }
-                catch(err) {
-                    print("[Powerful Fists] Error: \n" + err);
-                }
-            }
-        }));
-        updateWindow=false;
-    } 
 punchb();
 restartb();
-
 }
 
 function punchb(){
@@ -1079,6 +942,7 @@ punchlist()
 }
 }
 
+
 function leaveGame(){
 hidep();
 hider();
@@ -1138,14 +1002,14 @@ preventDefault();
 var velX;
 var velY;
 var velZ;
-var power = 3.5;
+var power = 2;
 
 var playerYaw = Entity.getYaw(Player.getEntity()); 
 var playerPitch = Entity.getPitch(Player.getEntity());
 velY = Math.sin((playerPitch - 180) / 180 * Math.PI);
-            velX = power * (Math.sin(playerYaw / 180 * Math.PI) * Math.cos((playerPitch - 180) / 180 * Math.PI)); 
-            velZ = power * (-1 * Math.cos(playerYaw / 180 * Math.PI) * Math.cos((playerPitch - 180) / 180 * Math.PI));
-velY = velY + 2;
+velX = power * (Math.sin(playerYaw / 180 * Math.PI) * Math.cos((playerPitch - 180) / 180 * Math.PI)); 
+velZ = power * (-1 * Math.cos(playerYaw / 180 * Math.PI) * Math.cos((playerPitch - 180) / 180 * Math.PI));
+velY = velY + 3;
 setVelX(victim,velX); 
 setVelY(victim,velY); 
 setVelZ(victim,velZ);
