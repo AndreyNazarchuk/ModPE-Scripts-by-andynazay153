@@ -22,7 +22,7 @@ var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
 
  function dip2px(ctx, dips){
  return Math.ceil(dips * ctx.getResources().getDisplayMetrics().density);
-} 
+}
 
  function checkVersion() {
     var r  = new java.lang.Runnable() {
