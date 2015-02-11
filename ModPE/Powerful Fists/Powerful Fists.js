@@ -9,8 +9,7 @@ Some edits include:
 */
 
 //Auto Update
-
-var version="7.0";
+var version="1.0";
 var checkForUpdate=false;
 var updateWindow=false;
 var newUpdate;
@@ -21,7 +20,7 @@ var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     var r  = new java.lang.Runnable() {
         run: function() {
             try {
-                var urls= new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Kits/KitsVersion.txt");
+                var urls= new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Powerful%20Fists/Powerfull%20Fists%20version.txt");
                 var check = urls.openConnection();
                 check.setRequestMethod("GET");
                 check.setDoOutput(true);
@@ -36,7 +35,7 @@ var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
                 }
                 newUpdate = checkedVersion;
                 if(version+"\n" != checkedVersion) {
-                    print("[Kits] Kits Mod has an update! " + newUpdate);
+                    print("[Powerful Fists] Powerful Fists Mod has an update! " + newUpdate);
                     updateWindow=true;
                 }
                 else if(version+"\n"==checkedVersion){
@@ -46,10 +45,10 @@ var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
             catch(err) {
                 print("Update check failed ");
                 if(err=="JavaException: java.net.UnknownHostException: raw.githubusercontent.com") {
-                                print("[Kits] Cannot connect to internet.");
+                                print("[Powerful Fists] Cannot connect to internet.");
                             }
                             else {
-                                print("[Kits]   Error: \n" + err);
+                                print("[Powerful Fists]   Error: \n" + err);
                             } 
             }
         }
@@ -60,8 +59,8 @@ var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
 function updateVersion() {
     try {
         var upd = new android.app.AlertDialog.Builder(ctx);
-        upd.setTitle("Kits has an update!");
-        upd.setMessage("Kits has an update!\nDo you want to update it now?\nCurrent version: " + version + "\nNew version: " + newUpdate + "\nThis Update has new features, new Kits, and Bug fixes");
+        upd.setTitle("Powerful Fists has an update!");
+        upd.setMessage("Powerful Fists has an update!\nDo you want to update it now?\nCurrent version: " + version + "\nNew version: " + newUpdate + "\nThis Update has new features, new Powerful Fists, and Bug fixes");
         upd.setNegativeButton("Later", new android.content.DialogInterface.OnClickListener() {
             onClick: function(par1) {
             dialog.dismiss(); 
@@ -72,7 +71,7 @@ function updateVersion() {
                 var ru  = new java.lang.Runnable() {
                     run: function() {
                         try {
-                            var urls = new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Kits/Kits.js");
+                            var urls = new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Powerful%20Fists/Powerful%20Fists.js");
                             var check = urls.openConnection();
                             check.setRequestMethod("GET");
                             check.setDoOutput(true);
@@ -85,7 +84,7 @@ function updateVersion() {
                                 updateMod += new java.lang.String(typeb, 0, byteCount);               
                             }
                             var modpeFolder = ctx.getDir("modscripts", 0);
-                            var modpeFile = new java.io.File(modpeFolder, "Kits.js");
+                            var modpeFile = new java.io.File(modpeFolder, "Powerful Fists.js");
                             var update = new java.io.PrintWriter(modpeFile);
                             update.write(updateMod);
                             update.flush();
@@ -94,15 +93,15 @@ function updateVersion() {
                             try {
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, false);
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, true);
-                                clientMessage("[Kits] The Kits Mod has been downloaded and is enabled!");
+                                clientMessage("[Powerful Fists] The Powerful Fists Mod has been downloaded and is enabled!");
                                    
                             }
                             catch(err) {
-                                print("[Kits] Error: \n" + err);
+                                print("[Powerful Fists] Error: \n" + err);
                             }
                         }
                         catch(err) {
-                            print("[Kits] Error: \n" + err);
+                            print("[Powerful Fists] Error: \n" + err);
                         }
                     }
                 }
@@ -114,7 +113,7 @@ function updateVersion() {
         dialog.show() 
     }
     catch(err) {
-        print("[Kits] Error: \n" + err);
+        print("[Powerful Fists] Error: \n" + err);
     }
 }
 
@@ -149,6 +148,33 @@ var path = android.os.Environment.getExternalStorageDirectory().getAbsolutePath(
 var path2 = new java.io.File(path, "games/com.mojang/minecraftWorlds");
 
 function newLevel(){
+	if(checkForUpdate==false) {
+        print("Checking for an update");
+        ctx.runOnUiThread(new java.lang.Runnable({
+            run: function() {
+                try {
+                    checkVersion();
+                }
+                catch(err) {
+                    print("[Powerful Fists] Error: \n"+err);
+                }
+            }
+        }));
+        checkForUpdate=true;
+    }
+    if(updateWindow) {
+        ctx.runOnUiThread(new java.lang.Runnable({
+            run: function() {
+                try {
+                    updateVersion();
+                }
+                catch(err) {
+                    print("[Powerful Fists] Error: \n" + err);
+                }
+            }
+        }));
+        updateWindow=false;
+    } 
 punchb();
 restartb();
 
