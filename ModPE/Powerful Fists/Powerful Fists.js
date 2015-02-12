@@ -1002,7 +1002,7 @@ preventDefault();
 var velX;
 var velY;
 var velZ;
-var power = 2;
+var power = 3;
 
 var playerYaw = Entity.getYaw(Player.getEntity()); 
 var playerPitch = Entity.getPitch(Player.getEntity());

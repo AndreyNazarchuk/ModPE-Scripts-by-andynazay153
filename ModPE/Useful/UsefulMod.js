@@ -13,116 +13,6 @@ ShareAlike - If you remix, transform, or build upon the material, you must ask t
 No additional restrictions - You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
 */
 
-//Auto update 
- 
-var version="0.1";
-var checkForUpdate=false;
-var updateWindow=false; 
-var newUpdate;
-var updateMod; 
-var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get(); 
- 
- function checkVersion() {
-    var r  = new java.lang.Runnable() {
-        run: function() {
-            try {
-                var urls= new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Useful/UsefulModVersion.txt");
-                var check = urls.openConnection();
-                check.setRequestMethod("GET");
-                check.setDoOutput(true);
-                check.connect();
-                check.getContentLength();
-                var script = check.getInputStream();
-                var typeb = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
-                var byteCount = 0; 
-                var checkedVersion;
-                while((byteCount = script.read(typeb)) != -1) { 
-                    checkedVersion = new java.lang.String(typeb, 0, byteCount);               
-                }
-                newUpdate = checkedVersion;
-                if(version+"\n" != checkedVersion) {
-                    clientMessage("New version! " + newUpdate);
-                    updateWindow=true;
-                }
-                else if(version+"\n"==checkedVersion){
-                clientMessage("No updates available");
-                }
-            }
-            catch(err) {
-                clientMessage("Update check failed ");
-                if(err=="JavaException: java.net.UnknownHostException: raw.githubusercontent.com") {
-                                clientMessage("No internet connection.");
-                            }
-                            else {
-                                clientMessage("Error: \n" + err);
-                            } 
-            }
-        }
-    }
-    var threadt = new java.lang.Thread(r);
-    threadt.start();
-}
-function updateVersion() {
-    try {
-        var upd = new android.app.AlertDialog.Builder(ctx);
-        upd.setTitle("New version available!");
-        upd.setMessage("An update to Useful Mod was found!\nWould you like to update it now?\nCurrent version: " + version + "\nNew version: " + newUpdate);
-        upd.setNegativeButton("Later", new android.content.DialogInterface.OnClickListener() {
-            onClick: function(par1) {
-            dialog.dismiss(); 
-   }
-        });
-        upd.setPositiveButton("Update", new android.content.DialogInterface.OnClickListener() {
-            onClick: function(par1) {
-                var ru  = new java.lang.Runnable() {
-                    run: function() {
-                        try {
-                            var urls = new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Useful/UsefulMod.js");
-                            var check = urls.openConnection();
-                            check.setRequestMethod("GET");
-                            check.setDoOutput(true);
-                            check.connect();
-                            check.getContentLength();
-                            var script = check.getInputStream();
-                            var typeb = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
-                            var byteCount = 0;
-                            while((byteCount = script.read(typeb)) != -1) { 
-                                updateMod += new java.lang.String(typeb, 0, byteCount);               
-                            }
-                            var modpeFolder = ctx.getDir("modscripts", 0);
-                            var modpeFile = new java.io.File(modpeFolder, "UsefulMod.js");
-                            var update = new java.io.PrintWriter(modpeFile);
-                            update.write(updateMod);
-                            update.flush();
-                            update.close();
-                             
-                            try {
-                                net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, false);
-                                net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, true);
-                                clientMessage("Downloaded and enabled!");
-                                   
-                            }
-                            catch(err) {
-                                clientMessage("Error: \n" + err);
-                            }
-                        }
-                        catch(err) {
-                            clientMessage("Error: \n" + err);
-                        }
-                    }
-                }
-                var threadt = new java.lang.Thread(ru);
-                threadt.start();
-            }
-        });
-        var dialog = upd.create();
-        dialog.show() 
-    }
-    catch(err) {
-        clientMessage("Error: \n" + err);
-    }
-}
-
 //GUI Code
 
 var GUI;
@@ -185,58 +75,17 @@ function mainMenu(){
 			}}));
 			menuLayout.addView(closebutton);
 			
-            var button = new android.widget.Button(ctx);
+            /*
+			var button = new android.widget.Button(ctx);
             button.setText("Save Inventory");
             button.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
 					
-					function saveFile (directory, inventory) {
-				try {
-					directory = android.os.Environment.getExternalStorageDirectory ().getPath () + "/games/com.mojang/minecraftworlds" + getWorldDir () + "/" + directory; // The file should be saved into the world directory.
-					var newFile = new java.io.File (directory,inventory);
-					var directory = new java.io.File (directory);
-					var success = directory.mkdirs (); // creates the directory if not already created
-					if (!success){ // if not succeeded
-						throw new java.io.IOException("Directory "+directory+ "cannot be created"); // throws an IOException. new java.io.IOException(String) has a string parameter as a message.
-					}
 					
-					newFile.delete();
-					/*newFile.createNewFile (); // creates a blank new file*/
-					var outWrite = new java.io.OutputStreamWriter (new java.io.FileOutputStream (newFile)); // creates the output writer
-					outWrite.append (Player.getInventorySlot(i));
-					outWrite.close(); // closes the writer; not necessary to close, but better do it
-					return false; // tells that it succeeds; not necessary to catch, but better do it
-				}
-				catch(thrown){ // catches the error in the try block
-					return thrown.toString(); // returns a human-readable description of the error. The most common one is java.io.IOException that there is no such file
-				}
-			}
-
-			function readFile (directory, inventory, wantBytes) { // wantBytes: true or false
-				try{
-					directory = android.os.Environment.getExternalStorageDirectory ().getPath () + "/games/com.mojang/minecraftworlds" + getWorldDir () + "/" + directory;
-					var inFile = new java.io.File(directory,filename);
-					if (!inFile.isFile()) return "notfile"; // check if it is a file
-					var inStream = new java.io.FileReader (inFile);
-					if (wantBytes) {
-						inStream.read (bytes); // stores the contents into bytes
-						var bytes = new Array();
-						return bytes;
-					}
-					var inBuffer = new java.io.BufferedReader (inStream);
-					var line = "",var returner = "";
-					while ((line = inBuffer.readLine ()) != null) { // read http://docs.oracle.com/javase/7/docs/api/java/io/BufferedReader.html#readLine()
-						returner = returner + line + java.lang.System.getProperty ("line.seperator");
-					}
-					return returner;
-				}
-				catch(error){
-					return error.toString();
-				}
-			}
                 }
             }));
             menuLayout.addView(button);
+			*/
 			
 			var button2 = new android.widget.Button(ctx);
             button2.setText("Clear Inventory");
@@ -247,6 +96,7 @@ function mainMenu(){
             }));
             menuLayout.addView(button2);
 			
+			/*
 			var button3 = new android.widget.Button(ctx);
             button3.setText("Load Inventory");
             button3.setOnClickListener(new android.view.View.OnClickListener({
@@ -255,15 +105,25 @@ function mainMenu(){
                 }
             }));
             menuLayout.addView(button3);
+			*/
             
             var button10 = new android.widget.Button(ctx);
-            button10.setText("Time");
+            button10.setText("Set time to Day");
             button10.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
-                    //Your Code
+                    Level.setTime(1000);
                 }
             }));
             menuLayout.addView(button10);
+			
+			var button100 = new android.widget.Button(ctx);
+            button100.setText("Set time to Night");
+            button100.setOnClickListener(new android.view.View.OnClickListener({
+                onClick: function(viewarg){
+                    Level.setTime(14000);
+                }
+            }));
+            menuLayout.addView(button100);
 			
 			var button4 = new android.widget.Button(ctx);
             button4.setText("Gamemode");
@@ -295,18 +155,28 @@ function mainMenu(){
             menuLayout.addView(flyOff);
 			
 			var button6 = new android.widget.Button(ctx);
-            button6.setText("Invulnerable Mode");
+            button6.setText("Infinite Health ON");
             button6.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
-                    //Your Code
+						Player.setHealth(99999999999);
                 }
             }));
             menuLayout.addView(button6);
+			
+			var buttonInfHO = new android.widget.Button(ctx);
+            buttonInfHO.setText("Infinite Health OFF");
+            buttonInfHO.setOnClickListener(new android.view.View.OnClickListener({
+                onClick: function(viewarg){
+						Player.setHealth(20);
+                }
+            }));
+            menuLayout.addView(buttonInfHO);
 			
 			var button7 = new android.widget.Button(ctx);
             button7.setText("Ride an entity");
             button7.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
+					preventDefault();
 					function attackHook(attacker, victim){
 					rideAnimal(attacker, victim);
 					clientMessage("Punch an animal to ride it");
@@ -332,8 +202,19 @@ function mainMenu(){
                 }
             }));
             menuLayout.addView(button9);
-            
-            /* Entity.setSneaking(entity, setSneaking);*/
+			
+			var closebutton1 = new android.widget.Button(ctx);
+			closebutton1.setText("Close Menu");
+			closebutton1.setOnClickListener(new android.view.View.OnClickListener({
+			onClick: function(viewarg){
+				if(menu != null){
+				menu.dismiss();
+				menu = null;
+			}
+			}}));
+			menuLayout.addView(closebutton1);
+			
+			/* Entity.setSneaking(entity, setSneaking);*/
 			
             menu = new android.widget.PopupWindow(menuLayout1, ctx.getWindowManager().getDefaultDisplay().getWidth()/3, ctx.getWindowManager().getDefaultDisplay().getHeight());
             menu.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -370,35 +251,6 @@ function exit(){
     }}));
 }
 
- if(checkForUpdate==false) {
-        print("Checking for updates");
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    checkVersion();
-                }
-                catch(err) {
-                    clientMessage("Error: \n"+err);
-                }
-            }
-        }));
-        checkForUpdate=true;
-    }
-    if(updateWindow) {
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    updateVersion();
-                }
-                catch(err) {
-                    clientMessage("Error: \n" + err);
-                }
-            }
-        }));
-        updateWindow=false;
-    }
-}
-
 function leaveGame(){
     var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
     ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
@@ -415,4 +267,5 @@ function leaveGame(){
             exitUI = null;
         }
     }}));
+}
 }
