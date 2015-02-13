@@ -9,7 +9,11 @@
 */
 
 //GUI Code
-
+var version = "0.3"; 
+var checkForUpdate=false;
+var updateWindow=false; 
+var newUpdate;
+var updateMod;
 var GUI;
 var menu;
 var exitUI;
@@ -213,6 +217,42 @@ function mainMenu(){
             }));
             menuLayout.addView(button14);
 			
+			var button15 = new android.widget.Button(ctx);
+            button15.setText("Update");
+            button15.setOnClickListener(new android.view.View.OnClickListener({
+                onClick: function(viewarg){
+					if(checkForUpdate==false) {
+						print("Checking for updates");
+						ctx.runOnUiThread(new java.lang.Runnable({
+							run: function() {
+								try {
+									checkVersion();
+								}
+								catch(err) {
+									print("Error: \n"+err);
+								}
+							}
+						}));
+					}
+					if(updateWindow) {
+						ctx.runOnUiThread(new java.lang.Runnable({
+							run: function() {
+								try {
+									updateVersion();
+								}
+								catch(err) {
+									print("Error: \n" + err);
+								}
+							}
+						}));
+						updateWindow=false;
+						checkForUpdate=true;
+					}
+                }
+            }));
+            menuLayout.addView(button15);
+			
+			
 			var closebutton1 = new android.widget.Button(ctx);
 			closebutton1.setText("Close Menu");
 			closebutton1.setOnClickListener(new android.view.View.OnClickListener({
@@ -261,32 +301,7 @@ function exit(){
     }}));
 }
 
-function leaveGame(){
-    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-    ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
-        if(GUI != null){
-            GUI.dismiss();
-            GUI = null;
-        }
-        if(menu != null){
-            menu.dismiss();
-            menu = null;
-        }
-        if(exitUI != null){
-            exitUI.dismiss();
-            exitUI = null;
-        }
-    }}));
-}
-}
-
 //Auto-Update Code
-var version = "0.2"; 
-var checkForUpdate=false;
-var updateWindow=false; 
-var newUpdate;
-var updateMod;
-var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
 
  function dip2px(ctx, dips){
  return Math.ceil(dips * ctx.getResources().getDisplayMetrics().density);
@@ -392,30 +407,22 @@ function updateVersion() {
         print("Error: \n" + err);
     }
 }
-	if(checkForUpdate==false) {
-        print("Checking for updates");
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    checkVersion();
-                }
-                catch(err) {
-                    print("Error: \n"+err);
-                }
-            }
-        }));
-        checkForUpdate=true;
-    }
-    if(updateWindow) {
-        ctx.runOnUiThread(new java.lang.Runnable({
-            run: function() {
-                try {
-                    updateVersion();
-                }
-                catch(err) {
-                    print("Error: \n" + err);
-                }
-            }
-        }));
-        updateWindow=false;
-	}
+
+function leaveGame(){
+    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
+    ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
+        if(GUI != null){
+            GUI.dismiss();
+            GUI = null;
+        }
+        if(menu != null){
+            menu.dismiss();
+            menu = null;
+        }
+        if(exitUI != null){
+            exitUI.dismiss();
+            exitUI = null;
+        }
+    }}));
+}
+}
