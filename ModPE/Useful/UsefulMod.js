@@ -238,6 +238,7 @@ function mainMenu(){
 			
 			var updateButton = new android.widget.Button(ctx);
             updateButton.setText("Update");
+			clientMessage("Push Update Button 2 times");
             updateButton.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
 					if(checkForUpdate==false) {
@@ -266,6 +267,7 @@ function mainMenu(){
 						}));
 						updateWindow=false;
 						checkForUpdate=true;
+						clientMessage("Leave and join the game to activate update");
 					}
                 }
             }));
