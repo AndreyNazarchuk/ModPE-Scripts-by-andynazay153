@@ -78,8 +78,7 @@ function mainMenu(){
             saveInvButton.setText("Save Inventory");
             saveInvButton.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
-					
-					
+					clientMessage("Inventory saved");
                 }
             }));
             menuLayout.addView(saveInvButton);
@@ -90,6 +89,7 @@ function mainMenu(){
             clearInvButton.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
                     Player.clearInventory();
+					clientMessage("Inventory Cleared.");
                 }
             }));
             menuLayout.addView(clearInvButton);
