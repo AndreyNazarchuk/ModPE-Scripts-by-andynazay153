@@ -440,33 +440,33 @@ onClick: function(){
 on = false;
 on = true;
 if(checkForUpdate==false) {
-						print("Checking for updates");
-						ctx.runOnUiThread(new java.lang.Runnable({
-							run: function() {
-								try {
-									checkVersion();
-								}
-								catch(err) {
-									print("Error: \n"+err);
-								}
-							}
-						}));
+	print("Checking for updates");
+		ctx.runOnUiThread(new java.lang.Runnable({
+			run: function() {
+				try {
+					checkVersion();
 					}
-					if(updateWindow) {
-						ctx.runOnUiThread(new java.lang.Runnable({
-							run: function() {
-								try {
-									updateVersion();
-								}
-								catch(err) {
-									print("Error: \n" + err);
-								}
-							}
-						}));
-						updateWindow=false;
-						checkForUpdate=true;
-						clientMessage(ChatColor.GREEN + "Restart the game to activate update(s)");
+				catch(err) {
+					print("Error: \n"+err);
 					}
+				}
+			}));
+		}
+if(updateWindow) {
+	ctx.runOnUiThread(new java.lang.Runnable({
+		run: function() {
+			try {
+				updateVersion();
+				}
+			catch(err) {
+				print("Error: \n" + err);
+				}
+			}
+		}));
+updateWindow=false;
+checkForUpdate=true;
+clientMessage(ChatColor.GREEN + "Restart the game to activate update(s)");
+		}
 }
 })
 fb16.setText(" Update ")
@@ -1174,7 +1174,7 @@ Level.spawnMob(x,y,z,65);
     var r  = new java.lang.Runnable() {
         run: function() {
             try {
-                var urls= new java.net.URL("");
+                var urls= new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Powerful%20Fists/PFVersion.txt");
                 var check = urls.openConnection();
                 check.setRequestMethod("GET");
                 check.setDoOutput(true);
@@ -1225,7 +1225,7 @@ function updateVersion() {
                 var ru  = new java.lang.Runnable() {
                     run: function() {
                         try {
-                            var urls = new java.net.URL("");
+                            var urls = new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Powerful%20Fists/Powerful%20Fists.js");
                             var check = urls.openConnection();
                             check.setRequestMethod("GET");
                             check.setDoOutput(true);
