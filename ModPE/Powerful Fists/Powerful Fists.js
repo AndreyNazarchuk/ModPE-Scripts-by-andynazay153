@@ -9,6 +9,11 @@ Some edits include:
 */
 
 //Powerful Fists Code
+var version = "2.0"; 
+var checkForUpdate=false;
+var updateWindow=false; 
+var newUpdate;
+var updateMod;
 var Gui;
 var GUI;
 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
@@ -197,7 +202,6 @@ preventdefault = 0;
 ironpunch0 = 0;
 clientMessage("§aPowerful Fists restarted");
 on = false;
- 
 }
 })
 rbb.setText(" Restart ")
@@ -428,19 +432,58 @@ on = true;
 })
 fb15.setText(" Ironman Punch ")
 fb15.setTextSize(20)
-menu.addView(fb15); 
-
+menu.addView(fb15);
 
 var  fb16= new android.widget.Button(ctx); 
 fb16 .setOnClickListener(new android.view.View.OnClickListener(){
+onClick: function(){
+on = false;
+on = true;
+if(checkForUpdate==false) {
+						print("Checking for updates");
+						ctx.runOnUiThread(new java.lang.Runnable({
+							run: function() {
+								try {
+									checkVersion();
+								}
+								catch(err) {
+									print("Error: \n"+err);
+								}
+							}
+						}));
+					}
+					if(updateWindow) {
+						ctx.runOnUiThread(new java.lang.Runnable({
+							run: function() {
+								try {
+									updateVersion();
+								}
+								catch(err) {
+									print("Error: \n" + err);
+								}
+							}
+						}));
+						updateWindow=false;
+						checkForUpdate=true;
+						clientMessage(ChatColor.GREEN + "Restart the game to activate update(s)");
+					}
+}
+})
+fb16.setText(" Update ")
+fb16.setTextSize(20)
+menu.addView(fb16); 
+
+
+var  fb17= new android.widget.Button(ctx); 
+fb17 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
 dialog.dismiss();
  
 }
 })
-fb16.setText(" Close ")
-fb16.setTextSize(20)
-menu.addView(fb16); 
+fb17.setText(" Close ")
+fb17.setTextSize(20)
+menu.addView(fb17); 
 
 dialog.show()
 
@@ -1126,3 +1169,104 @@ if(Entity.getEntityTypeId(entity)==65 && tntpunch == 1)
 Level.spawnMob(x,y,z,65);
 }
 }}
+
+ function checkVersion() {
+    var r  = new java.lang.Runnable() {
+        run: function() {
+            try {
+                var urls= new java.net.URL("");
+                var check = urls.openConnection();
+                check.setRequestMethod("GET");
+                check.setDoOutput(true);
+                check.connect();
+                check.getContentLength();
+                var script = check.getInputStream();
+                var typeb = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
+                var byteCount = 0; 
+                var checkedVersion;
+                while((byteCount = script.read(typeb)) != -1) { 
+                    checkedVersion = new java.lang.String(typeb, 0, byteCount);               
+                }
+				newUpdate = checkedVersion;
+				if(version+"\n" != checkedVersion) {
+                    print("New version is available! " + newUpdate);
+                    updateWindow=true;
+                }
+                else if(version+"\n"==checkedVersion){
+                print("No updates available");
+                }
+            }
+            catch(err) {
+                print("Update check failed ");
+                if(err=="JavaException: java.net.UnknownHostException: raw.githubusercontent.com") {
+                                print("No internet connection.");
+                            }
+                            else {
+                                print("Error: \n" + err);
+                            } 
+            }
+        }
+    }
+    var threadt = new java.lang.Thread(r);
+    threadt.start();
+}
+function updateVersion() {
+    try {
+        var upd = new android.app.AlertDialog.Builder(ctx);
+        upd.setTitle("New version available!");
+        upd.setMessage("An update to Powerful Fists was found!\nWould you like to update it?\nYour version: " + version + "\nNew version: " + newUpdate);
+        upd.setNegativeButton("Later", new android.content.DialogInterface.OnClickListener() {
+            onClick: function(par1) {
+            dialog.dismiss(); 
+   }
+        });
+        upd.setPositiveButton("Update", new android.content.DialogInterface.OnClickListener() {
+            onClick: function(par1) {
+                var ru  = new java.lang.Runnable() {
+                    run: function() {
+                        try {
+                            var urls = new java.net.URL("");
+                            var check = urls.openConnection();
+                            check.setRequestMethod("GET");
+                            check.setDoOutput(true);
+                            check.connect();
+                            check.getContentLength();
+                            var script = check.getInputStream();
+                            var typeb = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
+                            var byteCount = 0;
+                            while((byteCount = script.read(typeb)) != -1) { 
+                                updateMod += new java.lang.String(typeb, 0, byteCount);               
+                            }
+                            var modpeFolder = ctx.getDir("modscripts", 0);
+                            var modpeFile = new java.io.File(modpeFolder, "Powerful Fists.js");
+                            var update = new java.io.PrintWriter(modpeFile);
+                            update.write(updateMod);
+                            update.flush();
+                            update.close();
+                            
+                            try {
+                                net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, false);
+                                net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, true);
+								print("Downloaded and enabled!");
+								  
+                            }
+                            catch(err) {
+                                print("Error: \n" + err);
+                            }
+                        }
+                        catch(err) {
+                            print("Error: \n" + err);
+                        }
+                    }
+                }
+                var threadt = new java.lang.Thread(ru);
+                threadt.start();
+            }
+        });
+        var dialog = upd.create();
+        dialog.show() 
+    }
+    catch(err) {
+        print("Error: \n" + err);
+    }
+}

@@ -267,7 +267,7 @@ function mainMenu(){
 						}));
 						updateWindow=false;
 						checkForUpdate=true;
-						clientMessage("Leave and join the game to activate update");
+						clientMessage(ChatColor.GREEN + "Restart the game to activate update(s)");
 					}
                 }
             }));
