@@ -229,7 +229,6 @@ function mainMenu(){
 			
 			var updateButton = new android.widget.Button(ctx);
             updateButton.setText("Update");
-			clientMessage("Push Update Button 2 times");
             updateButton.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
 					if(checkForUpdate==false) {
@@ -338,6 +337,7 @@ function exit(){
 				if(version+"\n" != checkedVersion) {
                     print("New version is available! " + newUpdate);
                     updateWindow=true;
+					clientMessage("Push Update button 2 times");
                 }
                 else if(version+"\n"==checkedVersion){
                 print("No updates available");
