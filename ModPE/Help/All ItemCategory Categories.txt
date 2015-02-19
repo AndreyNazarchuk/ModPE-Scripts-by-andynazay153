@@ -1,0 +1,11 @@
+ALL ITEMCATEGORY CATEGORIES
+
+ItemCategory.INTERNAL - -1
+ItemCategory.MATERIAL - 1
+ItemCategory.TOOL - 2
+ItemCategory.FOOD - 4
+ItemCategory.DECORATION - 8
+
+ItemCategory.INTERNAL removes the specified item from the crafting menu.
+
+So Item.setCategory(280, ItemCategory.INTERNAL, 0) would be the same as Item.setCategory(280, -1, 0).

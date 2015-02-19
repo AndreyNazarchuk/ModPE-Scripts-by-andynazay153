@@ -176,10 +176,10 @@ scroll.addView(menu);
 var dialog = new android.app.Dialog(ctx); 
 dialog.setContentView(scroll);
 
-dialog.setTitle("Punches");
+dialog.setTitle("Useful Mod");
 
 var  rbb= new android.widget.Button(ctx); 
-rbb .setOnClickListener(new android.view.View.OnClickListener(){
+rbb.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
 firepunch = 0;
 throwpunch = 0;
@@ -465,7 +465,7 @@ if(updateWindow) {
 		}));
 updateWindow=false;
 checkForUpdate=true;
-clientMessage(ChatColor.GREEN + "Restart the game to activate update(s)");
+clientMessage(ChatColor.GREEN + "Restart the game to activate update");
 		}
 }
 })
@@ -1045,7 +1045,7 @@ preventDefault();
 var velX;
 var velY;
 var velZ;
-var power = 3;
+var power = 2;
 
 var playerYaw = Entity.getYaw(Player.getEntity()); 
 var playerPitch = Entity.getPitch(Player.getEntity());
