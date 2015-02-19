@@ -140,6 +140,18 @@ function mainMenu(){
                 }
             }));
             menuLayout.addView(survivalButton);
+						
+			var infHealthOnButton = new android.widget.Button(ctx);
+            infHealthOnButton.setText("Infinite Health ON");
+            infHealthOnButton.setOnClickListener(new android.view.View.OnClickListener({
+                onClick: function(viewarg){
+						Player.setHealth(99999999999);
+						clientMessage(ChatColor.RED + "WARNING:");
+						clientMessage(ChatColor.RED + "You will die and loose your items when you leave the game!");
+						clientMessage(ChatColor.GREEN + "Unless you use the Heal button when you are done with it.");
+                }
+            }));
+            menuLayout.addView(infHealthOnButton);
 			
 			var healButton = new android.widget.Button(ctx);
             healButton.setText("Heal");
@@ -180,28 +192,6 @@ function mainMenu(){
                 }
             }));
             menuLayout.addView(flyOffButton);
-			
-			var infHealthOnButton = new android.widget.Button(ctx);
-            infHealthOnButton.setText("Infinite Health ON");
-            infHealthOnButton.setOnClickListener(new android.view.View.OnClickListener({
-                onClick: function(viewarg){
-						Player.setHealth(99999999999);
-						clientMessage(ChatColor.RED + "WARNING:");
-						clientMessage(ChatColor.RED + "You will die and loose your items when you leave the game!");
-						clientMessage(ChatColor.GREEN + "Unless you turn off Infinite Health when you are done with it.");
-                }
-            }));
-            menuLayout.addView(infHealthOnButton);
-			
-			var infHealthOffButton = new android.widget.Button(ctx);
-            infHealthOffButton.setText("Infinite Health OFF");
-            infHealthOffButton.setOnClickListener(new android.view.View.OnClickListener({
-                onClick: function(viewarg){
-						Player.setHealth(20);
-						clientMessage("Health set to Normal");
-                }
-            }));
-            menuLayout.addView(infHealthOffButton);
 			
 			/*
 			var rideButton = new android.widget.Button(ctx);
