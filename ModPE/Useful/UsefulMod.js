@@ -187,7 +187,7 @@ function mainMenu(){
                 onClick: function(viewarg){
 						Player.setHealth(99999999999);
 						clientMessage(ChatColor.RED + "WARNING:");
-						clientMessage(ChatColor.WHITE + "You will die and loose your items when you leave the game!");
+						clientMessage(ChatColor.RED + "You will die and loose your items when you leave the game!");
 						clientMessage(ChatColor.GREEN + "Unless you turn off Infinite Health when you are done with it.");
                 }
             }));
@@ -198,6 +198,7 @@ function mainMenu(){
             infHealthOffButton.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg){
 						Player.setHealth(20);
+						clientMessage("Health set to Normal");
                 }
             }));
             menuLayout.addView(infHealthOffButton);
@@ -267,7 +268,7 @@ function mainMenu(){
 						}));
 						updateWindow=false;
 						checkForUpdate=true;
-						clientMessage(ChatColor.GREEN + "Restart the game to activate update(s)");
+						clientMessage(ChatColor.GREEN + "Restart the game to activate update");
 					}
                 }
             }));
