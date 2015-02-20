@@ -69,7 +69,7 @@ var layout = new android.widget.LinearLayout(ctx);
 var pl = new android.widget.Button(ctx);
  
 
-pl.setText("PL");
+pl.setText("PF");
 
 layout.setOrientation(android.widget.LinearLayout.VERTICAL);
 layout.setGravity(android.view.Gravity.LEFT);
