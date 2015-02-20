@@ -45,7 +45,7 @@ var path2 = new java.io.File(path, "games/com.mojang/minecraftWorlds");
 
 function newLevel(){
 punchb();
-restartb();
+resetP();
 }
 
 function punchb(){
@@ -53,7 +53,7 @@ function punchb(){
 ctx.runOnUiThread(new java.lang.Runnable(){
  
 run: function(){
- 
+	
 try{
  
 GUI = new android.widget.PopupWindow();
@@ -93,37 +93,13 @@ print ("Error: "+e)
 }});
 }
  
-function restartb(){
+function resetP(){
  
 ctx.runOnUiThread(new java.lang.Runnable(){
  
 run: function(){
- 
+	
 try{
- 
-Gui = new android.widget.PopupWindow();
-
-var layout = new android.widget.LinearLayout(ctx);
-var restart = new android.widget.Button(ctx);
- 
-
-restart.setText("Restart");
-
-layout.setOrientation(android.widget.LinearLayout.VERTICAL);
-layout.setGravity(android.view.Gravity.RIGHT);
-layout.addView(restart);
-
-
-Gui.setContentView(layout);
-Gui.setHeight(android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
-Gui.setWidth(android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
-Gui.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.BOTTOM | android.view.Gravity.RIGHT, 0, 0);
-
-restart.setOnClickListener(new android.view.View.OnClickListener(){
- 
-onClick: function(view){
-
-if(on == true) {
 firepunch = 0;
 throwpunch = 0;
 killpunch = 0;
@@ -143,18 +119,6 @@ ironpunch = 0;
 meteorpunch = 0;
 preventdefault = 0;
 ironpunch0 = 0;
-clientMessage("§aPowerful Fists restarted");
-on = false;
-
-} else if(on == false) {
-clientMessage("§cNo Punch Selected!");
-print("Type /plist for a list of punches");
-
-}
-}
- 
-});
- 
 } catch (e){
 print ("Error: "+e)
 }
@@ -176,46 +140,15 @@ scroll.addView(menu);
 var dialog = new android.app.Dialog(ctx); 
 dialog.setContentView(scroll);
 
-dialog.setTitle("Useful Mod");
-
-var  rbb= new android.widget.Button(ctx); 
-rbb.setOnClickListener(new android.view.View.OnClickListener(){
-onClick: function(){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-clientMessage("§aPowerful Fists restarted");
-on = false;
-}
-})
-rbb.setText(" Restart ")
-rbb.setTextSize(30)
-menu.addView(rbb); 
-
+dialog.setTitle("Powerful Fists");
 
 var  fb= new android.widget.Button(ctx); 
 fb .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 firepunch = 1;
 clientMessage("Fire Punch Selected");
 on = true;
- 
 }
 })
 fb.setText(" Fire Punch ")
@@ -226,11 +159,11 @@ menu.addView(fb);
 var  fb1= new android.widget.Button(ctx); 
 fb1 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 throwpunch = 1;
 clientMessage("Throw Punch Selected");
 preventDefault();
 on = true;
- 
 }
 })
 fb1.setText("  Throw Punch ")
@@ -241,10 +174,10 @@ menu.addView(fb1);
 var  fb2= new android.widget.Button(ctx); 
 fb2 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 killpunch = 1;
 clientMessage("Kill Punch Selected");
 on = true;
- 
 }
 })
 fb2.setText(" Kill Punch ")
@@ -255,10 +188,10 @@ menu.addView(fb2);
 var  fb3= new android.widget.Button(ctx); 
 fb3 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 explodingpunch = 1;
 clientMessage("Exploding Punch Selected");
 on = true;
- 
 }
 })
 fb3.setText(" Exploding Punch ")
@@ -269,10 +202,10 @@ menu.addView(fb3);
 var  fb4= new android.widget.Button(ctx); 
 fb4 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 regeneratingpunch = 1;
 clientMessage("Regenerating Punch Selected");
 on = true;
- 
 }
 })
 fb4.setText(" Regenerating Punch ")
@@ -283,10 +216,10 @@ menu.addView(fb4);
 var  fb5= new android.widget.Button(ctx); 
 fb5 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 destroyblockpunch = 1;
 clientMessage("Destroy Block Punch Selected");
 on = true;
- 
 }
 })
 fb5.setText(" Destroy Punch ")
@@ -297,11 +230,11 @@ menu.addView(fb5);
 var  fb6= new android.widget.Button(ctx); 
 fb6 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 ridepunch = 1;
 clientMessage("Ride Punch Selected");
 preventDefault();
 on = true;
- 
 }
 })
 fb6.setText(" Ride Punch ")
@@ -312,6 +245,7 @@ menu.addView(fb6);
 var  fb7= new android.widget.Button(ctx); 
 fb7 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 hardpunch = 1;
 clientMessage("Hard Punch Selected");
 on = true;
@@ -326,6 +260,7 @@ menu.addView(fb7);
 var  fb8= new android.widget.Button(ctx); 
 fb8 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 webpunch = 1;
 clientMessage("Web Punch Selected");
 on = true;
@@ -340,6 +275,7 @@ menu.addView(fb8);
 var  fb9= new android.widget.Button(ctx); 
 fb9 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 waterpunch = 1;
 clientMessage("Water Punch Selected");
 on = true;
@@ -354,6 +290,7 @@ menu.addView(fb9);
 var  fb10= new android.widget.Button(ctx); 
 fb10 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 lavapunch = 1;
 clientMessage("Lava Punch Selected");
 on = true;
@@ -368,6 +305,7 @@ menu.addView(fb10);
 var  fb11= new android.widget.Button(ctx); 
 fb11 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 diamondpunch = 1;
 clientMessage("Diamond Punch Selected");
 on = true;
@@ -382,6 +320,7 @@ menu.addView(fb11);
 var  fb12= new android.widget.Button(ctx); 
 fb12 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 goldpunch = 1;
 clientMessage("Gold Punch Selected");
 on = true;
@@ -396,6 +335,7 @@ menu.addView(fb12);
 var  fb13= new android.widget.Button(ctx); 
 fb13 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 ironpunch = 1;
 clientMessage("Iron Punch Selected");
 on = true;
@@ -410,6 +350,7 @@ menu.addView(fb13);
 var  fb14= new android.widget.Button(ctx); 
 fb14 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 meteorpunch = 1;
 clientMessage("Meteor Punch Selected");
 on = true;
@@ -424,6 +365,7 @@ menu.addView(fb14);
 var  fb15= new android.widget.Button(ctx); 
 fb15 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
+resetP();
 ironpunch0 = 1;
 clientMessage("Ironman Punch Selected");
 on = true;
@@ -1052,7 +994,7 @@ var playerPitch = Entity.getPitch(Player.getEntity());
 velY = Math.sin((playerPitch - 180) / 180 * Math.PI);
 velX = power * (Math.sin(playerYaw / 180 * Math.PI) * Math.cos((playerPitch - 180) / 180 * Math.PI)); 
 velZ = power * (-1 * Math.cos(playerYaw / 180 * Math.PI) * Math.cos((playerPitch - 180) / 180 * Math.PI));
-velY = velY + 3;
+velY = velY + 2;
 setVelX(victim,velX); 
 setVelY(victim,velY); 
 setVelZ(victim,velZ);
@@ -1071,6 +1013,7 @@ Entity.setHealth(attacker, 20);
 }
 
 if(ridepunch == 1){
+preventDefault();
 rideAnimal(attacker, victim);
 }
 
