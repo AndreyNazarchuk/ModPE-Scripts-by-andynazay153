@@ -69,7 +69,7 @@ var layout = new android.widget.LinearLayout(ctx);
 var pl = new android.widget.Button(ctx);
  
 
-pl.setText("Punch List");
+pl.setText("PL");
 
 layout.setOrientation(android.widget.LinearLayout.VERTICAL);
 layout.setGravity(android.view.Gravity.LEFT);
@@ -173,7 +173,7 @@ preventDefault();
 on = true;
 }
 })
-fb1.setText("  Throw Punch ")
+fb1.setText(" Throw Punch ")
 fb1.setTextSize(20)
 menu.addView(fb1); 
 
