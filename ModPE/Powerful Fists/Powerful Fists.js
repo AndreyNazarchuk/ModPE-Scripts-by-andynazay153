@@ -1008,7 +1008,7 @@ setVelZ(victim,velZ);
 }
 
 if(killpunch == 1){
-Entity.setHealth(victim, 1);
+Entity.setHealth(victim, 0);
 }
 
 if(explodingpunch == 1){
