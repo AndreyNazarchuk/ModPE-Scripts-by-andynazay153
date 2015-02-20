@@ -1,11 +1,18 @@
 /*
-Original code by Metamorposis_2.
-He has given me permission to take over this mod and update it to 0.10.5.
-Edited and Improved by andynazay153
-Some edits include:
+ * © 2015 by andynazay153
+ * Auto-Update code used with permission from Bajan_Deadman0
+ * Original code by Metamorposis_2
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * He has given me permission to take over this mod COMPLETELY and update it to 0.10.5.
+ * Edited and Improved by andynazay153
+ * Improvements:
  - Better Grammar ;D
- - Improved Throw Punch
+ - Improved Throw Punch.
  - Auto Update
+ - Reset before enabling a punch.
 */
 
 //Powerful Fists Code
@@ -1134,6 +1141,7 @@ Level.spawnMob(x,y,z,65);
 				if(version+"\n" != checkedVersion) {
                     print("New version is available! " + newUpdate);
                     updateWindow=true;
+					clientMessage("Push Update button 2 times");
                 }
                 else if(version+"\n"==checkedVersion){
                 print("No updates available");
