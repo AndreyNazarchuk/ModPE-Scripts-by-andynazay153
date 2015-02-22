@@ -16,7 +16,7 @@
 */
 
 //Powerful Fists Code
-var version = "2.0"; 
+var version = "2.3"; 
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
