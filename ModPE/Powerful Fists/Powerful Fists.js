@@ -47,6 +47,7 @@ var preventdefault = 0;
 var ironpunch0 = 0;
 var ironpunch1 = 0;
 var brickcage = 0;
+var arrowPunch = 0;
 var path = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
 var path2 = new java.io.File(path, "games/com.mojang/minecraftWorlds");
 
@@ -126,6 +127,7 @@ ironpunch = 0;
 meteorpunch = 0;
 preventdefault = 0;
 ironpunch0 = 0;
+arrowPunch = 0;
 } catch (e){
 print ("Error: "+e)
 }
@@ -148,6 +150,44 @@ var dialog = new android.app.Dialog(ctx);
 dialog.setContentView(scroll);
 
 dialog.setTitle("Powerful Fists");
+
+var  fbc= new android.widget.Button(ctx); 
+fbc .setOnClickListener(new android.view.View.OnClickListener(){
+onClick: function(){
+resetP();
+}
+})
+fbc.setText("clear all selections")
+menu.addView(fbc);
+
+var  fb61= new android.widget.Button(ctx); 
+fb61 .setOnClickListener(new android.view.View.OnClickListener(){
+onClick: function(){
+resetP();
+arrowPunch = 1;
+clientMessage("Arrow Rain Punch selected");
+clientMessage("It will lag a little :)");
+preventDefault();
+on = true;
+}
+})
+fb61.setText("Arrow Rain Punch")
+fb61.setTextSize(20)
+menu.addView(fb61);
+
+var  fb15= new android.widget.Button(ctx); 
+fb15 .setOnClickListener(new android.view.View.OnClickListener(){
+onClick: function(){
+resetP();
+ironpunch0 = 1;
+clientMessage("Ironman Punch Selected");
+on = true;
+ 
+}
+})
+fb15.setText(" Ironman Punch ")
+fb15.setTextSize(20)
+menu.addView(fb15);
 
 var  fb= new android.widget.Button(ctx); 
 fb .setOnClickListener(new android.view.View.OnClickListener(){
@@ -246,8 +286,7 @@ on = true;
 })
 fb6.setText(" Ride Punch ")
 fb6.setTextSize(20)
-menu.addView(fb6); 
-
+menu.addView(fb6);
 
 var  fb7= new android.widget.Button(ctx); 
 fb7 .setOnClickListener(new android.view.View.OnClickListener(){
@@ -263,7 +302,6 @@ fb7.setText(" Hard Punch ")
 fb7.setTextSize(20)
 menu.addView(fb7); 
 
-
 var  fb8= new android.widget.Button(ctx); 
 fb8 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
@@ -277,7 +315,6 @@ on = true;
 fb8.setText(" Web Punch ")
 fb8.setTextSize(20)
 menu.addView(fb8); 
-
 
 var  fb9= new android.widget.Button(ctx); 
 fb9 .setOnClickListener(new android.view.View.OnClickListener(){
@@ -293,7 +330,6 @@ fb9.setText(" Water Punch ")
 fb9.setTextSize(20)
 menu.addView(fb9);
 
-
 var  fb10= new android.widget.Button(ctx); 
 fb10 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
@@ -307,7 +343,6 @@ on = true;
 fb10.setText(" Lava Punch ")
 fb10.setTextSize(20)
 menu.addView(fb10); 
-
 
 var  fb11= new android.widget.Button(ctx); 
 fb11 .setOnClickListener(new android.view.View.OnClickListener(){
@@ -323,7 +358,6 @@ fb11.setText(" Diamond Punch ")
 fb11.setTextSize(20)
 menu.addView(fb11); 
 
-
 var  fb12= new android.widget.Button(ctx); 
 fb12 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
@@ -337,7 +371,6 @@ on = true;
 fb12.setText(" Gold Punch ")
 fb12.setTextSize(20)
 menu.addView(fb12); 
-
 
 var  fb13= new android.widget.Button(ctx); 
 fb13 .setOnClickListener(new android.view.View.OnClickListener(){
@@ -353,7 +386,6 @@ fb13.setText(" Iron Punch ")
 fb13.setTextSize(20)
 menu.addView(fb13); 
 
-
 var  fb14= new android.widget.Button(ctx); 
 fb14 .setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
@@ -366,22 +398,7 @@ on = true;
 })
 fb14.setText(" Meteor Punch ")
 fb14.setTextSize(20)
-menu.addView(fb14); 
-
-
-var  fb15= new android.widget.Button(ctx); 
-fb15 .setOnClickListener(new android.view.View.OnClickListener(){
-onClick: function(){
-resetP();
-ironpunch0 = 1;
-clientMessage("Ironman Punch Selected");
-on = true;
- 
-}
-})
-fb15.setText(" Ironman Punch ")
-fb15.setTextSize(20)
-menu.addView(fb15);
+menu.addView(fb14);
 
 var  fb16= new android.widget.Button(ctx); 
 fb16 .setOnClickListener(new android.view.View.OnClickListener(){
@@ -448,492 +465,6 @@ if(destroyblockpunch == 1)
 Level.destroyBlock (x, y, z, true)
 
 }
-
-function procCmd(cmd){
-if (cmd=="fire punch"){
-firepunch = 1;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§cFire Punch Selected");}
-else if (cmd=="throw punch"){
-firepunch = 0;
-throwpunch = 1;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 1;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§aThrow Punch Selected");}
-else if (cmd=="kill punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 1;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§1Kill Punch Selected");}
-else if (cmd=="exploding punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 1;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§2Exploding Punch Selected");}
-else if (cmd=="restart"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = false;
-clientMessage("§aPowerfull Fist Has Restart Punches");}
-else if (cmd=="regenerating punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 1;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§3Regenerating Punch Selected");}
-else if (cmd=="fun punch"){
-firepunch = 1;
-throwpunch = 1;
-killpunch = 1;
-explodingpunch = 1;
-regeneratingpunch = 1;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 1;
-ironpunch1 = 1;
-on = true;
-clientMessage("§4Every punch selected");}
-else if (cmd=="destroy punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 1;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§5Destroy Block Punch Selected");}
-else if (cmd=="ride punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 1;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 1;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§6Ride Punch Selected");}
-else if (cmd=="hard punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 1;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§7Hard Punch Selected");}
-else if (cmd=="help punch"){
-clientMessage("List Of Punches");
-clientMessage(" /fire punch");
-clientMessage(" /throw punch");
-clientMessage(" /exploding punch");
-clientMessage(" /diamond punch");
-clientMessage(" /gold punch");
-clientMessage(" /iron punch");
-clientMessage(" /regenerating punch");}
-else if (cmd=="help punch 2"){
-clientMessage(" /fun punch");
-
-clientMessage(" /destroy punch");
-clientMessage(" /ride punch");
-clientMessage(" /hard punch");
-clientMessage(" /water punch");
-clientMessage(" /lava punch");
-clientMessage(" /meteor punch");
-clientMessage(" /ironman punch");
-clientMessage(" /web punch");}
-else if (cmd=="web punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 1;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 1;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§8Web Punch Selected");}
-else if (cmd=="water punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 1;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§9Water Punch Selected");}
-else if (cmd=="lava punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 1;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§bLava Punch Selected");}
-else if (cmd=="diamond punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 1;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§dDiamond Punch Selected");}
-else if (cmd=="tnt punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 1;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 1;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§eTnT Punch Selected");}
-else if (cmd=="gold punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 1;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§fGold Punch Selected");}
-else if (cmd=="iron punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 1;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§gIron Punch Selected");}
-else if (cmd=="meteor punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 1;
-preventdefault = 0;
-ironpunch0 = 0;
-ironpunch1 = 0;
-on = true;
-clientMessage("§hMeteor Punch Selected");}
-else if (cmd=="ironman punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 1;
-on = true;
-clientMessage("§iIronman Punch Selected");}
-else if (cmd=="brickcage punch"){
-firepunch = 0;
-throwpunch = 0;
-killpunch = 0;
-explodingpunch = 0;
-regeneratingpunch = 0;
-destroyblockpunch = 0;
-ridepunch = 0;
-hardpunch = 0;
-webpunch = 0;
-waterpunch = 0;
-lavapunch = 0;
-diamondpunch = 0;
-extraweb = 0;
-tntpunch = 0;
-goldpunch = 0;
-ironpunch = 0;
-meteorpunch = 0;
-preventdefault = 0;
-ironpunch0 = 0;
-brickcage = 1;
-on = true;
-clientMessage("Brick Cage Punch Selected");}
-else if (cmd=="plist"){
-punchlist()
-}
-}
-
 
 function leaveGame(){
 hidep();
@@ -1009,6 +540,40 @@ setVelZ(victim,velZ);
 
 if(killpunch == 1){
 Entity.setHealth(victim, 0);
+}
+
+if(arrowPunch == 1){
+preventDefault();
+xa = Entity.getX(victim);
+ya = Entity.getY(victim) + 20;
+za = Entity.getZ(victim);
+var arrow = Level.spawnMob(xa, ya, za, 80);
+Entity.setFireTicks(arrow,5);
+Entity.setVelY(arrow, -4.5);
+var arrow2 = Level.spawnMob(xa+ 1, ya, za, 80);
+Entity.setFireTicks(arrow2,5);
+Entity.setVelY(arrow2, -4.5);
+var arrow3 = Level.spawnMob(xa + 1, ya, za + 1, 80);
+Entity.setFireTicks(arrow3,5);
+Entity.setVelY(arrow3, -4.5);
+var arrow4 = Level.spawnMob(xa - 1, ya, za, 80);
+Entity.setFireTicks(arrow4,5);
+Entity.setVelY(arrow4, -4.5);
+var arrow5 = Level.spawnMob(xa - 1, ya, za - 1, 80);
+Entity.setFireTicks(arrow5,5);
+Entity.setVelY(arrow5, -4.5);
+var arrow6 = Level.spawnMob(xa, ya, za - 1, 80);
+Entity.setFireTicks(arrow6,5);
+Entity.setVelY(arrow6, -4.5);
+var arrow7 = Level.spawnMob(xa, ya, za + 1, 80);
+Entity.setFireTicks(arrow7,5);
+Entity.setVelY(arrow7, -4.5);
+var arrow8 = Level.spawnMob(xa - 1, ya, za + 1, 80);
+Entity.setFireTicks(arrow8,5);
+Entity.setVelY(arrow8, -4.5);
+var arrow9 = Level.spawnMob(xa + 1, ya, za - 1, 80);
+Entity.setFireTicks(arrow9,5);
+Entity.setVelY(arrow9, -4.5);
 }
 
 if(explodingpunch == 1){
