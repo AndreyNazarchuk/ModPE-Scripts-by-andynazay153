@@ -15,9 +15,14 @@ var Gui;
 var GUI;
 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
 var m = 0;
+var fAR = false;
+var tntR = false;
+var gR = false;
+var sR = false;
 
 function newLevel(){
 Rainb();
+resetR();
 }
 
 function Rainb(){
@@ -31,14 +36,14 @@ try{
 GUI = new android.widget.PopupWindow();
 
 var layout = new android.widget.LinearLayout(ctx);
-var ul = new android.widget.Button(ctx);
+var prl = new android.widget.Button(ctx);
  
 
-ul.setText("PR");
+prl.setText("PR");
 
 layout.setOrientation(android.widget.LinearLayout.VERTICAL);
 layout.setGravity(android.view.Gravity.LEFT);
-layout.addView(ul);
+layout.addView(prl);
 
 GUI.setContentView(layout);
 GUI.setHeight(android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -46,18 +51,35 @@ GUI.setWidth(android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
 GUI.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
 GUI.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.CENTER_VERTICAL, 0, 0);
 
-ul.setOnClickListener(new android.view.View.OnClickListener(){
+prl.setOnClickListener(new android.view.View.OnClickListener(){
 
 onClick: function(view){
 
 if(m == 0) {
 powerfulRainList()
-
 }
 }
  
 });
  
+} catch (e){
+print ("Error: "+e)
+}
+
+}});
+}
+
+function resetR(){
+ 
+ctx.runOnUiThread(new java.lang.Runnable(){
+ 
+run: function(){
+	
+try{
+fAR = false;
+tntR = false;
+gr = false;
+sR = false;
 } catch (e){
 print ("Error: "+e)
 }
@@ -84,42 +106,47 @@ dialog.setTitle("Powerful Rain");
 var rb= new android.widget.Button(ctx); 
 rb.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
-fAR = true;
+	resetR();
+	fAR = true;
 }
 })
 rb.setText("")
 rb.setTextSize(20)
 menu.addView(rb);
 
-var rb= new android.widget.Button(ctx); 
-rb.setOnClickListener(new android.view.View.OnClickListener(){
+var rb2= new android.widget.Button(ctx); 
+rb2.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
-//Add Functions here
+	resetR();
+	clientMessage("This will set your health to 99999999.");
+	clientMessage("Then it will drop TNT around you.");
+	clientMessage("Then it will set your health back to normal.")
 }
 })
-rb.setText("")
-rb.setTextSize(20)
-menu.addView(rb);
+rb2.setText("TNT Rain")
+rb2.setTextSize(20)
+menu.addView(rb2);
 
-var rb= new android.widget.Button(ctx); 
-rb.setOnClickListener(new android.view.View.OnClickListener(){
+var rb3= new android.widget.Button(ctx); 
+rb3.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
-//Add Functions here
+	resetR();
+	
 }
 })
-rb.setText("")
-rb.setTextSize(20)
-menu.addView(rb);
+rb3.setText("Guard Rain")
+rb3.setTextSize(20)
+menu.addView(rb3);
 
-var rb= new android.widget.Button(ctx); 
-rb.setOnClickListener(new android.view.View.OnClickListener(){
+var rb4= new android.widget.Button(ctx); 
+rb4.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
-//Add Functions here
+	resetR();
 }
 })
-rb.setText("")
-rb.setTextSize(20)
-menu.addView(rb);
+rb4.setText("Snowball Rain")
+rb4.setTextSize(20)
+menu.addView(rb4);
 
 var rb16= new android.widget.Button(ctx); 
 rb16.setOnClickListener(new android.view.View.OnClickListener(){
@@ -279,7 +306,7 @@ Entity.setVelY(arrow26, -4.5);
     var r  = new java.lang.Runnable() {
         run: function() {
             try {
-                var urls= new java.net.URL("");
+                var urls= new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Powerful%20Rain/PRVersion.txt");
                 var check = urls.openConnection();
                 check.setRequestMethod("GET");
                 check.setDoOutput(true);
@@ -296,7 +323,7 @@ Entity.setVelY(arrow26, -4.5);
 				if(version+"\n" != checkedVersion) {
                     print("New version is available! " + newUpdate);
                     updateWindow=true;
-					clientMessage("Push Update button until a dialog appears");
+					clientMessage("Push the Update button until a dialog appears");
                 }
                 else if(version+"\n"==checkedVersion){
                 print("No updates available");
@@ -320,7 +347,7 @@ function updateVersion() {
     try {
         var upd = new android.app.AlertDialog.Builder(ctx);
         upd.setTitle("New version available!");
-        upd.setMessage("An update to Powerful Fists was found!\nWould you like to update it?\nYour version: " + version + "\nNew version: " + newUpdate);
+        upd.setMessage("An update to Powerful Rain was found!\nWould you like to update it?\nYour version: " + version + "\nNew version: " + newUpdate);
         upd.setNegativeButton("Later", new android.content.DialogInterface.OnClickListener() {
             onClick: function(par1) {
             dialog.dismiss(); 
@@ -331,7 +358,7 @@ function updateVersion() {
                 var ru  = new java.lang.Runnable() {
                     run: function() {
                         try {
-                            var urls = new java.net.URL("");
+                            var urls = new java.net.URL("https://raw.githubusercontent.com/AndreyNazarchuk/ModPE-Scripts-by-andynazay153/master/ModPE/Powerful%20Rain/PR.js");
                             var check = urls.openConnection();
                             check.setRequestMethod("GET");
                             check.setDoOutput(true);
@@ -344,7 +371,7 @@ function updateVersion() {
                                 updateMod += new java.lang.String(typeb, 0, byteCount);               
                             }
                             var modpeFolder = ctx.getDir("modscripts", 0);
-                            var modpeFile = new java.io.File(modpeFolder, "Powerful Fists.js");
+                            var modpeFile = new java.io.File(modpeFolder, "PR.js");
                             var update = new java.io.PrintWriter(modpeFile);
                             update.write(updateMod);
                             update.flush();
