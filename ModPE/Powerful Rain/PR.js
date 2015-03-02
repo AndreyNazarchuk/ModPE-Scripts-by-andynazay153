@@ -6,7 +6,7 @@
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
 */
-var version = "2.0"; 
+var version = "1.1"; 
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
@@ -19,6 +19,7 @@ var fAR = false;
 var tntR = false;
 var gR = false;
 var sR = false;
+var eR = false;
 
 function newLevel(){
 Rainb();
@@ -78,8 +79,9 @@ run: function(){
 try{
 fAR = false;
 tntR = false;
-gr = false;
+gR = false;
 sR = false;
+eR = false;
 } catch (e){
 print ("Error: "+e)
 }
@@ -110,7 +112,7 @@ onClick: function(){
 	fAR = true;
 }
 })
-rb.setText("")
+rb.setText("Flaming Arrow Rain")
 rb.setTextSize(20)
 menu.addView(rb);
 
@@ -118,12 +120,15 @@ var rb2= new android.widget.Button(ctx);
 rb2.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
 	resetR();
+	tntR = true;
+	clientMessage(ChatColor.RED + "COMING SOON");
 	clientMessage("This will set your health to 99999999.");
 	clientMessage("Then it will drop TNT around you.");
-	clientMessage("Then it will set your health back to normal.")
+	clientMessage("Then it will set your health back to normal.");
 }
 })
 rb2.setText("TNT Rain")
+rb2.setTextColor(android.graphics.Color.RED)
 rb2.setTextSize(20)
 menu.addView(rb2);
 
@@ -131,10 +136,12 @@ var rb3= new android.widget.Button(ctx);
 rb3.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
 	resetR();
-	
+	gR = true;
+	clientMessage(ChatColor.RED + "COMING SOON");
 }
 })
-rb3.setText("Guard Rain")
+rb3.setText("Guardian Rain")
+rb3.setTextColor(android.graphics.Color.RED)
 rb3.setTextSize(20)
 menu.addView(rb3);
 
@@ -142,11 +149,23 @@ var rb4= new android.widget.Button(ctx);
 rb4.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
 	resetR();
+	sR = true;
 }
 })
 rb4.setText("Snowball Rain")
 rb4.setTextSize(20)
 menu.addView(rb4);
+
+var rb5= new android.widget.Button(ctx); 
+rb5.setOnClickListener(new android.view.View.OnClickListener(){
+onClick: function(){
+	resetR();
+	eR = true;
+}
+})
+rb5.setText("Egg Rain")
+rb5.setTextSize(20)
+menu.addView(rb5);
 
 var rb16= new android.widget.Button(ctx); 
 rb16.setOnClickListener(new android.view.View.OnClickListener(){
@@ -299,6 +318,85 @@ var arrow26 = Level.spawnMob(xa + 3, ya, za - 3, 80);
 Entity.setFireTicks(arrow26,5);
 Entity.setVelY(arrow26, -4.5);
 
+}
+
+if(tntR == true){
+
+xa = Entity.getX(attacker);
+ya = Entity.getY(attacker) + 20;
+za = Entity.getZ(attacker);
+
+var tnt2 = Level.spawnMob(xa+ 1, ya, za, 65);
+Entity.setVelY(tnt2, -4.5);
+
+var tnt3 = Level.spawnMob(xa, ya, za + 1, 65);
+Entity.setVelY(tnt3, -4.5);
+
+var tnt4 = Level.spawnMob(xa - 1, ya, za, 65);
+Entity.setVelY(tnt4, -4.5);
+
+var tnt5 = Level.spawnMob(xa, ya, za - 1, 65);
+Entity.setVelY(tnt5, -4.5);
+
+var tnt6 = Level.spawnMob(xa - 1, ya, za - 1, 65);
+Entity.setVelY(tnt6, -4.5);
+
+var tnt7 = Level.spawnMob(xa + 1, ya, za + 1, 65);
+Entity.setVelY(tnt7, -4.5);
+
+var tnt8 = Level.spawnMob(xa - 1, ya, za + 1, 65);
+Entity.setVelY(tnt8, -4.5);
+
+var tnt9 = Level.spawnMob(xa + 1, ya, za - 1, 65);
+Entity.setVelY(tnt9, -4.5);
+
+var tnt10 = Level.spawnMob(xa + 2, ya, za, 65);
+Entity.setVelY(tnt10, -4.5);
+
+var tnt11 = Level.spawnMob(xa - 2, ya, za, 65);
+Entity.setVelY(tnt11, -4.5);
+
+var tnt12 = Level.spawnMob(xa, ya, za + 2, 65);
+Entity.setVelY(tnt12, -4.5);
+
+var tnt13 = Level.spawnMob(xa, ya, za - 2, 65);
+Entity.setVelY(tnt13, -4.5);
+
+var tnt14 = Level.spawnMob(xa - 2, ya, za - 2, 65);
+Entity.setVelY(tnt14, -4.5);
+
+var tnt15 = Level.spawnMob(xa + 2, ya, za + 2, 65);
+Entity.setVelY(tnt15, -4.5);
+
+var tnt16 = Level.spawnMob(xa - 2, ya, za + 2, 65);
+Entity.setVelY(tnt16, -4.5);
+
+var tnt17 = Level.spawnMob(xa + 2, ya, za - 2, 65);
+Entity.setVelY(tnt17, -4.5);
+
+var tnt18 = Level.spawnMob(xa + 3, ya, za, 65);
+Entity.setVelY(tnt18, -4.5);
+
+var tnt19 = Level.spawnMob(xa, ya, za + 3, 65);
+Entity.setVelY(tnt19, -4.5);
+
+var tnt21 = Level.spawnMob(xa - 3, ya, za, 65);
+Entity.setVelY(tnt21, -4.5);
+
+var tnt22 = Level.spawnMob(xa, ya, za - 3, 65);
+Entity.setVelY(tnt22, -4.5);
+
+var tnt23 = Level.spawnMob(xa - 3, ya, za - 3, 65);
+Entity.setVelY(tnt23, -4.5);
+
+var tnt24 = Level.spawnMob(xa + 3, ya, za + 3, 65);
+Entity.setVelY(tnt24, -4.5);
+
+var tnt25 = Level.spawnMob(xa - 3, ya, za + 3, 65);
+Entity.setVelY(tnt25, -4.5);
+
+var tnt26 = Level.spawnMob(xa + 3, ya, za - 3, 65);
+Entity.setVelY(tnt26, -4.5);
 }
 }
 
