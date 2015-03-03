@@ -18,7 +18,7 @@ var m = 0;
 var fAR = false;
 var tntR = false;
 var gR = false;
-var sR = false;
+var eCR = false;
 var eR = false;
 
 function newLevel(){
@@ -82,6 +82,7 @@ tntR = false;
 gR = false;
 sR = false;
 eR = false;
+eCR = false;
 } catch (e){
 print ("Error: "+e)
 }
@@ -105,6 +106,16 @@ dialog.setContentView(scroll);
 
 dialog.setTitle("Powerful Rain");
 
+var rB= new android.widget.Button(ctx); 
+rB.setOnClickListener(new android.view.View.OnClickListener(){
+onClick: function(){
+	resetR();
+}
+})
+rB.setText("Reset")
+rB.setTextSize(20)
+menu.addView(rB);
+
 var rb= new android.widget.Button(ctx); 
 rb.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
@@ -121,14 +132,10 @@ rb2.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
 	resetR();
 	tntR = true;
-	clientMessage(ChatColor.RED + "COMING SOON");
-	clientMessage("This will set your health to 99999999.");
-	clientMessage("Then it will drop TNT around you.");
-	clientMessage("Then it will set your health back to normal.");
+	clientMessage(ChatColor.RED + "RUN!!!");
 }
 })
 rb2.setText("TNT Rain")
-rb2.setTextColor(android.graphics.Color.RED)
 rb2.setTextSize(20)
 menu.addView(rb2);
 
@@ -137,7 +144,7 @@ rb3.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
 	resetR();
 	gR = true;
-	clientMessage(ChatColor.RED + "COMING SOON");
+	clientMessage(ChatColor.RED + "COMING SOON!!!");
 }
 })
 rb3.setText("Guardian Rain")
@@ -149,10 +156,11 @@ var rb4= new android.widget.Button(ctx);
 rb4.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
 	resetR();
-	sR = true;
+	eR = true;
+	clientMessage(ChatColor.RED + "WARNING: MANY chickens can be spawned");
 }
 })
-rb4.setText("Snowball Rain")
+rb4.setText("Egg Rain")
 rb4.setTextSize(20)
 menu.addView(rb4);
 
@@ -160,10 +168,10 @@ var rb5= new android.widget.Button(ctx);
 rb5.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
 	resetR();
-	eR = true;
+	eCR = true;
 }
 })
-rb5.setText("Egg Rain")
+rb5.setText("Exploding Confetti")
 rb5.setTextSize(20)
 menu.addView(rb5);
 
@@ -217,7 +225,7 @@ print ("Error: "+e)
 function attackHook(attacker, victim){
 
 if(fAR == true){
-
+preventDefault();
 xa = Entity.getX(attacker);
 ya = Entity.getY(attacker) + 20;
 za = Entity.getZ(attacker);
@@ -321,83 +329,242 @@ Entity.setVelY(arrow26, -4.5);
 }
 
 if(tntR == true){
+preventDefault();
+xa = Entity.getX(attacker);
+ya = Entity.getY(attacker) + 10;
+za = Entity.getZ(attacker);
 
+var tnt2 = Level.spawnMob(xa+ 1, ya, za, 65);
+
+var tnt3 = Level.spawnMob(xa, ya, za + 1, 65);
+
+var tnt4 = Level.spawnMob(xa - 1, ya, za, 65);
+
+var tnt5 = Level.spawnMob(xa, ya, za - 1, 65);
+
+var tnt6 = Level.spawnMob(xa - 1, ya, za - 1, 65);
+
+var tnt7 = Level.spawnMob(xa + 1, ya, za + 1, 65);
+
+var tnt8 = Level.spawnMob(xa - 1, ya, za + 1, 65);
+
+var tnt9 = Level.spawnMob(xa + 1, ya, za - 1, 65);
+
+var tnt10 = Level.spawnMob(xa + 2, ya, za, 65);
+
+var tnt11 = Level.spawnMob(xa - 2, ya, za, 65);
+
+var tnt12 = Level.spawnMob(xa, ya, za + 2, 65);
+
+var tnt13 = Level.spawnMob(xa, ya, za - 2, 65);
+
+var tnt14 = Level.spawnMob(xa - 2, ya, za - 2, 65);
+
+var tnt15 = Level.spawnMob(xa + 2, ya, za + 2, 65);
+
+var tnt16 = Level.spawnMob(xa - 2, ya, za + 2, 65);
+
+var tnt17 = Level.spawnMob(xa + 2, ya, za - 2, 65);
+
+var tnt18 = Level.spawnMob(xa + 3, ya, za, 65);
+
+var tnt19 = Level.spawnMob(xa, ya, za + 3, 65);
+
+var tnt21 = Level.spawnMob(xa - 3, ya, za, 65);
+
+var tnt22 = Level.spawnMob(xa, ya, za - 3, 65);
+
+var tnt23 = Level.spawnMob(xa - 3, ya, za - 3, 65);
+
+var tnt24 = Level.spawnMob(xa + 3, ya, za + 3, 65);
+
+var tnt25 = Level.spawnMob(xa - 3, ya, za + 3, 65);
+
+var tnt26 = Level.spawnMob(xa + 3, ya, za - 3, 65);
+}
+
+if(eR == true){
+preventDefault();
 xa = Entity.getX(attacker);
 ya = Entity.getY(attacker) + 20;
 za = Entity.getZ(attacker);
 
-var tnt2 = Level.spawnMob(xa+ 1, ya, za, 65);
-Entity.setVelY(tnt2, -4.5);
+var egg2 = Level.spawnMob(xa+ 1, ya, za, 82);
+Entity.setVelY(egg2, -4.5);
 
-var tnt3 = Level.spawnMob(xa, ya, za + 1, 65);
-Entity.setVelY(tnt3, -4.5);
+var egg3 = Level.spawnMob(xa, ya, za + 1, 82);
+Entity.setVelY(egg3, -4.5);
 
-var tnt4 = Level.spawnMob(xa - 1, ya, za, 65);
-Entity.setVelY(tnt4, -4.5);
+var egg4 = Level.spawnMob(xa - 1, ya, za, 82);
+Entity.setVelY(egg4, -4.5);
 
-var tnt5 = Level.spawnMob(xa, ya, za - 1, 65);
-Entity.setVelY(tnt5, -4.5);
+var egg5 = Level.spawnMob(xa, ya, za - 1, 82);
+Entity.setVelY(egg5, -4.5);
 
-var tnt6 = Level.spawnMob(xa - 1, ya, za - 1, 65);
-Entity.setVelY(tnt6, -4.5);
+var egg6 = Level.spawnMob(xa - 1, ya, za - 1, 82);
+Entity.setVelY(egg6, -4.5);
 
-var tnt7 = Level.spawnMob(xa + 1, ya, za + 1, 65);
-Entity.setVelY(tnt7, -4.5);
+var egg7 = Level.spawnMob(xa + 1, ya, za + 1, 82);
+Entity.setVelY(egg7, -4.5);
 
-var tnt8 = Level.spawnMob(xa - 1, ya, za + 1, 65);
-Entity.setVelY(tnt8, -4.5);
+var egg8 = Level.spawnMob(xa - 1, ya, za + 1, 82);
+Entity.setVelY(egg8, -4.5);
 
-var tnt9 = Level.spawnMob(xa + 1, ya, za - 1, 65);
-Entity.setVelY(tnt9, -4.5);
+var egg9 = Level.spawnMob(xa + 1, ya, za - 1, 82);
+Entity.setVelY(egg9, -4.5);
 
-var tnt10 = Level.spawnMob(xa + 2, ya, za, 65);
-Entity.setVelY(tnt10, -4.5);
+var egg10 = Level.spawnMob(xa + 2, ya, za, 82);
+Entity.setVelY(egg10, -4.5);
 
-var tnt11 = Level.spawnMob(xa - 2, ya, za, 65);
-Entity.setVelY(tnt11, -4.5);
+var egg11 = Level.spawnMob(xa - 2, ya, za, 82);
+Entity.setVelY(egg11, -4.5);
 
-var tnt12 = Level.spawnMob(xa, ya, za + 2, 65);
-Entity.setVelY(tnt12, -4.5);
+var egg12 = Level.spawnMob(xa, ya, za + 2, 82);
+Entity.setVelY(egg12, -4.5);
 
-var tnt13 = Level.spawnMob(xa, ya, za - 2, 65);
-Entity.setVelY(tnt13, -4.5);
+var egg13 = Level.spawnMob(xa, ya, za - 2, 82);
+Entity.setVelY(egg13, -4.5);
 
-var tnt14 = Level.spawnMob(xa - 2, ya, za - 2, 65);
-Entity.setVelY(tnt14, -4.5);
+var egg14 = Level.spawnMob(xa - 2, ya, za - 2, 82);
+Entity.setVelY(egg14, -4.5);
 
-var tnt15 = Level.spawnMob(xa + 2, ya, za + 2, 65);
-Entity.setVelY(tnt15, -4.5);
+var egg15 = Level.spawnMob(xa + 2, ya, za + 2, 82);
+Entity.setVelY(egg15, -4.5);
 
-var tnt16 = Level.spawnMob(xa - 2, ya, za + 2, 65);
-Entity.setVelY(tnt16, -4.5);
+var egg16 = Level.spawnMob(xa - 2, ya, za + 2, 82);
+Entity.setVelY(egg16, -4.5);
 
-var tnt17 = Level.spawnMob(xa + 2, ya, za - 2, 65);
-Entity.setVelY(tnt17, -4.5);
+var egg17 = Level.spawnMob(xa + 2, ya, za - 2, 82);
+Entity.setVelY(egg17, -4.5);
 
-var tnt18 = Level.spawnMob(xa + 3, ya, za, 65);
-Entity.setVelY(tnt18, -4.5);
+var egg18 = Level.spawnMob(xa + 3, ya, za, 82);
+Entity.setVelY(egg18, -4.5);
 
-var tnt19 = Level.spawnMob(xa, ya, za + 3, 65);
-Entity.setVelY(tnt19, -4.5);
+var egg19 = Level.spawnMob(xa, ya, za + 3, 82);
+Entity.setVelY(egg19, -4.5);
 
-var tnt21 = Level.spawnMob(xa - 3, ya, za, 65);
-Entity.setVelY(tnt21, -4.5);
+var egg21 = Level.spawnMob(xa - 3, ya, za, 82);
+Entity.setVelY(egg21, -4.5);
 
-var tnt22 = Level.spawnMob(xa, ya, za - 3, 65);
-Entity.setVelY(tnt22, -4.5);
+var egg22 = Level.spawnMob(xa, ya, za - 3, 82);
+Entity.setVelY(egg22, -4.5);
 
-var tnt23 = Level.spawnMob(xa - 3, ya, za - 3, 65);
-Entity.setVelY(tnt23, -4.5);
+var egg23 = Level.spawnMob(xa - 3, ya, za - 3, 82);
+Entity.setVelY(egg23, -4.5);
 
-var tnt24 = Level.spawnMob(xa + 3, ya, za + 3, 65);
-Entity.setVelY(tnt24, -4.5);
+var egg24 = Level.spawnMob(xa + 3, ya, za + 3, 82);
+Entity.setVelY(egg24, -4.5);
 
-var tnt25 = Level.spawnMob(xa - 3, ya, za + 3, 65);
-Entity.setVelY(tnt25, -4.5);
+var egg25 = Level.spawnMob(xa - 3, ya, za + 3, 82);
+Entity.setVelY(egg25, -4.5);
 
-var tnt26 = Level.spawnMob(xa + 3, ya, za - 3, 65);
-Entity.setVelY(tnt26, -4.5);
+var egg26 = Level.spawnMob(xa + 3, ya, za - 3, 82);
+Entity.setVelY(egg26, -4.5);
 }
+
+if(eCR == true){
+preventDefault();
+xa = Entity.getX(attacker);
+ya = Entity.getY(attacker) + 20;
+za = Entity.getZ(attacker);
+
+var flamingEgg2 = Level.spawnMob(xa+ 1, ya, za, 81);
+Entity.setFireTicks(flamingEgg2,5);
+Entity.setVelY(flamingEgg2, -4.5);
+
+var flamingEgg3 = Level.spawnMob(xa, ya, za + 1, 81);
+Entity.setFireTicks(flamingEgg3,5);
+Entity.setVelY(flamingEgg3, -4.5);
+
+var flamingEgg4 = Level.spawnMob(xa - 1, ya, za, 81);
+Entity.setFireTicks(flamingEgg4,5);
+Entity.setVelY(flamingEgg4, -4.5);
+
+var flamingEgg5 = Level.spawnMob(xa, ya, za - 1, 81);
+Entity.setFireTicks(flamingEgg5,5);
+Entity.setVelY(flamingEgg5, -4.5);
+
+var flamingEgg6 = Level.spawnMob(xa - 1, ya, za - 1, 81);
+Entity.setFireTicks(flamingEgg6,5);
+Entity.setVelY(flamingEgg6, -4.5);
+
+var flamingEgg7 = Level.spawnMob(xa + 1, ya, za + 1, 81);
+Entity.setFireTicks(flamingEgg7,5);
+Entity.setVelY(flamingEgg7, -4.5);
+
+var flamingEgg8 = Level.spawnMob(xa - 1, ya, za + 1, 81);
+Entity.setFireTicks(flamingEgg8,5);
+Entity.setVelY(flamingEgg8, -4.5);
+
+var flamingEgg9 = Level.spawnMob(xa + 1, ya, za - 1, 81);
+Entity.setFireTicks(flamingEgg9,5);
+Entity.setVelY(flamingEgg9, -4.5);
+
+var flamingEgg10 = Level.spawnMob(xa + 2, ya, za, 81);
+Entity.setFireTicks(flamingEgg10,5);
+Entity.setVelY(flamingEgg10, -4.5);
+
+var flamingEgg11 = Level.spawnMob(xa - 2, ya, za, 81);
+Entity.setFireTicks(flamingEgg11,5);
+Entity.setVelY(flamingEgg11, -4.5);
+
+var flamingEgg12 = Level.spawnMob(xa, ya, za + 2, 81);
+Entity.setFireTicks(flamingEgg12,5);
+Entity.setVelY(flamingEgg12, -4.5);
+
+var flamingEgg13 = Level.spawnMob(xa, ya, za - 2, 81);
+Entity.setFireTicks(flamingEgg13,5);
+Entity.setVelY(flamingEgg13, -4.5);
+
+var flamingEgg14 = Level.spawnMob(xa - 2, ya, za - 2, 81);
+Entity.setFireTicks(flamingEgg14,5);
+Entity.setVelY(flamingEgg14, -4.5);
+
+var flamingEgg15 = Level.spawnMob(xa + 2, ya, za + 2, 81);
+Entity.setFireTicks(flamingEgg15,5);
+Entity.setVelY(flamingEgg15, -4.5);
+
+var flamingEgg16 = Level.spawnMob(xa - 2, ya, za + 2, 81);
+Entity.setFireTicks(flamingEgg16,5);
+Entity.setVelY(flamingEgg16, -4.5);
+
+var flamingEgg17 = Level.spawnMob(xa + 2, ya, za - 2, 81);
+Entity.setFireTicks(flamingEgg17,5);
+Entity.setVelY(flamingEgg17, -4.5);
+
+var flamingEgg18 = Level.spawnMob(xa + 3, ya, za, 81);
+Entity.setFireTicks(flamingEgg18,5);
+Entity.setVelY(flamingEgg18, -4.5);
+
+var flamingEgg19 = Level.spawnMob(xa, ya, za + 3, 81);
+Entity.setFireTicks(flamingEgg19,5);
+Entity.setVelY(flamingEgg19, -4.5);
+
+var flamingEgg21 = Level.spawnMob(xa - 3, ya, za, 81);
+Entity.setFireTicks(flamingEgg21,5);
+Entity.setVelY(flamingEgg21, -4.5);
+
+var flamingEgg22 = Level.spawnMob(xa, ya, za - 3, 81);
+Entity.setFireTicks(flamingEgg22,5);
+Entity.setVelY(flamingEgg22, -4.5);
+
+var flamingEgg23 = Level.spawnMob(xa - 3, ya, za - 3, 81);
+Entity.setFireTicks(flamingEgg23,5);
+Entity.setVelY(flamingEgg23, -4.5);
+
+var flamingEgg24 = Level.spawnMob(xa + 3, ya, za + 3, 81);
+Entity.setFireTicks(flamingEgg24,5);
+Entity.setVelY(flamingEgg24, -4.5);
+
+var flamingEgg25 = Level.spawnMob(xa - 3, ya, za + 3, 81);
+Entity.setFireTicks(flamingEgg25,5);
+Entity.setVelY(flamingEgg25, -4.5);
+
+var flamingEgg26 = Level.spawnMob(xa + 3, ya, za - 3, 81);
+Entity.setFireTicks(flamingEgg26,5);
+Entity.setVelY(flamingEgg26, -4.5);
+}
+
 }
 
  function checkVersion() {
