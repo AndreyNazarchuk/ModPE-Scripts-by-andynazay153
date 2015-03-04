@@ -6,7 +6,7 @@
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
 */
-var version = "1.1"; 
+var version = "1.2"; 
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
@@ -110,6 +110,7 @@ var rB= new android.widget.Button(ctx);
 rB.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
 	resetR();
+	clientMessage(ChatColor.GREEN + "You are now powerless");
 }
 })
 rB.setText("Reset")
@@ -121,6 +122,8 @@ rb.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
 	resetR();
 	fAR = true;
+	clientMessage(ChatColor.BLUE + "EPIC!!!");
+	clientMessage("Please hit anything alive, your punch won't hurt it, but the Rain might :)");
 }
 })
 rb.setText("Flaming Arrow Rain")
@@ -133,6 +136,7 @@ onClick: function(){
 	resetR();
 	tntR = true;
 	clientMessage(ChatColor.RED + "RUN!!!");
+	clientMessage("Please hit anything alive, your punch won't hurt it, but the Rain might :)");
 }
 })
 rb2.setText("TNT Rain")
@@ -145,6 +149,7 @@ onClick: function(){
 	resetR();
 	gR = true;
 	clientMessage(ChatColor.RED + "COMING SOON!!!");
+	clientMessage("Please hit anything alive, your punch won't hurt it, but the Rain might :)");
 }
 })
 rb3.setText("Guardian Rain")
@@ -158,6 +163,7 @@ onClick: function(){
 	resetR();
 	eR = true;
 	clientMessage(ChatColor.RED + "WARNING: MANY chickens can be spawned");
+	clientMessage("Please hit anything alive, your punch won't hurt it, but the Rain might :)");
 }
 })
 rb4.setText("Egg Rain")
@@ -169,11 +175,27 @@ rb5.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
 	resetR();
 	eCR = true;
+	clientMessage("PRANK AWAY!");
+	clientMessage("Please hit anything alive, your punch won't hurt it, but the Rain might :)");
 }
 })
 rb5.setText("Exploding Confetti")
 rb5.setTextSize(20)
 menu.addView(rb5);
+
+var rb6= new android.widget.Button(ctx); 
+rb6.setOnClickListener(new android.view.View.OnClickListener(){
+onClick: function(){
+	clientMessage(ChatColor.GREEN + "Upcoming Features:");
+	clientMessage(ChatColor.GREEN + "*" + ChatColor.WHITE + " Guardians: They spawn and protect you with their Flaming Arrow Bows.");
+	clientMessage(ChatColor.GREEN + "*" + ChatColor.WHITE + " Mass Mob Spawning buttons, they spawn mobs for you to fight.");
+	clientMessage(ChatColor.GREEN + "*" + ChatColor.WHITE + " Rain that falls on you and people around you, healing all of you.");
+	clientMessage(ChatColor.RED + "Please give me more ideas on the forums :)");
+}
+})
+rb6.setText("Upcoming Features")
+rb6.setTextSize(20)
+menu.addView(rb6);
 
 var rb16= new android.widget.Button(ctx); 
 rb16.setOnClickListener(new android.view.View.OnClickListener(){
@@ -467,102 +489,83 @@ preventDefault();
 xa = Entity.getX(attacker);
 ya = Entity.getY(attacker) + 20;
 za = Entity.getZ(attacker);
+xx = Entity.getX(victim);
+yx = Entity.getY(victim);
+zx = Entity.getZ(victim);
 
-var flamingEgg2 = Level.spawnMob(xa+ 1, ya, za, 81);
-Entity.setFireTicks(flamingEgg2,5);
-Entity.setVelY(flamingEgg2, -4.5);
+var explodeC = Level.explode(xx, yx, zx, 1);
 
-var flamingEgg3 = Level.spawnMob(xa, ya, za + 1, 81);
-Entity.setFireTicks(flamingEgg3,5);
-Entity.setVelY(flamingEgg3, -4.5);
+var snowball2 = Level.spawnMob(xa+ 1, ya, za, 81);
+Entity.setVelY(snowball2, -4.5);
 
-var flamingEgg4 = Level.spawnMob(xa - 1, ya, za, 81);
-Entity.setFireTicks(flamingEgg4,5);
-Entity.setVelY(flamingEgg4, -4.5);
+var snowball3 = Level.spawnMob(xa, ya, za + 1, 81);
+Entity.setVelY(snowball3, -4.5);
 
-var flamingEgg5 = Level.spawnMob(xa, ya, za - 1, 81);
-Entity.setFireTicks(flamingEgg5,5);
-Entity.setVelY(flamingEgg5, -4.5);
+var snowball4 = Level.spawnMob(xa - 1, ya, za, 81);
+Entity.setVelY(snowball4, -4.5);
 
-var flamingEgg6 = Level.spawnMob(xa - 1, ya, za - 1, 81);
-Entity.setFireTicks(flamingEgg6,5);
-Entity.setVelY(flamingEgg6, -4.5);
+var snowball5 = Level.spawnMob(xa, ya, za - 1, 81);
+Entity.setVelY(snowball5, -4.5);
 
-var flamingEgg7 = Level.spawnMob(xa + 1, ya, za + 1, 81);
-Entity.setFireTicks(flamingEgg7,5);
-Entity.setVelY(flamingEgg7, -4.5);
+var snowball6 = Level.spawnMob(xa - 1, ya, za - 1, 81);
+Entity.setVelY(snowball6, -4.5);
 
-var flamingEgg8 = Level.spawnMob(xa - 1, ya, za + 1, 81);
-Entity.setFireTicks(flamingEgg8,5);
-Entity.setVelY(flamingEgg8, -4.5);
+var snowball7 = Level.spawnMob(xa + 1, ya, za + 1, 81);
+Entity.setVelY(snowball7, -4.5);
 
-var flamingEgg9 = Level.spawnMob(xa + 1, ya, za - 1, 81);
-Entity.setFireTicks(flamingEgg9,5);
-Entity.setVelY(flamingEgg9, -4.5);
+var snowball8 = Level.spawnMob(xa - 1, ya, za + 1, 81);
+Entity.setVelY(snowball8, -4.5);
 
-var flamingEgg10 = Level.spawnMob(xa + 2, ya, za, 81);
-Entity.setFireTicks(flamingEgg10,5);
-Entity.setVelY(flamingEgg10, -4.5);
+var snowball9 = Level.spawnMob(xa + 1, ya, za - 1, 81);
+Entity.setVelY(snowball9, -4.5);
 
-var flamingEgg11 = Level.spawnMob(xa - 2, ya, za, 81);
-Entity.setFireTicks(flamingEgg11,5);
-Entity.setVelY(flamingEgg11, -4.5);
+var snowball10 = Level.spawnMob(xa + 2, ya, za, 81);
+Entity.setVelY(snowball10, -4.5);
 
-var flamingEgg12 = Level.spawnMob(xa, ya, za + 2, 81);
-Entity.setFireTicks(flamingEgg12,5);
-Entity.setVelY(flamingEgg12, -4.5);
+var snowball11 = Level.spawnMob(xa - 2, ya, za, 81);
+Entity.setVelY(snowball11, -4.5);
 
-var flamingEgg13 = Level.spawnMob(xa, ya, za - 2, 81);
-Entity.setFireTicks(flamingEgg13,5);
-Entity.setVelY(flamingEgg13, -4.5);
+var snowball12 = Level.spawnMob(xa, ya, za + 2, 81);
+Entity.setVelY(snowball12, -4.5);
 
-var flamingEgg14 = Level.spawnMob(xa - 2, ya, za - 2, 81);
-Entity.setFireTicks(flamingEgg14,5);
-Entity.setVelY(flamingEgg14, -4.5);
+var snowball13 = Level.spawnMob(xa, ya, za - 2, 81);
+Entity.setVelY(snowball13, -4.5);
 
-var flamingEgg15 = Level.spawnMob(xa + 2, ya, za + 2, 81);
-Entity.setFireTicks(flamingEgg15,5);
-Entity.setVelY(flamingEgg15, -4.5);
+var snowball14 = Level.spawnMob(xa - 2, ya, za - 2, 81);
+Entity.setVelY(snowball14, -4.5);
 
-var flamingEgg16 = Level.spawnMob(xa - 2, ya, za + 2, 81);
-Entity.setFireTicks(flamingEgg16,5);
-Entity.setVelY(flamingEgg16, -4.5);
+var snowball15 = Level.spawnMob(xa + 2, ya, za + 2, 81);
+Entity.setVelY(snowball15, -4.5);
 
-var flamingEgg17 = Level.spawnMob(xa + 2, ya, za - 2, 81);
-Entity.setFireTicks(flamingEgg17,5);
-Entity.setVelY(flamingEgg17, -4.5);
+var snowball16 = Level.spawnMob(xa - 2, ya, za + 2, 81);
+Entity.setVelY(snowball16, -4.5);
 
-var flamingEgg18 = Level.spawnMob(xa + 3, ya, za, 81);
-Entity.setFireTicks(flamingEgg18,5);
-Entity.setVelY(flamingEgg18, -4.5);
+var snowball17 = Level.spawnMob(xa + 2, ya, za - 2, 81);
+Entity.setVelY(snowball17, -4.5);
 
-var flamingEgg19 = Level.spawnMob(xa, ya, za + 3, 81);
-Entity.setFireTicks(flamingEgg19,5);
-Entity.setVelY(flamingEgg19, -4.5);
+var snowball18 = Level.spawnMob(xa + 3, ya, za, 81);
+Entity.setVelY(snowball18, -4.5);
 
-var flamingEgg21 = Level.spawnMob(xa - 3, ya, za, 81);
-Entity.setFireTicks(flamingEgg21,5);
-Entity.setVelY(flamingEgg21, -4.5);
+var snowball19 = Level.spawnMob(xa, ya, za + 3, 81);
+Entity.setVelY(snowball19, -4.5);
 
-var flamingEgg22 = Level.spawnMob(xa, ya, za - 3, 81);
-Entity.setFireTicks(flamingEgg22,5);
-Entity.setVelY(flamingEgg22, -4.5);
+var snowball21 = Level.spawnMob(xa - 3, ya, za, 81);
+Entity.setVelY(snowball21, -4.5);
 
-var flamingEgg23 = Level.spawnMob(xa - 3, ya, za - 3, 81);
-Entity.setFireTicks(flamingEgg23,5);
-Entity.setVelY(flamingEgg23, -4.5);
+var snowball22 = Level.spawnMob(xa, ya, za - 3, 81);
+Entity.setVelY(snowball22, -4.5);
 
-var flamingEgg24 = Level.spawnMob(xa + 3, ya, za + 3, 81);
-Entity.setFireTicks(flamingEgg24,5);
-Entity.setVelY(flamingEgg24, -4.5);
+var snowball23 = Level.spawnMob(xa - 3, ya, za - 3, 81);
+Entity.setVelY(snowball23, -4.5);
 
-var flamingEgg25 = Level.spawnMob(xa - 3, ya, za + 3, 81);
-Entity.setFireTicks(flamingEgg25,5);
-Entity.setVelY(flamingEgg25, -4.5);
+var snowball24 = Level.spawnMob(xa + 3, ya, za + 3, 81);
+Entity.setVelY(snowball24, -4.5);
 
-var flamingEgg26 = Level.spawnMob(xa + 3, ya, za - 3, 81);
-Entity.setFireTicks(flamingEgg26,5);
-Entity.setVelY(flamingEgg26, -4.5);
+var snowball25 = Level.spawnMob(xa - 3, ya, za + 3, 81);
+Entity.setVelY(snowball25, -4.5);
+
+var snowball26 = Level.spawnMob(xa + 3, ya, za - 3, 81);
+Entity.setVelY(snowball26, -4.5);
 }
 
 }
