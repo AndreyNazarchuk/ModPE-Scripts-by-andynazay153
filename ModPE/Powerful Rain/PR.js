@@ -14,7 +14,6 @@ var updateMod;
 var Gui;
 var GUI;
 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-var m = 0;
 var fAR = false;
 var tntR = false;
 var gR = false;
@@ -55,10 +54,7 @@ GUI.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | 
 prl.setOnClickListener(new android.view.View.OnClickListener(){
 
 onClick: function(view){
-
-if(m == 0) {
 powerfulRainList()
-}
 }
  
 });

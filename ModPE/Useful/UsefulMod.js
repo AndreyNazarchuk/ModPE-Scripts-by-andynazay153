@@ -9,71 +9,80 @@
 */
 
 //GUI Code
-var version = "0.5"; 
+var version = "0.6"; 
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
 var updateMod;
+var Gui;
 var GUI;
-var menu;
-var exitUI;
-
-function dip2px(dips){
-    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-    return Math.ceil(dips * ctx.getResources().getDisplayMetrics().density);
-}
+var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
 
 function newLevel(){
-    Player.clearInventory = function() {
-		for(var i = 0; i < 255; i++) Player.clearInventorySlot(i);
-	};
-    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-    ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
-        try{
-            var layout = new android.widget.LinearLayout(ctx);
-            layout.setOrientation(1);
+usefulB();
+Player.clearInventory = function() {
+	for(var i = 0; i < 255; i++) Player.clearInventorySlot(i);
+};
+}
 
-            var menuBtn = new android.widget.Button(ctx);
-            menuBtn.setText("U");
-            menuBtn.setOnClickListener(new android.view.View.OnClickListener({
-                onClick: function(viewarg){
-                    mainMenu();
-                }
-            }));
-            layout.addView(menuBtn);
+function usefulB(){
+ 
+ctx.runOnUiThread(new java.lang.Runnable(){
+ 
+run: function(){
+ 
+try{
+ 
+GUI = new android.widget.PopupWindow();
 
-            GUI = new android.widget.PopupWindow(layout, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
-            GUI.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
-            GUI.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.CENTER_VERTICAL, 0, 0);
-        }catch(err){
-            print("An error occurred: " + err);
-        }
-    }}));
+var layout = new android.widget.LinearLayout(ctx);
+var ul = new android.widget.Button(ctx);
+ 
 
-function mainMenu(){
-    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-    ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
-        try{
-            var menuLayout = new android.widget.LinearLayout(ctx);
-            var menuScroll = new android.widget.ScrollView(ctx);
-            var menuLayout1 = new android.widget.LinearLayout(ctx);
-            menuLayout.setOrientation(1);
-            menuLayout1.setOrientation(1);
-            menuScroll.addView(menuLayout);
-            menuLayout1.addView(menuScroll);
+ul.setText("U");
 
-			var closeButton = new android.widget.Button(ctx);
-			closeButton.setText("Close Menu");
-			closeButton.setOnClickListener(new android.view.View.OnClickListener({
-			onClick: function(viewarg){
-				if(menu != null){
-				menu.dismiss();
-				menu = null;
-			}
-			}}));
-			menuLayout.addView(closeButton);
-			
-            /*
+layout.setOrientation(android.widget.LinearLayout.VERTICAL);
+layout.setGravity(android.view.Gravity.LEFT);
+layout.addView(ul);
+
+GUI.setContentView(layout);
+GUI.setHeight(android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
+GUI.setWidth(android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
+GUI.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
+GUI.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.CENTER_VERTICAL, 0, 0);
+
+ul.setOnClickListener(new android.view.View.OnClickListener(){
+
+onClick: function(view){
+usefulList()
+}
+ 
+});
+ 
+} catch (e){
+print ("Error: "+e)
+}
+
+}});
+}
+
+function usefulList(){
+ctx.runOnUiThread(new java.lang.Runnable(){
+run: function(){
+try{
+var menu = new android.widget.LinearLayout(ctx);
+var scroll = new android.widget.ScrollView(ctx);
+
+menu.setOrientation(android.widget.LinearLayout.VERTICAL);
+
+scroll.addView(menu);
+
+var dialog = new android.app.Dialog(ctx); 
+dialog.setContentView(scroll);
+
+dialog.setTitle("Useful Mod");
+
+/*
 			var saveInvButton = new android.widget.Button(ctx);
             saveInvButton.setText("Save Inventory");
             saveInvButton.setOnClickListener(new android.view.View.OnClickListener({
@@ -81,7 +90,8 @@ function mainMenu(){
 					clientMessage("Inventory saved");
                 }
             }));
-            menuLayout.addView(saveInvButton);
+			saveInvButton.setTextSize(20)
+            menu.addView(saveInvButton);
 			*/
 			
 			var clearInvButton = new android.widget.Button(ctx);
@@ -92,7 +102,8 @@ function mainMenu(){
 					clientMessage("Inventory Cleared.");
                 }
             }));
-            menuLayout.addView(clearInvButton);
+			clearInvButton.setTextSize(20)
+            menu.addView(clearInvButton);
 			
 			/*
 			var loadInvButton = new android.widget.Button(ctx);
@@ -102,7 +113,8 @@ function mainMenu(){
                     //Your Code
                 }
             }));
-            menuLayout.addView(loadInvButton);
+			loadInvButton.setTextSize(20)
+            menu.addView(loadInvButton);
 			*/
             
             var dayButton = new android.widget.Button(ctx);
@@ -112,7 +124,8 @@ function mainMenu(){
                     Level.setTime(1000);
                 }
             }));
-            menuLayout.addView(dayButton);
+			dayButton.setTextSize(20)
+            menu.addView(dayButton);
 			
 			var nightButton = new android.widget.Button(ctx);
             nightButton.setText("Set time to Night");
@@ -121,7 +134,8 @@ function mainMenu(){
                     Level.setTime(14000);
                 }
             }));
-            menuLayout.addView(nightButton);
+			nightButton.setTextSize(20)
+            menu.addView(nightButton);
 			
 			var creativeButton = new android.widget.Button(ctx);
             creativeButton.setText("Creative");
@@ -130,7 +144,8 @@ function mainMenu(){
                     Level.setGameMode(1);
                 }
             }));
-            menuLayout.addView(creativeButton);
+			creativeButton.setTextSize(20)
+            menu.addView(creativeButton);
 			
 			var survivalButton = new android.widget.Button(ctx);
             survivalButton.setText("Survival");
@@ -139,7 +154,8 @@ function mainMenu(){
                     Level.setGameMode(0);
                 }
             }));
-            menuLayout.addView(survivalButton);
+			survivalButton.setTextSize(20)
+            menu.addView(survivalButton);
 						
 			var infHealthOnButton = new android.widget.Button(ctx);
             infHealthOnButton.setText("Infinite Health ON");
@@ -151,7 +167,8 @@ function mainMenu(){
 						clientMessage(ChatColor.GREEN + "Unless you use the Heal button when you are done with it.");
                 }
             }));
-            menuLayout.addView(infHealthOnButton);
+			infHealthOnButton.setTextSize(20)
+            menu.addView(infHealthOnButton);
 			
 			var healButton = new android.widget.Button(ctx);
             healButton.setText("Heal");
@@ -160,7 +177,8 @@ function mainMenu(){
                     Player.setHealth(20);
                 }
             }));
-            menuLayout.addView(healButton);
+			healButton.setTextSize(20)
+            menu.addView(healButton);
 			
 			/*
 			var sneakButton = new android.widget.Button(ctx);
@@ -170,7 +188,8 @@ function mainMenu(){
                     Entity.setSneaking(entity, setSneaking);
                 }
             }));
-            menuLayout.addView(sneakButton);
+			sneakButton.setTextSize(20)
+            menu.addView(sneakButton);
 			*/
 			
 			var flyOnButton = new android.widget.Button(ctx);
@@ -181,7 +200,8 @@ function mainMenu(){
                     Player.setFlying(true);
                 }
             }));
-            menuLayout.addView(flyOnButton);
+			flyOnButton.setTextSize(20)
+            menu.addView(flyOnButton);
             
             var flyOffButton = new android.widget.Button(ctx);
             flyOffButton.setText("Flying Off");
@@ -191,7 +211,8 @@ function mainMenu(){
                     Player.setFlying(false);
                 }
             }));
-            menuLayout.addView(flyOffButton);
+			flyOffButton.setTextSize(20)
+            menu.addView(flyOffButton);
 			
 			/*
 			var rideButton = new android.widget.Button(ctx);
@@ -204,7 +225,8 @@ function mainMenu(){
 					preventDefault();
                 }
             }));
-            menuLayout.addView(rideButton);
+			rideButton.setTextSize(20)
+            menu.addView(rideButton);
 			*/
 			
 			/*
@@ -215,7 +237,8 @@ function mainMenu(){
                     
                 }
             }));
-            menuLayout.addView(teleButton);
+			teleButton.setTextSize(20)
+            menu.addView(teleButton);
 			*/
 			
 			var suicideButton = new android.widget.Button(ctx);
@@ -225,7 +248,8 @@ function mainMenu(){
                     Player.setHealth(0);
                 }
             }));
-            menuLayout.addView(suicideButton);
+			suicideButton.setTextSize(20)
+            menu.addView(suicideButton);
 			
 			var updateButton = new android.widget.Button(ctx);
             updateButton.setText("Update");
@@ -261,53 +285,15 @@ function mainMenu(){
 					}
                 }
             }));
-            menuLayout.addView(updateButton);
-			
-			
-			var closebutton2 = new android.widget.Button(ctx);
-			closebutton2.setText("Close Menu");
-			closebutton2.setOnClickListener(new android.view.View.OnClickListener({
-			onClick: function(viewarg){
-				if(menu != null){
-				menu.dismiss();
-				menu = null;
-			}
-			}}));
-			menuLayout.addView(closebutton2);
-			
-            menu = new android.widget.PopupWindow(menuLayout1, ctx.getWindowManager().getDefaultDisplay().getWidth()/3, ctx.getWindowManager().getDefaultDisplay().getHeight());
-            menu.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
-            menu.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.BOTTOM, 0, 0);
-        }catch(error){
-            print("An error occurred: " + error);
-        }
-    }}));
+			updateButton.setTextSize(20)
+            menu.addView(updateButton);
+
+dialog.show()
+
+} catch (e){
+print ("Error: "+e)
 }
-
-function exit(){
-    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-    ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
-        try{
-            var xLayout = new android.widget.LinearLayout(ctx);
-
-            var xButton = new android.widget.Button(ctx);
-            xButton.setText("x");
-            xButton.setTextColor(android.graphics.Color.WHITE);
-            xButton.setOnClickListener(new android.view.View.OnClickListener({
-                onClick: function(viewarg){
-                    exitUI.dismiss();
-                    menu.dismiss();
-                }
-            }));
-            xLayout.addView(xButton);
-
-            exitUI = new android.widget.PopupWindow(xLayout, dip2px(40), dip2px(40));
-            exitUI.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
-            exitUI.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.TOP, 0, 0);
-        }catch(exception){
-            print(exception);
-        }
-    }}));
+}});
 }
 
 //Auto-Update Code
@@ -416,23 +402,4 @@ function updateVersion() {
     catch(err) {
         print("Error: \n" + err);
     }
-}
-
-function leaveGame(){
-    var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-    ctx.runOnUiThread(new java.lang.Runnable({ run: function(){
-        if(GUI != null){
-            GUI.dismiss();
-            GUI = null;
-        }
-        if(menu != null){
-            menu.dismiss();
-            menu = null;
-        }
-        if(exitUI != null){
-            exitUI.dismiss();
-            exitUI = null;
-        }
-    }}));
-}
 }
