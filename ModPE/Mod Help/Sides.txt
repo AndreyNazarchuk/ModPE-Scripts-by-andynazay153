@@ -1,0 +1,8 @@
+SIDES
+
+0 - Bottom - (y - 1)
+1 - Top - (y + 1)
+2 - Front - (z - 1)
+3 - Back - (z + 1)
+4 - Left - (x - 1)
+5 - Right - (x + 1)

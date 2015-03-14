@@ -1,0 +1,49 @@
+ENTITY IDS LIST
+
+PASSIVE
+
+10 - Chicken
+11 - Cow
+12 - Pig
+13 - Sheep
+14 - Wolf
+15 - Villager
+16 - Mooshroom
+
+HOSTILE
+
+32 - Zombie
+33 - Creeper
+34 - Skeleton
+35 - Spider
+36 - Zombie Pigman
+37 - Slime
+38 - Enderman
+39 - Silverfish
+
+PLAYER
+
+63 - Player
+
+DROPS
+
+64 - Dropped Item
+
+BLOCKS
+
+65 - Primed TNT
+66 - Falling Block
+
+PROJECTILES
+
+80 - Shot Arrow
+81 - Thrown Snowball
+82 - Thrown Egg
+
+IMMOBILE
+
+83 - Painting
+
+VEHICLES
+
+84 - Minecart

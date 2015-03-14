@@ -1,0 +1,26 @@
+RENDER TYPES FOR Entity.setRenderType()
+
+0 - Unknown; Turns the entity invisible
+1 - No override
+2 - Primed TNT
+3 - Player (with nametag)
+4 - Dropped Item
+5 - Unknown
+6 - Chicken
+7 - Cow
+8 - Pig
+9 - Sheep
+10 - Unknown
+11 - Zombie
+12 - Skeleton
+13 - Spider
+14 - Creeper (very glitchy)
+15 - Shot Arrow
+16 - Player (without a nametag)
+17 - Thrown Egg
+18 - Thrown Snowball
+19 - Painting (crashes)
+20 - Falling Block
+21 - Minecart
+
+Any render type that is not listed here is currently unknown. Please tell me if you know one.

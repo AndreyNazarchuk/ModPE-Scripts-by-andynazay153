@@ -1,0 +1,34 @@
+HOW TO CREATE A COMMAND
+
+First of all, we need a hook called procCmd(), which is called whenever something is entered into the chat with a slash in front:
+
+function procCmd(command) {
+	
+}
+
+Next, we need a variable containing all the parameters entered. We will call this cmd:
+
+function procCmd(command) {
+	var cmd = command.split(" ");
+}
+
+This creates a variable containing the command and the parameters entered in an array. cmd[0] is the command, and the rest are the parameters:
+
+function procCmd(command) {
+	var cmd = command.split(" ");
+	if(cmd[0] == "myCommand") {
+		
+	}
+}
+
+What this does is it checks for the command "/myCommand".
+
+function procCmd(command) {
+	var cmd = command.split(" ");
+	if(cmd[0] == "myCommand") {
+		Level.explode(Player.getX(), Player.getY(), Player.getZ(), cmd[1]);
+		clientMessage("Explosion creatd with the radius of " + cmd[1] + ".");
+	}
+}
+
+It explodes with the radius of the first parameter at the player's coordinates. Now you've created your first command!
