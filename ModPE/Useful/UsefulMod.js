@@ -16,7 +16,7 @@ var newUpdate;
 var updateMod;
 var Gui;
 var GUI;
-var setSwitched = false;
+var switched = false;
 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
 
 function newLevel(){
@@ -41,7 +41,6 @@ var ul = new android.widget.Button(ctx);
  
 
 ul.setText("U");
-ul.setTextSize(15);
 
 layout.setOrientation(android.widget.LinearLayout.VERTICAL);
 layout.setGravity(android.view.Gravity.LEFT);
@@ -85,49 +84,49 @@ dialog.setContentView(scroll);
 dialog.setTitle("Useful Mod");
 
 /*
-var saveInvButton = new android.widget.Button(ctx);
-saveInvButton.setText("Save Inventory");
-saveInvButton.setOnClickListener(new android.view.View.OnClickListener({
-onClick: function(viewarg){
-	clientMessage("Inventory saved");
-    }
-}));
-saveInvButton.setTextSize(20)
-menu.addView(saveInvButton);
-*/
-
-var clearInvButton = new android.widget.Button(ctx);
-clearInvButton.setText("Clear Inventory");
-clearInvButton.setOnClickListener(new android.view.View.OnClickListener({
-onClick: function(viewarg){
-    Player.clearInventory();
-	clientMessage("Inventory Cleared.");
-    }
-}));
-clearInvButton.setTextSize(20)
-menu.addView(clearInvButton);
+			var saveInvButton = new android.widget.Button(ctx);
+            saveInvButton.setText("Save Inventory");
+            saveInvButton.setOnClickListener(new android.view.View.OnClickListener({
+                onClick: function(viewarg){
+					clientMessage("Inventory saved");
+                }
+            }));
+			saveInvButton.setTextSize(20)
+            menu.addView(saveInvButton);
+			*/
 			
-/*
-var loadInvButton = new android.widget.Button(ctx);
-loadInvButton.setText("Load Inventory");
-loadInvButton.setOnClickListener(new android.view.View.OnClickListener({
-    onClick: function(viewarg){
-        //Your Code
-}
-}));
-loadInvButton.setTextSize(20)
-menu.addView(loadInvButton);
-*/
+			var clearInvButton = new android.widget.Button(ctx);
+            clearInvButton.setText("Clear Inventory");
+            clearInvButton.setOnClickListener(new android.view.View.OnClickListener({
+                onClick: function(viewarg){
+                    Player.clearInventory();
+					clientMessage("Inventory Cleared.");
+                }
+            }));
+			clearInvButton.setTextSize(20)
+            menu.addView(clearInvButton);
+			
+			/*
+			var loadInvButton = new android.widget.Button(ctx);
+            loadInvButton.setText("Load Inventory");
+            loadInvButton.setOnClickListener(new android.view.View.OnClickListener({
+                onClick: function(viewarg){
+                    //Your Code
+                }
+            }));
+			loadInvButton.setTextSize(20)
+            menu.addView(loadInvButton);
+			*/
 
 var dayButton = new android.widget.Switch(ctx); 
 button.setText("Day/Night"); 
-button.setSwitched(checked); 
+button.setChecked(switched); 
 button.setOnClickListener(new android.view.View.OnClickListener({ onClick: function(viewarg){ 
-if(!checked){ 
-checked = true; 
+if(!switched){ 
+switched = true; 
 Level.setTime(1000); 
 }else{ 
-checked = false; 
+switched = false; 
 Level.setTime(14000);
 } 
 } 
@@ -136,13 +135,13 @@ menu.addView(dayButton);
 
 var gamemodeButton = new android.widget.Switch(ctx); 
 button.setText("Creative/Survival"); 
-button.setSwitched(checked); 
+button.setChecked(switched); 
 button.setOnClickListener(new android.view.View.OnClickListener({ onClick: function(viewarg){ 
-if(!checked){ 
-checked = true; 
+if(!switched){ 
+switched = true; 
 Level.setGameMode(1);
 }else{ 
-checked = false; 
+switched = false; 
 Level.setGameMode(0);
 } 
 } 
@@ -151,17 +150,17 @@ menu.addView(gamemodeButton);
 			
 var infHealthOnButton = new android.widget.Switch(ctx); 
 button.setText("Infinite Health ON"); 
-button.setSwitched(checked); 
+button.setChecked(switched); 
 button.setOnClickListener(new android.view.View.OnClickListener({ onClick: function(viewarg){ 
-if(!checked){ 
-checked = true; 
+if(!switched){ 
+switched = true; 
 Player.setHealth(99999999999);
-clientMessage(ChatColor.RED + "WARNING:");
-clientMessage(ChatColor.RED + "You will die and loose your items when you leave the game!");
-clientMessage(ChatColor.GREEN + "Unless you use the Heal button when you are done with it.");
+						clientMessage(ChatColor.RED + "WARNING:");
+						clientMessage(ChatColor.RED + "You will die and loose your items when you leave the game!");
+						clientMessage(ChatColor.GREEN + "Unless you use the Heal button when you are done with it.");
 Level.setGameMode(1);
 }else{ 
-checked = false; 
+switched = false; 
 Player.setHealth(20);
 } 
 } 
@@ -180,13 +179,13 @@ menu.addView(infHealthOnButton);
 			
 var sneakButton = new android.widget.Switch(ctx); 
 button.setText("Sneak"); 
-button.setSwitched(checked); 
+button.setChecked(switched); 
 button.setOnClickListener(new android.view.View.OnClickListener({ onClick: function(viewarg){ 
-if(!checked){ 
-checked = true; 
+if(!switched){ 
+switched = true; 
 Entity.setSneaking(getPlayerEnt(), true);
 }else{ 
-checked = false; 
+switched = false; 
 Entity.setSneaking(getPlayerEnt(), false);
 } 
 } 
@@ -195,14 +194,14 @@ menu.addView(sneakButton);
 			
 var flyButton = new android.widget.Switch(ctx); 
 button.setText("Fly"); 
-button.setSwitched(checked); 
+button.setChecked(switched); 
 button.setOnClickListener(new android.view.View.OnClickListener({ onClick: function(viewarg){ 
-if(!checked){ 
-checked = true; 
+if(!switched){ 
+switched = true; 
 Player.setCanFly(true);
 Player.setFlying(true);
 }else{ 
-checked = false; 
+switched = false; 
 Player.setCanFly(false);
 Player.setFlying(false);
 } 
@@ -210,21 +209,25 @@ Player.setFlying(false);
 })); 
 menu.addView(flyButton);
 			
-/*
-var rideButton = new android.widget.Button(ctx);
-rideButton.setText("Ride an Animal");
-rideButton.setOnClickListener(new android.view.View.OnClickListener({
-onClick: function(viewarg){
-	clientMessage(ChatColor.GREEN + "Punch an animal to ride it");
-	Entity.rideAnimal(attacker, victim);
-	rideAnimal(attacker, victim);
-	preventDefault();
-}
-}));
-rideButton.setTextSize(20)
-menu.addView(rideButton);
-*/
+			/*
+			var rideButton = new android.widget.Button(ctx);
+            rideButton.setText("Ride an Animal");
+            rideButton.setOnClickListener(new android.view.View.OnClickListener({
+                onClick: function(viewarg){
+					clientMessage(ChatColor.GREEN + "Punch an animal to ride it");
+					Entity.rideAnimal(attacker, victim);
+					rideAnimal(attacker, victim);
+					preventDefault();
+                }
+            }));
+			rideButton.setTextSize(20)
+            menu.addView(rideButton);
+			*/
 			
+var tpButton = new android.widget.Button(ctx);
+tpButton.setText("Teleport");
+tp.setOnClickListener(new android.view.View.OnClickListener({
+onClick: function(viewarg){
 var scroll = new android.widget.ScrollView(ctx); 
 var note = new android.widget.TextView(ctx); 
 note.setText("Teleport anywhere you would like!"); 
@@ -248,16 +251,20 @@ Entity.setPosition(getPlayerEnt(), setx.getText().toString(), sety.getText().toS
 teleButton.setNegativeButton("Cancel", new android.content.DialogInterface.OnClickListener(){ onClick: function(viewarg){ 
 }});
 var dialog = teleButton.create(); dialog.show();
-	
-var suicideButton = new android.widget.Button(ctx);
-suicideButton.setText("Commit Suicide");
-suicideButton.setOnClickListener(new android.view.View.OnClickListener({
-    onClick: function(viewarg){
-        Player.setHealth(0);
-    }
+}
 }));
-suicideButton.setTextSize(20)
-menu.addView(suicideButton);
+tpButton.setTextSize(20)
+menu.addView(tpButton);
+	
+			var suicideButton = new android.widget.Button(ctx);
+            suicideButton.setText("Commit Suicide");
+            suicideButton.setOnClickListener(new android.view.View.OnClickListener({
+                onClick: function(viewarg){
+                    Player.setHealth(0);
+                }
+            }));
+			suicideButton.setTextSize(20)
+            menu.addView(suicideButton);
 			
 			var updateButton = new android.widget.Button(ctx);
             updateButton.setText("Update");
@@ -323,17 +330,17 @@ print ("Error: "+e)
                 var script = check.getInputStream();
                 var typeb = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
                 var byteCount = 0; 
-                var checkedVersion;
+                var switchedVersion;
                 while((byteCount = script.read(typeb)) != -1) { 
-                    checkedVersion = new java.lang.String(typeb, 0, byteCount);               
+                    switchedVersion = new java.lang.String(typeb, 0, byteCount);               
                 }
-				newUpdate = checkedVersion;
-				if(version+"\n" != checkedVersion) {
+				newUpdate = switchedVersion;
+				if(version+"\n" != switchedVersion) {
                     print("New version is available! " + newUpdate);
                     updateWindow=true;
 					clientMessage("Push Update button 2 times");
                 }
-                else if(version+"\n"==checkedVersion){
+                else if(version+"\n"==switchedVersion){
                 print("No updates available");
                 }
             }
