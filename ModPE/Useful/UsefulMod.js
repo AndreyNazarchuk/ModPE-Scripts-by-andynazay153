@@ -99,39 +99,28 @@ dialog.setContentView(scroll);
 dialog.setTitle("     Useful Mod    ");
 
 /*
-			var saveInvButton = new android.widget.Button(ctx);
-            saveInvButton.setText("Save Inventory");
-            saveInvButton.setOnClickListener(new android.view.View.OnClickListener({
-                onClick: function(viewarg){
-					clientMessage("Inventory saved");
-                }
-            }));
-			saveInvButton.setTextSize(18)
-            menu.addView(saveInvButton);
-			*/
+var saveInvButton = new android.widget.Button(ctx);
+saveInvButton.setText("Save Inventory");
+saveInvButton.setOnClickListener(new android.view.View.OnClickListener({
+onClick: function(viewarg){
+clientMessage("Inventory saved");
+}
+}));
+saveInvButton.setTextSize(18)
+menu.addView(saveInvButton);
+*/
 			
-			var clearInvButton = new android.widget.Button(ctx);
-            clearInvButton.setText("Clear Inventory");
-            clearInvButton.setOnClickListener(new android.view.View.OnClickListener({
-                onClick: function(viewarg){
-                    Player.clearInventory();
-					clientMessage("Inventory Cleared.");
-                }
-            }));
-			clearInvButton.setTextSize(18)
-            menu.addView(clearInvButton);
-			
-			/*
-			var loadInvButton = new android.widget.Button(ctx);
-            loadInvButton.setText("Load Inventory");
-            loadInvButton.setOnClickListener(new android.view.View.OnClickListener({
-                onClick: function(viewarg){
-                    //Your Code
-                }
-            }));
-			loadInvButton.setTextSize(18)
-            menu.addView(loadInvButton);
-			*/
+/*
+var loadInvButton = new android.widget.Button(ctx);
+loadInvButton.setText("Load Inventory");
+loadInvButton.setOnClickListener(new android.view.View.OnClickListener({
+onClick: function(viewarg){
+clientMessage("Inventory Loaded");
+}
+}));
+loadInvButton.setTextSize(18)
+menu.addView(loadInvButton);
+*/
 
 var dayButton = new android.widget.Switch(ctx); 
 dayButton.setText(" Day/Night"); 
@@ -151,6 +140,7 @@ clientMessage("Time set to Night");
 dayButton.setTextSize(18)
 menu.addView(dayButton);
 
+/*
 var invisButton = new android.widget.Switch(ctx);
 invisButton.setText(" Invisibility");
 invisButton.setChecked(switched6);
@@ -168,8 +158,9 @@ invisButton.setOnClickListener(new android.view.View.OnClickListener({
         }
     }
 }));
-dayButton.setTextSize(18)
+invisButton.setTextSize(18)
 menu.addView(invisButton);
+*/
 
 var gamemodeButton = new android.widget.Switch(ctx); 
 gamemodeButton.setText(" Creative/Survival"); 
@@ -178,11 +169,11 @@ gamemodeButton.setOnClickListener(new android.view.View.OnClickListener({ onClic
 if(!switched1){ 
 switched1 = true; 
 Level.setGameMode(1);
-clientMessage("Gamemode set to Survival");
+clientMessage("Gamemode set to Creative");
 }else{ 
 switched1 = false; 
 Level.setGameMode(0);
-clientMessage("Gamemode set to Creative");
+clientMessage("Gamemode set to Survival");
 } 
 } 
 })); 
@@ -215,9 +206,24 @@ healButton.setOnClickListener(new android.view.View.OnClickListener({
         Player.setHealth(20);
     }
 }));
-healButton.setTextSize(20)
+healButton.setTextSize(18)
 menu.addView(healButton);
-			
+
+var sprintButton = new android.widget.Switch(ctx); 
+sprintButton.setText(" Sprint"); 
+sprintButton.setChecked(switched5); 
+sprintButton.setOnClickListener(new android.view.View.OnClickListener({ onClick: function(viewarg){ 
+if(!switched5){ 
+switched5 = true; 
+speed = true;
+}else{ 
+switched5 = false;
+} 
+} 
+}));
+sprintButton.setTextSize(18)
+menu.addView(sprintButton);
+
 var sneakButton = new android.widget.Switch(ctx); 
 sneakButton.setText(" Sneak"); 
 sneakButton.setChecked(switched3); 
@@ -252,26 +258,28 @@ Player.setFlying(false);
 flyButton.setTextSize(18)
 menu.addView(flyButton);
 			
-			/*
-			var rideButton = new android.widget.Button(ctx);
-            rideButton.setText("Ride an Animal");
-            rideButton.setOnClickListener(new android.view.View.OnClickListener({
-                onClick: function(viewarg){
-					clientMessage(ChatColor.GREEN + "Punch an animal to ride it");
-					Entity.rideAnimal(attacker, victim);
-					rideAnimal(attacker, victim);
-					preventDefault();
-                }
-            }));
-			rideButton.setTextSize(18)
-            menu.addView(rideButton);
-			*/
+/*
+var rideButton = new android.widget.Button(ctx);
+rideButton.setText("Ride an Animal");
+rideButton.setOnClickListener(new android.view.View.OnClickListener({
+onClick: function(viewarg){
+clientMessage(ChatColor.GREEN + "Punch an animal to ride it");
+Entity.rideAnimal(attacker, victim);
+rideAnimal(attacker, victim);
+preventDefault();
+}
+}));
+rideButton.setTextSize(18)
+menu.addView(rideButton);
+*/
 			
 var tpButton = new android.widget.Button(ctx);
 tpButton.setText("Teleport");
 tpButton.setOnClickListener(new android.view.View.OnClickListener({
 onClick: function(viewarg){
 var scroll = new android.widget.ScrollView(ctx); 
+var teleButton = new android.app.AlertDialog.Builder(ctx); 
+teleButton.setTitle("Teleport");
 var note = new android.widget.TextView(ctx); 
 note.setText("Teleport anywhere you would like!"); 
 note.setTextColor(android.graphics.Color.WHITE); 
@@ -282,7 +290,7 @@ var setz = new android.widget.EditText(ctx);
 setx.setHint("X"); 
 sety.setHint("Y");
 setz.setHint("Z");
-var params =new android.view.ViewGroup.LayoutParams(-2,-2); 
+var params = new android.view.ViewGroup.LayoutParams(-2,-2); 
 menu.addView(note,params); 
 menu.addView(setx,params); 
 menu.addView(sety,params);
@@ -309,18 +317,16 @@ onClick: function(viewarg){
 suicideButton.setTextSize(18)
 menu.addView(suicideButton);
 
-var sprintButton = new android.widget.Switch(ctx); 
-sprintButton.setText("Sprint"); 
-sprintButton.setChecked(switched5); 
-sprintButton.setOnClickListener(new android.view.View.OnClickListener({ onClick: function(viewarg){ 
-if(!switched5){ 
-switched5 = true; 
-}else{ 
-switched5 = false; 
-} 
-} 
-})); 
-menu.addView(sprintButton);
+var clearInvButton = new android.widget.Button(ctx);
+clearInvButton.setText("Clear Inventory");
+clearInvButton.setOnClickListener(new android.view.View.OnClickListener({
+onClick: function(viewarg){
+Player.clearInventory();
+clientMessage("Inventory Cleared.");
+}
+}));
+clearInvButton.setTextSize(18)
+menu.addView(clearInvButton);
 			
 			var updateButton = new android.widget.Button(ctx);
             updateButton.setText("Update");
