@@ -9,20 +9,21 @@
 */
 
 //GUI Code
-var version = "0.6"; 
+var version = "0.8"; 
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
 var updateMod;
 var Gui;
 var GUI;
-var switched = false;
-var switched1 = false;
-var switched2 = false;
-var switched3 = false;
-var switched4 = false;
-var switched5 = false;
-var switched6 = false;
+var switched = false; /*Time*/
+var switched1 = false; /*Gamemode*/
+var switched2 = false; /*Infinite Health*/
+var switched3 = false; /*Sneak*/
+var switched4 = false; /*Flying*/
+var switched5 = false; /*Sprint*/
+var switched6 = false; /*Invisibility*/
+var switched7 = false; /*Ride an Animal*/
 var sp = 0;
 var speed = false;
 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
@@ -96,7 +97,7 @@ scroll.addView(menu);
 var dialog = new android.app.Dialog(ctx); 
 dialog.setContentView(scroll);
 
-dialog.setTitle("     Useful Mod    ");
+dialog.setTitle("      Useful Mod     ");
 
 /*
 var saveInvButton = new android.widget.Button(ctx);
@@ -130,10 +131,12 @@ if(!switched){
 switched = true; 
 Level.setTime(1000); 
 clientMessage("Time set to Day");
+clientMessage("[BUG]If the ground is different than the sky, put brightness to full in MCPE settings");
 }else{ 
 switched = false; 
 Level.setTime(14000);
 clientMessage("Time set to Night");
+clientMessage("[BUG]If the ground is different than the sky, put brightness to full in MCPE settings");
 } 
 } 
 })); 
@@ -257,22 +260,34 @@ Player.setFlying(false);
 }));
 flyButton.setTextSize(18)
 menu.addView(flyButton);
-			
-/*
-var rideButton = new android.widget.Button(ctx);
-rideButton.setText("Ride an Animal");
-rideButton.setOnClickListener(new android.view.View.OnClickListener({
-onClick: function(viewarg){
-clientMessage(ChatColor.GREEN + "Punch an animal to ride it");
-Entity.rideAnimal(attacker, victim);
-rideAnimal(attacker, victim);
-preventDefault();
-}
+
+var rideButton = new android.widget.Switch(ctx); 
+rideButton.setText(" Ride an Animal"); 
+rideButton.setChecked(switched7); 
+rideButton.setOnClickListener(new android.view.View.OnClickListener({ onClick: function(viewarg){ 
+if(!switched7){
+switched7 = true;
+clientMessage(ChatColor.GREEN + "Punch an animal to ride it"); 
+}else{ 
+switched7 = false;
+} 
+} 
 }));
 rideButton.setTextSize(18)
 menu.addView(rideButton);
-*/
+
+var clearInvButton = new android.widget.Button(ctx);
+clearInvButton.setText("Clear Inventory");
+clearInvButton.setOnClickListener(new android.view.View.OnClickListener({
+onClick: function(viewarg){
+Player.clearInventory();
+clientMessage("Inventory Cleared.");
+}
+}));
+clearInvButton.setTextSize(18)
+menu.addView(clearInvButton);
 			
+/*
 var tpButton = new android.widget.Button(ctx);
 tpButton.setText("Teleport");
 tpButton.setOnClickListener(new android.view.View.OnClickListener({
@@ -305,7 +320,9 @@ var dialog = teleButton.create(); dialog.show();
 }
 }));
 tpButton.setTextSize(18)
+tpButton.setTextColor(android.graphics.Color.RED)
 menu.addView(tpButton);
+*/
 	
 var suicideButton = new android.widget.Button(ctx);
 suicideButton.setText("Commit Suicide");
@@ -316,17 +333,6 @@ onClick: function(viewarg){
 }));
 suicideButton.setTextSize(18)
 menu.addView(suicideButton);
-
-var clearInvButton = new android.widget.Button(ctx);
-clearInvButton.setText("Clear Inventory");
-clearInvButton.setOnClickListener(new android.view.View.OnClickListener({
-onClick: function(viewarg){
-Player.clearInventory();
-clientMessage("Inventory Cleared.");
-}
-}));
-clearInvButton.setTextSize(18)
-menu.addView(clearInvButton);
 			
 			var updateButton = new android.widget.Button(ctx);
             updateButton.setText("Update");
@@ -512,4 +518,11 @@ return null;
 
   }
  }
+}
+
+function attackHook(attacker, victim){
+if(switched7 = true){
+Entity.rideAnimal(attacker, victim);
+preventDefault();
+}
 }

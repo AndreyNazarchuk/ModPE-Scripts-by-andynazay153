@@ -1,0 +1,9 @@
+https://github.com/BeATz-UnKNoWN/ModPE_Scripts/wiki/ModPE-Script-Templates
+
+http://www.minecraftforum.net/forums/minecraft-pocket-edition/mcpe-mods-tools/1987535-0-9-5-modpe-help-2-1-gui-render-types-item
+
+https://github.com/Connor4898/ModPE-Scripts/wiki/ModPE-Script-Templates
+
+http://modpe.wikia.com/wiki/Function:_Level.spawnMob
+
+http://zhuoweizhang.net/mcpetexturenames/
