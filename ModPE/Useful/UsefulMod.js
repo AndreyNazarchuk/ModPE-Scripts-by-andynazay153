@@ -9,7 +9,7 @@
 */
 
 //GUI Code
-var version = "0.8"; 
+var version = "0.8.9"; 
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
@@ -521,7 +521,7 @@ return null;
 }
 
 function attackHook(attacker, victim){
-if(switched7 = true){
+if(switched7 == true){
 Entity.rideAnimal(attacker, victim);
 preventDefault();
 }
