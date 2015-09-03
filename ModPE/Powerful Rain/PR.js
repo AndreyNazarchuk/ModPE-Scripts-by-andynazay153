@@ -5,10 +5,14 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
+ * If anything happens to your device you cannot blame me.
+ * This mod has been tested by me to be safe and virus free,
+ * though I cannot guarantee it is safe unless it was 
+ * downloaded from the origional thread. (and none of the Adf.ly ads where clicked)
 */
-var version = "1.2"; 
-var checkForUpdate=false;
-var updateWindow=false; 
+var version = "1.3";
+var checkedForUpdate=false;
+var updateWindow=false;
 var newUpdate;
 var updateMod;
 var Gui;
@@ -19,25 +23,31 @@ var tntR = false;
 var gR = false;
 var eCR = false;
 var eR = false;
+var hR = false;
+var maximum = 2.5;
+var minimum = 0.5;
+var max = 2.5;
+var min = -2.5;
+var ticks = 10;
+var chance = 5; //health regen chance per tick, lower number is faster regen
 
 function newLevel(){
 Rainb();
-resetR();
 }
 
 function Rainb(){
- 
+
 ctx.runOnUiThread(new java.lang.Runnable(){
- 
+
 run: function(){
- 
+
 try{
- 
+
 GUI = new android.widget.PopupWindow();
 
 var layout = new android.widget.LinearLayout(ctx);
 var prl = new android.widget.Button(ctx);
- 
+
 
 prl.setText("PR");
 
@@ -56,9 +66,9 @@ prl.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(view){
 powerfulRainList()
 }
- 
+
 });
- 
+
 } catch (e){
 print ("Error: "+e)
 }
@@ -67,20 +77,20 @@ print ("Error: "+e)
 }
 
 function resetR(){
- 
+
 ctx.runOnUiThread(new java.lang.Runnable(){
- 
+
 run: function(){
-	
+
 try{
 fAR = false;
 tntR = false;
 gR = false;
-sR = false;
-eR = false;
 eCR = false;
+eR = false;
+hR = false;
 } catch (e){
-print ("Error: "+e)
+print ("Error resetting powers: "+e)
 }
 
 }});
@@ -97,135 +107,149 @@ menu.setOrientation(android.widget.LinearLayout.VERTICAL);
 
 scroll.addView(menu);
 
-var dialog = new android.app.Dialog(ctx); 
+var dialog = new android.app.Dialog(ctx);
 dialog.setContentView(scroll);
 
 dialog.setTitle("Powerful Rain");
 
-var rB= new android.widget.Button(ctx); 
+var helpTextName = new android.widget.TextView(ctx);
+helpTextName.setText("Select a type of Rain\n\n");
+menu.addView(helpTextName);
+
+var rB= new android.widget.Button(ctx);
 rB.setOnClickListener(new android.view.View.OnClickListener(){
-onClick: function(){
-	resetR();
-	clientMessage(ChatColor.GREEN + "You are now powerless");
-}
+    onClick: function(){
+        resetR();
+        clientMessage(ChatColor.GREEN + "You are now powerless");
+    }
 })
 rB.setText("Reset")
 rB.setTextSize(20)
 menu.addView(rB);
 
-var rb= new android.widget.Button(ctx); 
-rb.setOnClickListener(new android.view.View.OnClickListener(){
-onClick: function(){
-	resetR();
-	fAR = true;
-	clientMessage(ChatColor.BLUE + "EPIC!!!");
-	clientMessage("Please hit anything alive, your punch won't hurt it, but the Rain might :)");
-}
-})
-rb.setText("Flaming Arrow Rain")
-rb.setTextSize(20)
-menu.addView(rb);
-
-var rb2= new android.widget.Button(ctx); 
+var rb2= new android.widget.Button(ctx);
 rb2.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
-	resetR();
-	tntR = true;
-	clientMessage(ChatColor.RED + "RUN!!!");
-	clientMessage("Please hit anything alive, your punch won't hurt it, but the Rain might :)");
+    resetR();
+    tntR = true;
+    clientMessage("Hit any animal ;)");
+    clientMessage(ChatColor.RED + "RUN!!!");
 }
 })
 rb2.setText("TNT Rain")
 rb2.setTextSize(20)
 menu.addView(rb2);
 
-var rb3= new android.widget.Button(ctx); 
+var rb= new android.widget.Button(ctx);
+rb.setOnClickListener(new android.view.View.OnClickListener(){
+    onClick: function(){
+        resetR();
+        fAR = true;
+        clientMessage("Hit any animal ;)");
+        clientMessage(ChatColor.BLUE + "EPIC!!!");
+    }
+})
+rb.setText("Flaming Arrow Rain")
+rb.setTextSize(20)
+menu.addView(rb);
+
+var rb7= new android.widget.Button(ctx);
+rb7.setOnClickListener(new android.view.View.OnClickListener(){
+    onClick: function(){
+        resetR();
+        hR = true;
+        clientMessage(ChatColor.GREEN + "Automatically heals you when health isnt full");
+    }
+})
+rb7.setText("Healing Rain")
+rb7.setTextSize(20)
+menu.addView(rb7);
+
+var rb3= new android.widget.Button(ctx);
 rb3.setOnClickListener(new android.view.View.OnClickListener(){
-onClick: function(){
-	resetR();
-	gR = true;
-	clientMessage(ChatColor.RED + "COMING SOON!!!");
-	clientMessage("Please hit anything alive, your punch won't hurt it, but the Rain might :)");
-}
+    onClick: function(){
+        resetR();
+        gR = true;
+        clientMessage(ChatColor.RED + "COMING SOON!!!");
+    }
 })
 rb3.setText("Guardian Rain")
 rb3.setTextColor(android.graphics.Color.RED)
 rb3.setTextSize(20)
 menu.addView(rb3);
 
-var rb4= new android.widget.Button(ctx); 
+var rb4= new android.widget.Button(ctx);
 rb4.setOnClickListener(new android.view.View.OnClickListener(){
-onClick: function(){
-	resetR();
-	eR = true;
-	clientMessage(ChatColor.RED + "WARNING: MANY chickens can be spawned");
-	clientMessage("Please hit anything alive, your punch won't hurt it, but the Rain might :)");
-}
+    onClick: function(){
+        resetR();
+        eR = true;
+        clientMessage(ChatColor.RED + "WARNING: MANY chickens can be spawned");
+        clientMessage("Hit any animal ;)");
+    }
 })
 rb4.setText("Egg Rain")
 rb4.setTextSize(20)
 menu.addView(rb4);
 
-var rb5= new android.widget.Button(ctx); 
+var rb5= new android.widget.Button(ctx);
 rb5.setOnClickListener(new android.view.View.OnClickListener(){
-onClick: function(){
-	resetR();
-	eCR = true;
-	clientMessage("PRANK AWAY!");
-	clientMessage("Please hit anything alive, your punch won't hurt it, but the Rain might :)");
-}
+    onClick: function(){
+        resetR();
+        eCR = true;
+        clientMessage("Hit any animal ;)");
+        clientMessage("PRANK AWAY!");
+    }
 })
 rb5.setText("Exploding Confetti")
 rb5.setTextSize(20)
 menu.addView(rb5);
 
-var rb6= new android.widget.Button(ctx); 
+var rb6= new android.widget.Button(ctx);
 rb6.setOnClickListener(new android.view.View.OnClickListener(){
-onClick: function(){
-	clientMessage(ChatColor.GREEN + "Upcoming Features:");
-	clientMessage(ChatColor.GREEN + "*" + ChatColor.WHITE + " Guardians: They spawn and protect you with their Flaming Arrow Bows.");
-	clientMessage(ChatColor.GREEN + "*" + ChatColor.WHITE + " Mass Mob Spawning buttons, they spawn mobs for you to fight.");
-	clientMessage(ChatColor.GREEN + "*" + ChatColor.WHITE + " Rain that falls on you and people around you, healing all of you.");
-	clientMessage(ChatColor.RED + "Please give me more ideas on the forums :)");
-}
+    onClick: function(){
+        clientMessage(ChatColor.GREEN + "Upcoming Features:");
+        clientMessage(ChatColor.BLUE + "*" + ChatColor.WHITE + " Guardians: They spawn and protect you with their Flaming Arrow Bows.");
+        clientMessage(ChatColor.GREEN + "*" + ChatColor.WHITE + " Mass Mob Spawning buttons, they spawn mobs for you to fight.");
+        clientMessage(ChatColor.RED + "Please give me more ideas on the forums :)");
+    }
 })
 rb6.setText("Upcoming Features")
 rb6.setTextSize(20)
 menu.addView(rb6);
 
-var rb16= new android.widget.Button(ctx); 
+var rb16= new android.widget.Button(ctx);
 rb16.setOnClickListener(new android.view.View.OnClickListener(){
 onClick: function(){
 on = false;
 on = true;
-if(checkForUpdate==false) {
-	print("Checking for updates");
-		ctx.runOnUiThread(new java.lang.Runnable({
-			run: function() {
-				try {
-					checkVersion();
-					}
-				catch(err) {
-					print("Error: \n"+err);
-					}
-				}
-			}));
-		}
-if(updateWindow) {
-	ctx.runOnUiThread(new java.lang.Runnable({
-		run: function() {
-			try {
-				updateVersion();
-				}
-			catch(err) {
-				print("Error: \n" + err);
-				}
-			}
-		}));
-updateWindow=false;
-checkForUpdate=true;
+if(checkedForUpdate == false) {
+    print("Checking for updates");
+        ctx.runOnUiThread(new java.lang.Runnable({
+            run: function() {
+                try {
+                    checkVersion();
+                    }
+                catch(err) {
+                    print("Error: \n"+err);
+                    }
+                }
+            }));
+        }
+if(updateWindow == false) {
+    ctx.runOnUiThread(new java.lang.Runnable({
+        run: function() {
+            try {
+                updateVersion();
+                }
+            catch(err) {
+                print("Error: \n" + err);
+                }
+            }
+        }));
+updateWindow = false;
+checkedForUpdate = true;
 clientMessage(ChatColor.GREEN + "Restart the game to activate the update");
-		}
+        }
 }
 })
 rb16.setText("Update")
@@ -563,7 +587,55 @@ Entity.setVelY(snowball25, -4.5);
 var snowball26 = Level.spawnMob(xa + 3, ya, za - 3, 81);
 Entity.setVelY(snowball26, -4.5);
 }
+}
 
+function modTick(){ 
+if(hR == true){
+var xp = Player.getX();
+var yp = Player.getY();
+var zp = Player.getZ();
+var hsize = Math.random() * (maximum - minimum + 0.1);
+var loc = Math.random() * (max - min + 0.1);
+var h = Entity.getHealth(Player.getEntity());
+ticks = 20 - h;
+chance = chance - 1;
+if(chance = 0){
+chance = 5
+if(h < 20){
+Player.setHealth(h + 1);
+//Level.addParticle(14(heart), xp, yp, zp, velX, velY, velZ, hsize);
+var heart = Level.addParticle(14, xp + hsize, yp, zp, 0, hsize, 0, hsize);
+
+var heart2 = Level.addParticle(14, xp + hsize, yp, zp, 0, loc, 0, hsize);
+
+var heart3 = Level.addParticle(14, xp - hsize, yp, zp, 0, loc, 0, hsize);
+
+var heart4 = Level.addParticle(14, xp, yp + hsize, zp, 0, loc, 0, hsize);
+
+var heart5 = Level.addParticle(14, xp, yp - hsize, zp, 0, hsize, 0, hsize);
+
+var heart6 = Level.addParticle(14, xp, yp, zp + hsize, 0, hsize, 0, hsize);
+
+var heart7 = Level.addParticle(14, xp, yp, zp - hsize, 0, hsize, 0, hsize);
+
+var heart8 = Level.addParticle(14, xp + hsize, yp + hsize, zp + hsize, 0, hsize, 0, hsize);
+
+var heart9 = Level.addParticle(14, xp - hsize, yp - hsize, zp - hsize, 0, hsize, 0, hsize);
+
+var heart10 = Level.addParticle(14, xp + hsize, yp + hsize, zp - hsize, 0, hsize, 0, hsize);
+
+var heart11 = Level.addParticle(14, xp + hsize, yp - hsize, zp - hsize, 0, hsize, 0, hsize);
+
+var heart12 = Level.addParticle(14, xp - hsize, yp + hsize, zp + hsize, 0, hsize, 0, hsize);
+
+var heart13 = Level.addParticle(14, xp - hsize, yp - hsize, zp + hsize, 0, hsize, 0, hsize);
+
+var heart14 = Level.addParticle(14, xp + hsize, yp - hsize, zp + hsize, 0, hsize, 0, hsize);
+
+var heart15 = Level.addParticle(14, xp - hsize, yp + hsize, zp - hsize, 0, hsize, 0, hsize);
+}
+}
+}
 }
 
  function checkVersion() {
@@ -578,16 +650,16 @@ Entity.setVelY(snowball26, -4.5);
                 check.getContentLength();
                 var script = check.getInputStream();
                 var typeb = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
-                var byteCount = 0; 
+                var byteCount = 0;
                 var checkedVersion;
-                while((byteCount = script.read(typeb)) != -1) { 
-                    checkedVersion = new java.lang.String(typeb, 0, byteCount);               
+                while((byteCount = script.read(typeb)) != -1) {
+                    checkedVersion = new java.lang.String(typeb, 0, byteCount);
                 }
-				newUpdate = checkedVersion;
-				if(version+"\n" != checkedVersion) {
+                newUpdate = checkedVersion;
+                if(version+"\n" != checkedVersion) {
                     print("New version is available! " + newUpdate);
                     updateWindow=true;
-					clientMessage("Push the Update button until a dialog appears");
+                    clientMessage("Keep pushing the Update button until a dialog appears");
                 }
                 else if(version+"\n"==checkedVersion){
                 print("No updates available");
@@ -600,7 +672,7 @@ Entity.setVelY(snowball26, -4.5);
                             }
                             else {
                                 print("Error: \n" + err);
-                            } 
+                            }
             }
         }
     }
@@ -611,10 +683,10 @@ function updateVersion() {
     try {
         var upd = new android.app.AlertDialog.Builder(ctx);
         upd.setTitle("New version available!");
-        upd.setMessage("An update to Powerful Rain was found!\nWould you like to update it?\nYour version: " + version + "\nNew version: " + newUpdate);
+        upd.setMessage("An update to Powerful Rain was found!\nWould you like to update it?\nYour version: " + version + "\nNew version: " + newUpdate + "\n\n");
         upd.setNegativeButton("Later", new android.content.DialogInterface.OnClickListener() {
             onClick: function(par1) {
-            dialog.dismiss(); 
+            dialog.dismiss();
    }
         });
         upd.setPositiveButton("Update", new android.content.DialogInterface.OnClickListener() {
@@ -631,8 +703,8 @@ function updateVersion() {
                             var script = check.getInputStream();
                             var typeb = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
                             var byteCount = 0;
-                            while((byteCount = script.read(typeb)) != -1) { 
-                                updateMod += new java.lang.String(typeb, 0, byteCount);               
+                            while((byteCount = script.read(typeb)) != -1) {
+                                updateMod += new java.lang.String(typeb, 0, byteCount);
                             }
                             var modpeFolder = ctx.getDir("modscripts", 0);
                             var modpeFile = new java.io.File(modpeFolder, "PR.js");
@@ -640,12 +712,12 @@ function updateVersion() {
                             update.write(updateMod);
                             update.flush();
                             update.close();
-                            
+
                             try {
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, false);
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, true);
-								print("Downloaded and enabled!");
-								  
+                                print("Downloaded and enabled!");
+
                             }
                             catch(err) {
                                 print("Error: \n" + err);
@@ -661,7 +733,7 @@ function updateVersion() {
             }
         });
         var dialog = upd.create();
-        dialog.show() 
+        dialog.show()
     }
     catch(err) {
         print("Error: \n" + err);
