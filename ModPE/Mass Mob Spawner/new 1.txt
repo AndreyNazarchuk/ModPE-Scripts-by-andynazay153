@@ -1,0 +1,22 @@
+EntityType.CHICKEN
+EntityType.COW
+EntityType.PIG
+EntityType.SHEEP
+EntityType.WOLF
+EntityType.VILLAGER
+EntityType.MUSHROOM_COW //Mooshroom
+EntityType.SQUID
+EntityType.BAT
+EntityType.ZOMBIE
+EntityType.CREEPER
+EntityType.SKELETON
+EntityType.SPIDER
+EntityType.PIG_ZOMBIE //Zombie Pigman
+EntityType.SLIME
+EntityType.ENDERMAN
+EntityType.SILVERFISH
+EntityType.CAVE_SPIDER
+EntityType.GHAST
+EntityType.LAVA_SLIME //Magma Cube
+
+Level.spawnMob(x, y, z, entity);

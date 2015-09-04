@@ -235,7 +235,7 @@ if(checkedForUpdate == false) {
                 }
             }));
         }
-if(updateWindow == false) {
+if(updateWindow == false) { //no == false
     ctx.runOnUiThread(new java.lang.Runnable({
         run: function() {
             try {

@@ -16,14 +16,14 @@ var newUpdate;
 var updateMod;
 var Gui;
 var GUI;
-var switched = false; /*Time*/
-var switched1 = false; /*Gamemode*/
-var switched2 = false; /*Infinite Health*/
-var switched3 = false; /*Sneak*/
-var switched4 = false; /*Flying*/
-var switched5 = false; /*Sprint*/
-var switched6 = false; /*Invisibility*/
-var switched7 = false; /*Ride an Animal*/
+var switched = false; //Time
+var switched1 = false; //Gamemode
+var switched2 = false; //Infinite Health
+var switched3 = false; //Sneak
+var switched4 = false; //Flying
+var switched5 = false; //Sprint
+var switched6 = false; //Invisibility
+var switched7 = false; //Ride an Animal
 var sp = 0;
 var speed = false;
 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
