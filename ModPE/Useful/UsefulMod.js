@@ -9,7 +9,7 @@
 */
 
 //GUI Code
-var version = "0.8.9"; 
+var version = "0.9.0"; 
 var checkForUpdate=false;
 var updateWindow=false; 
 var newUpdate;
@@ -59,7 +59,7 @@ android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
 
 
 layout.setOrientation(android.widget.LinearLayout.VERTICAL);
-layout.setGravity(android.view.Gravity.LEFT);
+layout.setGravity(android.view.Gravity.TOP);
 layout.addView(ul);
 
 GUI.setContentView(layout);
@@ -97,7 +97,7 @@ scroll.addView(menu);
 var dialog = new android.app.Dialog(ctx); 
 dialog.setContentView(scroll);
 
-dialog.setTitle("      Useful Mod     ");
+dialog.setTitle("      Useful Mod      ");
 
 /*
 var saveInvButton = new android.widget.Button(ctx);
@@ -130,32 +130,28 @@ dayButton.setOnClickListener(new android.view.View.OnClickListener({ onClick: fu
 if(!switched){ 
 switched = true; 
 Level.setTime(1000); 
-clientMessage("Time set to Day");
-clientMessage("[BUG]If the ground is different than the sky, put brightness to full in MCPE settings");
 }else{ 
 switched = false; 
 Level.setTime(14000);
-clientMessage("Time set to Night");
-clientMessage("[BUG]If the ground is different than the sky, put brightness to full in MCPE settings");
 } 
 } 
 })); 
 dayButton.setTextSize(18)
 menu.addView(dayButton);
 
-/*
+
 var invisButton = new android.widget.Switch(ctx);
 invisButton.setText(" Invisibility");
 invisButton.setChecked(switched6);
 invisButton.setOnClickListener(new android.view.View.OnClickListener({
     onClick: function(viewarg){
         if(!switched6){
-            Entity.setRenderType(Player.getEntity(), 0);
+            Entity.addEffect(getPlayerEnt(), 14, 99999999999, 1, false, false);
             switched6 = true;
 			clientMessage("You are now Invisible.");
         } 
 		else{
-            Entity.setRenderType(Player.getEntity(), 3);
+            Entity.removeEffect(getPlayerEnt(), 14);
             switched6 = false;
 			clientMessage("You are no longer Invisible.")
         }
@@ -163,7 +159,7 @@ invisButton.setOnClickListener(new android.view.View.OnClickListener({
 }));
 invisButton.setTextSize(18)
 menu.addView(invisButton);
-*/
+
 
 var gamemodeButton = new android.widget.Switch(ctx); 
 gamemodeButton.setText(" Creative/Survival"); 
@@ -172,11 +168,9 @@ gamemodeButton.setOnClickListener(new android.view.View.OnClickListener({ onClic
 if(!switched1){ 
 switched1 = true; 
 Level.setGameMode(1);
-clientMessage("Gamemode set to Creative");
 }else{ 
 switched1 = false; 
 Level.setGameMode(0);
-clientMessage("Gamemode set to Survival");
 } 
 } 
 })); 
@@ -190,9 +184,8 @@ infHealthButton.setOnClickListener(new android.view.View.OnClickListener({ onCli
 if(!switched2){ 
 switched2 = true; 
 Player.setHealth(99999999999);
-clientMessage(ChatColor.RED + "WARNING:");
-clientMessage(ChatColor.RED + "You will die and loose your items when you leave the game!");
-clientMessage(ChatColor.GREEN + "Unless you use the Heal button when you are done with it.");
+clientMessage(ChatColor.RED + "WARNING: please use the Heal button when you are done.");
+clientMessage(ChatColor.RED + "Or you will loose all of your stuff when you leave the game.");
 }else{ 
 switched2 = false; 
 Player.setHealth(20);
@@ -227,22 +220,6 @@ switched5 = false;
 sprintButton.setTextSize(18)
 menu.addView(sprintButton);
 
-var sneakButton = new android.widget.Switch(ctx); 
-sneakButton.setText(" Sneak"); 
-sneakButton.setChecked(switched3); 
-sneakButton.setOnClickListener(new android.view.View.OnClickListener({ onClick: function(viewarg){ 
-if(!switched3){ 
-switched3 = true; 
-Entity.setSneaking(getPlayerEnt(), true);
-}else{ 
-switched3 = false; 
-Entity.setSneaking(getPlayerEnt(), false);
-} 
-} 
-}));
-sneakButton.setTextSize(18)
-menu.addView(sneakButton);
-			
 var flyButton = new android.widget.Switch(ctx); 
 flyButton.setText(" Fly"); 
 flyButton.setChecked(switched4); 
@@ -334,30 +311,30 @@ onClick: function(viewarg){
 suicideButton.setTextSize(18)
 menu.addView(suicideButton);
 			
-			var updateButton = new android.widget.Button(ctx);
-            updateButton.setText("Update");
-            updateButton.setOnClickListener(new android.view.View.OnClickListener({
-                onClick: function(viewarg){
-					if(checkForUpdate==false) {
-						print("Checking for updates");
-						ctx.runOnUiThread(new java.lang.Runnable({
-							run: function() {
-								try {
-									checkVersion();
-								}
-								catch(err) {
-									print("Error: \n"+err);
-								}
-							}
-						}));
+var updateButton = new android.widget.Button(ctx);
+updateButton.setText("Update");
+updateButton.setOnClickListener(new android.view.View.OnClickListener({
+    onClick: function(viewarg){
+		if(checkForUpdate==false) {
+			print("Checking for updates");
+			ctx.runOnUiThread(new java.lang.Runnable({
+				run: function() {
+					try {
+						checkVersion();
 					}
-					if(updateWindow) {
-						ctx.runOnUiThread(new java.lang.Runnable({
-							run: function() {
-								try {
-									updateVersion();
-								}
-								catch(err) {
+					catch(err) {
+						print("Error: \n"+err);
+					}
+				}
+			}));
+		}
+		if(updateWindow) {
+			ctx.runOnUiThread(new java.lang.Runnable({
+				run: function() {
+					try {
+						updateVersion();
+					}
+					catch(err) {
 									print("Error: \n" + err);
 								}
 							}
@@ -400,6 +377,7 @@ print ("Error: "+e)
 				newUpdate = checkedVersion;
 				if(version+"\n" != checkedVersion) {
                     print("New version is available! " + newUpdate);
+                    print("You have version: " + version);
                     updateWindow=true;
 					clientMessage("Push the Update button until a dialog appears");
                 }
@@ -454,7 +432,6 @@ function updateVersion() {
                             update.write(updateMod);
                             update.flush();
                             update.close();
-                            
                             try {
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, false);
                                 net.zhuoweizhang.mcpelauncher.ScriptManager.setEnabled(modpeFile, true);
@@ -522,7 +499,7 @@ return null;
 
 function attackHook(attacker, victim){
 if(switched7 == true){
-Entity.rideAnimal(attacker, victim);
 preventDefault();
+Entity.rideAnimal(attacker, victim);
 }
 }
